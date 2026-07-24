@@ -1,0 +1,2 @@
+/* Objetivo: responsividade. Responsabilidade: adaptar shell para tablets e mobile. Dependências: layout.css. */
+@media (max-width:1100px){.app-main{grid-template-columns:1fr 1fr}#code{grid-column:1/-1}}@media (max-width:760px){.app-shell{grid-template-areas:"header" "sidebar" "main" "footer";grid-template-columns:1fr}.app-header{align-items:flex-start;flex-direction:column}.app-sidebar{border-right:0;border-bottom:1px solid var(--color-border)}.app-sidebar nav{grid-auto-flow:column;overflow:auto}.app-main{grid-template-columns:1fr;padding:var(--space-4)}}

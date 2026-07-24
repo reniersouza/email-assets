@@ -1,0 +1,21 @@
+{
+  "name": "objetivonet-email-signature-generator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "PWA foundation for the OBJETIVONET Email Signature Generator.",
+  "scripts": {
+    "start": "python3 -m http.server 4173",
+    "lint": "eslint assets/js/**/*.js assets/components/**/*.js service-worker.js",
+    "format": "prettier --check \"**/*.{html,css,js,json,md}\""
+  },
+  "devDependencies": {
+    "@eslint/js": "latest",
+    "eslint": "latest",
+    "globals": "latest",
+    "prettier": "latest"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

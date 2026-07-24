@@ -1,0 +1,2 @@
+/* Objetivo: utilitários. Responsabilidade: classes pequenas reutilizáveis. Dependências: tokens globais. */
+.visually-hidden{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}.stack{display:grid;gap:var(--space-4)}.cluster{align-items:center;display:flex;flex-wrap:wrap;gap:var(--space-3)}

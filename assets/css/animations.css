@@ -1,0 +1,2 @@
+/* Objetivo: movimento leve. Responsabilidade: animações seguras e respeitando redução de movimento. Dependências: tokens globais. */
+@keyframes fade-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}.panel{animation:fade-in 220ms ease both}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
