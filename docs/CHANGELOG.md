@@ -10,21 +10,37 @@ O projeto segue Semantic Versioning (SemVer).
 
 ### 🎉 Concluído
 
-- ✅ Fase 4B – Signature Engine.
+* ✅ Fase 4B – Signature Engine
 
 ### ✨ Implementado
 
-- Signature Engine desacoplado da interface consumindo o Store e a Validation Engine.
-- Layout Engine com suporte inicial a layouts horizontal, vertical e compacto.
-- Style Engine para tokens visuais reutilizáveis por Preview e HTML Renderer.
-- HTML Renderer sem JavaScript, com escape de caracteres, remoção de campos vazios e base para CSS inline compatível com clientes de e-mail.
-- Preview integrado ao fluxo Store → Signature Engine → Renderer → Preview com debounce, cache e prevenção de renderizações redundantes.
-- Infraestrutura de exportação HTML e Clipboard reutilizando o HTML Renderer.
-- Eventos padronizados: SIGNATURE_UPDATED, PREVIEW_UPDATED, HTML_RENDERED, LAYOUT_CHANGED, STYLE_CHANGED e RENDER_COMPLETED.
+* Signature Engine desacoplado da interface consumindo exclusivamente o Store e a Validation Engine.
+* Layout Engine com suporte inicial aos layouts Horizontal, Vertical e Compacto.
+* Style Engine para gerenciamento centralizado de estilos reutilizados pelo Preview e HTML Renderer.
+* HTML Renderer compatível com clientes de e-mail, sem JavaScript, com escape de caracteres especiais, remoção automática de campos vazios e estrutura preparada para CSS inline.
+* Preview integrado ao fluxo Store → Signature Engine → Renderer → Preview com debounce, cache interno e prevenção de renderizações desnecessárias.
+* Infraestrutura de exportação HTML e Clipboard reutilizando integralmente o HTML Renderer.
+* Integração completa com o Event Bus utilizando eventos padronizados:
+
+  * SIGNATURE_UPDATED
+  * PREVIEW_UPDATED
+  * HTML_RENDERED
+  * LAYOUT_CHANGED
+  * STYLE_CHANGED
+  * RENDER_COMPLETED
 
 ### 🧪 Testes
 
-- Testes básicos para Signature Engine, Layout Engine, Style Engine, HTML Renderer, Preview Renderer, integração com Store, Event Bus e exportação.
+* Testes básicos para:
+
+  * Signature Engine
+  * Layout Engine
+  * Style Engine
+  * HTML Renderer
+  * Preview Renderer
+  * Integração com Store
+  * Integração com Event Bus
+  * Infraestrutura de Exportação
 
 ---
 
@@ -32,21 +48,21 @@ O projeto segue Semantic Versioning (SemVer).
 
 ### 🎉 Concluído
 
-- ✅ Fase 4A – Application State (Core Application Layer)
+* ✅ Fase 4A – Application State (Core Application Layer)
 
 ### ✨ Implementado
 
-- Store central sem dependências externas com state, getters, actions, mutations, subscribers, observers, dispatch, commit, watch, snapshot e restore.
-- Modelos independentes para pessoa, empresa, foto, redes sociais, tema, estilo, layout, configurações, validação e aplicação.
-- Serviços centrais desacoplados para persistência, validação, tema, histórico, eventos, configuração, logger, imagem, clipboard e notificações.
-- Sincronização automática entre estado, validação, preview state, Event Bus, observers, histórico e persistência.
-- Undo/Redo, checkpoint, snapshot e restore com limite configurável.
-- Persistência com IndexedDB e fallback para LocalStorage, incluindo versionamento.
-- Validação em tempo real para e-mail, telefone, WhatsApp, URLs, GitHub, LinkedIn e campos obrigatórios.
+* Store central sem dependências externas com State, Getters, Actions, Mutations, Subscribers, Observers, Dispatch, Commit, Watch, Snapshot e Restore.
+* Modelos independentes para Pessoa, Empresa, Foto, Redes Sociais, Tema, Estilo, Layout, Configurações, Validação e Aplicação.
+* Serviços desacoplados para Persistência, Validação, Tema, Histórico, Eventos, Configuração, Logger, Imagem, Clipboard e Notificações.
+* Sincronização automática entre estado, validação, Preview State, Event Bus, Observers, Histórico e Persistência.
+* Undo/Redo, Checkpoint, Snapshot e Restore com limite configurável.
+* Persistência utilizando IndexedDB com fallback para LocalStorage.
+* Validação em tempo real para e-mail, telefone, WhatsApp, URLs, GitHub, LinkedIn e campos obrigatórios.
 
 ### 🧪 Testes
 
-- Testes básicos para Store, Validation, History, Storage, Theme, Observers e Event Bus.
+* Testes básicos para Store, Validation, History, Storage, Theme, Observers e Event Bus.
 
 ---
 
@@ -54,79 +70,78 @@ O projeto segue Semantic Versioning (SemVer).
 
 ### 🎉 Concluído
 
-- ✅ Fase 1 – Documentação e Arquitetura
-- ✅ Fase 2 – Fundação da Aplicação (Foundation)
-- ✅ Fase 3 – Interface do Usuário (UI/UX)
+* ✅ Fase 1 – Documentação e Arquitetura
+* ✅ Fase 2 – Fundação da Aplicação
+* ✅ Fase 3 – Interface do Usuário
 
 ### ✨ Implementado
 
-- Estrutura completa da Progressive Web App (PWA).
-- Interface responsiva.
-- Layout principal.
-- Sistema de componentes.
-- Header.
-- Sidebar.
-- Editor.
-- Preview (estrutura).
-- Code Viewer.
-- Footer.
-- Sistema de temas (Light / Dark / Auto).
-- Responsividade.
-- Estrutura de navegação.
-- Base para Event Bus.
-- Base para LocalStorage.
-- Base para IndexedDB.
-- Service Worker.
-- Manifest.
-- Bootstrap da aplicação.
+* Estrutura completa da Progressive Web App (PWA).
+* Interface responsiva.
+* Layout principal.
+* Sistema de componentes.
+* Header.
+* Sidebar.
+* Editor.
+* Preview estrutural.
+* Code Viewer.
+* Footer.
+* Sistema de temas.
+* Responsividade.
+* Estrutura de navegação.
+* Base para Event Bus.
+* Base para LocalStorage.
+* Base para IndexedDB.
+* Service Worker.
+* Manifest.
+* Bootstrap da aplicação.
 
 ### 🔄 Alterações Arquiteturais
 
-- Roadmap reorganizado.
-- Criação da Fase exclusiva para Assets.
-- Divisão da antiga Fase 4 em:
-  - Fase 4A – Application State (Core Application Layer)
-  - Fase 4B – Signature Engine
-- Arquivos binários removidos da Fase 2.
-- favicon.ico adiado para a Fase 5.
-- Estrutura preparada para futura inclusão dos ícones PWA.
-- Inclusão dos documentos:
-  - PROJECT_CONTEXT.md
-  - AI_RULES.md
+* Reorganização do Roadmap.
+* Criação da Fase exclusiva para Assets.
+* Divisão da antiga Fase 4 em:
+
+  * Fase 4A – Application State
+  * Fase 4B – Signature Engine
+* Remoção dos arquivos binários da Fase 2.
+* Adiamento dos Assets para a Fase 5.
+* Inclusão da documentação técnica oficial.
 
 ### 📚 Documentação
 
 Atualizados:
 
-- ROADMAP.md
-- PROJECT_CONTEXT.md
-- AI_RULES.md
-- CHANGELOG.md
+* ROADMAP.md
+* PROJECT_CONTEXT.md
+* AI_RULES.md
+* CHANGELOG.md
 
 ---
 
 ### 🚀 Próxima Versão
 
-## [0.5.0]
+## [0.6.0]
 
 ### Escopo Previsto
 
-#### Fase 4B – Signature Engine
+#### Fase 5 – Assets
 
 Objetivos:
 
-- Transformar o Application State em uma representação completa da assinatura.
-- Renderizar o Preview utilizando dados reais.
-- Gerar HTML compatível com clientes de e-mail.
-- Exportar HTML.
-- Copiar HTML para a área de transferência.
-- Reutilizar integralmente o Store, Models e Services implementados na Fase 4A.
-- Manter integração com Event Bus, Validation Engine, Storage e Theme System.
-- Preservar integralmente a arquitetura modular definida na Fase 1.
+* Implementar a biblioteca oficial de Assets da aplicação.
+* Adicionar favicon e ícones oficiais da Progressive Web App.
+* Criar biblioteca padronizada de ícones sociais.
+* Adicionar logos oficiais.
+* Adicionar imagens e placeholders.
+* Integrar fontes oficiais do projeto.
+* Otimizar imagens para carregamento, cache e funcionamento offline.
+* Atualizar Manifest e Service Worker quando necessário.
+* Manter total compatibilidade com o Signature Engine e com a arquitetura existente.
 
 ### 📌 Observações
 
-- Nenhuma alteração estrutural na arquitetura será realizada.
-- Nenhuma dependência externa será adicionada.
-- Os recursos binários permanecem previstos para a Fase 5 – Assets.
-- Templates continuam previstos exclusivamente para a Fase 6.
+* Nenhuma alteração estrutural será realizada.
+* Nenhuma dependência externa será adicionada.
+* Os Templates permanecem previstos exclusivamente para a Fase 6.
+* Todos os Assets deverão seguir a organização oficial do projeto.
