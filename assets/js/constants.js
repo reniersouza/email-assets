@@ -1,4 +1,3 @@
-`javascript
 // Objetivo: constantes compartilhadas da aplicação.
 // Responsabilidade:
 // - Centralizar versões
@@ -118,4 +117,4 @@ export const COMPONENTS = Object.freeze([
   'Dialog',
 
 ]);
-```
+
