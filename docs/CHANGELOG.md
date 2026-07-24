@@ -4,7 +4,17 @@
 
 - Inicializa a fundação funcional da PWA estática.
 
-### Alterado
+### Concluído
+
+- Fase 1 – Documentação
+- Fase 2 – Fundação
+- Fase 3 – Interface completa
+
+### Próxima fase
+
+- Fase 4A – Gerenciamento de Estado
+  
+### Alterações no decorrer do projeto
 
 - Reorganização do roadmap.
 - Criação da Fase exclusiva para Assets.
