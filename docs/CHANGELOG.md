@@ -119,29 +119,29 @@ Atualizados:
 
 ---
 
-### 🚀 Próxima Versão
+---
+
+# Próxima Versão
 
 ## [0.6.0]
 
-### Escopo Previsto
-
-#### Fase 5 – Assets
+### Fase 5 — Assets
 
 Objetivos:
 
-* Implementar a biblioteca oficial de Assets da aplicação.
-* Adicionar favicon e ícones oficiais da Progressive Web App.
-* Criar biblioteca padronizada de ícones sociais.
-* Adicionar logos oficiais.
-* Adicionar imagens e placeholders.
-* Integrar fontes oficiais do projeto.
-* Otimizar imagens para carregamento, cache e funcionamento offline.
-* Atualizar Manifest e Service Worker quando necessário.
-* Manter total compatibilidade com o Signature Engine e com a arquitetura existente.
+- Implementar recursos visuais oficiais da aplicação.
+- Adicionar favicon.
+- Adicionar ícones PWA.
+- Adicionar ícones sociais.
+- Adicionar logos.
+- Adicionar imagens.
+- Adicionar fontes.
+- Criar estrutura definitiva de assets.
+- Otimizar recursos para performance.
+- Preparar recursos utilizados pelos templates futuros.
 
-### 📌 Observações
+Observações:
 
-* Nenhuma alteração estrutural será realizada.
-* Nenhuma dependência externa será adicionada.
-* Os Templates permanecem previstos exclusivamente para a Fase 6.
-* Todos os Assets deverão seguir a organização oficial do projeto.
+- Nenhuma alteração arquitetural será realizada.
+- Templates continuam exclusivos da Fase 6.
+- O Signature Engine continuará consumindo os assets através de serviços desacoplados.
