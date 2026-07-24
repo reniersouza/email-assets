@@ -19,5 +19,6 @@
 - Reorganização do roadmap.
 - Criação da Fase exclusiva para Assets.
 - Remoção de arquivos binários da Fase 2.
+- Divisão da fase 4 em A e B duas etapas.
 - favicon.ico adiado para a Fase 5.
 - Estrutura preparada para futura inclusão dos ícones PWA.
