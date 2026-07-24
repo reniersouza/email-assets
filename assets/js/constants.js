@@ -8,7 +8,7 @@ export const STORAGE_VERSION = 1;
 export const STORAGE_KEY = 'objetivonet.signature.settings';
 export const THEME_KEY = 'objetivonet.theme.preference';
 
-export const ROUTES = Object.freeze(['editor', 'preview', 'code']);
+export const ROUTES = Object.freeze(['dados-pessoais', 'foto', 'redes-sociais', 'personalizacao', 'templates', 'preview', 'exportacao', 'configuracoes', 'sobre', 'code']);
 
 export const EVENTS = Object.freeze({
   APP_READY: 'app:ready',
