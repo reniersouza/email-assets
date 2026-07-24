@@ -1,6 +1,21 @@
 // Objetivo: bootstrap principal da aplicação.
-// Responsabilidade: inicializar tema, roteador, configurações, componentes e service worker.
-// Dependências: constants.js, config.js, events.js, helpers.js, logger.js, router.js e store.js.
+// Responsabilidade:
+// - Inicializar Store
+// - Restaurar estado persistido
+// - Inicializar tema
+// - Carregar configurações
+// - Inicializar componentes
+// - Registrar Service Worker
+// - Preparar integração entre Core Layer e Interface
+//
+// Dependências:
+// constants.js
+// config.js
+// events.js
+// helpers.js
+// logger.js
+// router.js
+// store.js
 
 import { APP_VERSION, COMPONENTS, EVENTS } from './constants.js';
 import { configLoader } from './config.js';
