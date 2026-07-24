@@ -93,7 +93,9 @@ ARCHITECTURE.md
 assets/js/
 
 models/
+signature-models.js
 services/
+core-services.js
 
 app.js
 config.js
@@ -106,6 +108,8 @@ storage.js
 store.js
 utils.js
 ```
+
+Os serviços principais da aplicação permanecem centralizados no módulo `core-services.js`, mantendo baixo acoplamento e separação de responsabilidades.
 
 Esta estrutura é considerada oficial.
 
