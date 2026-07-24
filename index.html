@@ -32,18 +32,36 @@
     <a class="skip-link" href="#main-content">Ir para o conteúdo principal</a>
     <div id="app" class="app-shell" data-state="booting">
       <header class="app-header" role="banner" data-component="Header">
-        <div><strong>OBJETIVONET</strong><span>Email Signature Generator</span></div>
-        <nav aria-label="Ações principais"><button type="button" id="theme-toggle" class="button">Tema</button></nav>
+        <a class="brand" href="#dados-pessoais" aria-label="ObjetivoNET - início"><span class="brand-mark">ON</span><span><strong>ObjetivoNET</strong><small>Email Signature Studio · v0.1.0</small></span></a>
+        <div class="header-status" role="status" aria-live="polite"><span class="status-dot"></span> Salvamento automático ativo</div>
+        <nav class="header-actions" aria-label="Ações principais">
+          <button type="button" id="theme-toggle" class="button button-ghost" aria-label="Alternar tema">Tema: Auto</button>
+          <button type="button" class="button button-ghost">Configurações</button><button type="button" class="button button-ghost">Ajuda</button><button type="button" class="button button-ghost">Sobre</button><button type="button" class="button">Feedback</button>
+          <button type="button" class="user-menu" aria-haspopup="menu" aria-label="Menu do usuário">ON</button>
+        </nav>
       </header>
       <aside class="app-sidebar" aria-label="Navegação de módulos" data-component="Sidebar">
-        <nav><a href="#editor" data-route="editor">Editor</a><a href="#preview" data-route="preview">Preview</a><a href="#code" data-route="code">Código</a></nav>
+        <nav class="side-nav">
+          <a href="#dados-pessoais" data-route="dados-pessoais">👤 Dados pessoais</a><a href="#foto" data-route="foto">🖼️ Foto</a><a href="#redes-sociais" data-route="redes-sociais">🔗 Redes sociais</a><a href="#personalizacao" data-route="personalizacao">🎨 Personalização</a><a href="#templates" data-route="templates">🧩 Templates</a><a href="#preview" data-route="preview">👁️ Preview</a><a href="#exportacao" data-route="exportacao">📤 Exportação</a><a href="#configuracoes" data-route="configuracoes">⚙️ Configurações</a><a href="#sobre" data-route="sobre">ℹ️ Sobre</a>
+        </nav>
       </aside>
       <main id="main-content" class="app-main" tabindex="-1">
-        <section id="editor" class="panel" aria-labelledby="editor-title" data-component="Editor"><h1 id="editor-title">Editor</h1><p>Área preparada para os campos da assinatura.</p></section>
-        <section id="preview" class="panel" aria-labelledby="preview-title" data-component="Preview"><h2 id="preview-title">Preview</h2><div class="placeholder" role="status">Preview será implementado na fase futura.</div></section>
-        <section id="code" class="panel" aria-labelledby="code-title" data-component="CodeViewer"><h2 id="code-title">Code Viewer</h2><pre aria-live="polite"><code>&lt;!-- HTML gerado será exibido em fase futura. --&gt;</code></pre></section>
+        <section id="editor" class="editor-stack" data-component="Editor" aria-label="Editor da assinatura">
+          <article id="dados-pessoais" class="card app-card fade-in"><header><span>👤</span><div><h1>Dados pessoais</h1><p>Informações profissionais que alimentarão a assinatura nas próximas fases.</p></div></header><div class="form-grid">
+            <label>Nome<input placeholder="Ana Silva" /></label><label>Cargo<input placeholder="Head de Operações" /></label><label>Departamento<input placeholder="Atendimento" /></label><label>Empresa<input placeholder="ObjetivoNET" /></label><label>Cidade<input placeholder="São Paulo" /></label><label>Estado<input placeholder="SP" /></label><label>País<input placeholder="Brasil" /></label><label>Telefone<input placeholder="+55 11 3000-0000" /></label><label>Celular<input placeholder="+55 11 90000-0000" /></label><label>WhatsApp<input placeholder="+55 11 90000-0000" /></label><label>Email<input type="email" placeholder="ana@objetivonet.com.br" /></label><label>Website<input type="url" placeholder="https://objetivonet.com.br" /></label>
+          </div></article>
+          <article id="foto" class="card app-card fade-in"><header><span>🖼️</span><div><h2>Foto</h2><p>Interface preparada para Gravatar, URL, upload e ajustes visuais.</p></div></header><div class="photo-grid"><div class="drop-zone" tabindex="0" role="button" aria-label="Arrastar ou selecionar foto"><div class="avatar-preview">AS</div><strong>Arraste uma imagem aqui</strong><small>ou escolha Gravatar, URL ou upload</small></div><div class="control-stack"><label><input type="radio" name="photo-source" checked /> Gravatar</label><label>URL da imagem<input placeholder="https://..." /></label><button class="button" type="button">Upload</button><div class="button-row"><button type="button">Zoom</button><button type="button">Crop</button><button type="button">Centralizar</button><button type="button">Remover</button></div></div></div></article>
+          <article id="redes-sociais" class="card app-card fade-in"><header><span>🔗</span><div><h2>Redes sociais</h2><p>Ative canais, informe URLs e organize a ordem visual da assinatura.</p></div></header><div class="social-grid" aria-label="Lista reordenável de redes sociais"></div></article>
+          <article id="personalizacao" class="card app-card fade-in"><header><span>🎨</span><div><h2>Personalização</h2><p>Controles visuais preparados para a próxima etapa de renderização.</p></div></header><div class="form-grid compact"><label>Cor do fundo<input type="color" value="#ffffff" /></label><label>Cor da borda<input type="color" value="#dbe3ef" /></label><label>Cor do texto<input type="color" value="#0f172a" /></label><label>Cor do subtítulo<input type="color" value="#64748b" /></label><label>Cor da barra inferior<input type="color" value="#2563eb" /></label><label>Border Radius<input type="range" min="0" max="32" /></label><label>Largura<input type="number" placeholder="640" /></label><label>Altura<input type="number" placeholder="240" /></label><label>Espaçamento<input type="range" min="0" max="40" /></label><label>Foto<select><option>Arredondada</option></select></label><label>Ícones<select><option>Lineares</option></select></label><label>Fontes<select><option>System UI</option></select></label></div></article>
+          <article id="templates" class="card app-card fade-in"><header><span>🧩</span><div><h2>Templates</h2><p>Galeria visual sem troca funcional nesta fase.</p></div></header><div class="template-grid"></div></article>
+          <article id="exportacao" class="card app-card muted-card"><h2>Exportação</h2><p>Módulo reservado para fases futuras. A interface já mantém o fluxo de navegação.</p></article>
+          <article id="configuracoes" class="card app-card muted-card"><h2>Configurações</h2><p>Preferências gerais, tema e opções de acessibilidade serão conectadas posteriormente.</p></article>
+          <article id="sobre" class="card app-card muted-card"><h2>Sobre</h2><p>Gerador de assinaturas ObjetivoNET, PWA modular e preparado para evolução incremental.</p></article>
+        </section>
+        <section id="preview" class="panel preview-panel" aria-labelledby="preview-title" data-component="Preview"><h2 id="preview-title">Preview</h2><div class="preview-modes"><button>Desktop</button><button>Tablet</button><button>Mobile</button><button>Dark Mode</button><button>Gmail</button><button>Outlook</button><button>Apple Mail</button><button>Yahoo</button><button>Zoho</button></div><div class="signature-mock"><strong>Ana Silva</strong><span>Head de Operações · ObjetivoNET</span><p>ana@objetivonet.com.br · +55 11 90000-0000</p><div class="mock-bar"></div></div></section>
+        <section id="code" class="panel code-panel" aria-labelledby="code-title" data-component="CodeViewer"><div class="panel-heading"><h2 id="code-title">Code Viewer</h2><div class="button-row"><button>Copiar</button><button>Selecionar</button><button>Formatar</button><button>Minificar</button></div></div><pre aria-live="polite"><code></code></pre></section>
       </main>
-      <footer class="app-footer" role="contentinfo" data-component="Footer"><small>&copy; 2026 OBJETIVONET</small></footer>
+      <footer class="app-footer" role="contentinfo" data-component="Footer"><span>v0.1.0 · Status: Interface pronta</span><span>&copy; 2026 OBJETIVONET</span><nav aria-label="Links do rodapé"><a href="https://github.com/" rel="noopener">GitHub</a><a href="docs/roadmap.md">Documentação</a></nav></footer>
     </div>
     <div id="modal-root" aria-live="polite"></div><div id="toast-root" aria-live="polite" aria-atomic="true"></div>
     <script type="module" src="assets/js/app.js"></script>

@@ -13,8 +13,8 @@ export class Router {
   }
 
   resolve() {
-    const requestedRoute = window.location.hash.replace('#', '') || 'editor';
-    const route = ROUTES.includes(requestedRoute) ? requestedRoute : 'editor';
+    const requestedRoute = window.location.hash.replace('#', '') || 'dados-pessoais';
+    const route = ROUTES.includes(requestedRoute) ? requestedRoute : 'dados-pessoais';
 
     $$('[data-route]').forEach((link) => {
       link.setAttribute('aria-current', link.dataset.route === route ? 'page' : 'false');

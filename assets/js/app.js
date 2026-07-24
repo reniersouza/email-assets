@@ -49,6 +49,7 @@ export class ThemeManager {
       storage.save({ theme: preference });
     }
 
+    document.querySelector('#theme-toggle')?.replaceChildren(document.createTextNode(`Tema: ${preference.charAt(0).toUpperCase()}${preference.slice(1)}`));
     eventBus.emit(EVENTS.THEME_CHANGED, { theme: preference });
   }
 
