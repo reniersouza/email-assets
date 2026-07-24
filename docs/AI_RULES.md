@@ -1,4 +1,4 @@
-##Regras para uso com IA
+#Regras para uso com IA
 
 - Nunca alterar a arquitetura aprovada
 - Nunca recriar arquivos existentes sem necessidade
