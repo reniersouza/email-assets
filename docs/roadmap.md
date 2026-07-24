@@ -97,25 +97,22 @@ Toda informação permanente da assinatura passou a ser controlada pelo Store ce
 
 # Fase 4B — Signature Engine
 
-**Status:** ✅ Concluída
+Status: ✅ Concluída
 
 Implementado:
 
-* Signature Engine desacoplado da interface.
-* Integração completa com Store.
-* Integração com Validation Engine.
-* Layout Engine.
-* Style Engine.
-* HTML Renderer.
-* Preview Renderer.
-* Renderização baseada no Application State.
-* Remoção de campos vazios.
-* Escape de caracteres.
-* Estrutura preparada para CSS inline.
-* Exportação HTML.
-* Clipboard Integration.
-* Eventos padronizados de renderização.
-
+- Signature Engine desacoplado.
+- Normalização dos dados da assinatura.
+- Layout Engine.
+- Style Engine.
+- HTML Renderer.
+- Preview Renderer.
+- Renderização utilizando dados reais do Store.
+- Geração de HTML compatível com clientes de e-mail.
+- Clipboard Service integrado.
+- Eventos de renderização.
+- Integração completa com Store, Validation Engine e Event Bus.
+  
 Objetivo atingido:
 
 O estado da aplicação agora pode ser transformado em uma assinatura normalizada e renderizada.
