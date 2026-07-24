@@ -2,100 +2,85 @@
 
 ## Status do Projeto
 
-**Versão:** 1.0.0
+**Versão Atual:** 0.4.0
 
 ---
 
-## Fase 1 — Planejamento e Arquitetura
-Status: ✅ Concluída
+# Fase 1 — Planejamento e Arquitetura
 
-Escopo:
-- Documento de requisitos (SRS)
-- Arquitetura
-- Roadmap
-- Estrutura inicial
-- Requisitos funcionais
-- Requisitos não funcionais
+**Status:** ✅ Concluída
 
 ---
 
-## Fase 2 — Fundação do Projeto
-Status: ✅ Concluída
+# Fase 2 — Fundação do Projeto
 
-Escopo:
-- Estrutura de diretórios
-- Bootstrap da aplicação
-- Configuração da PWA
-- Sistema de temas
-- Service Worker
-- Manifest
-- Local Storage
-- IndexedDB
+**Status:** ✅ Concluída
+
+---
+
+# Fase 3 — Interface do Usuário
+
+**Status:** ✅ Concluída
+
+---
+
+# Fase 4A — Estado da Aplicação (Application State)
+
+**Status:** ✅ Concluída
+
+Implementado:
+
+- Store central
+- Models
+- Services
+- Persistência
+- Validation Engine
 - Event Bus
-- Logger
-- Configurações
-- Componentes base
-- CSS global
-
-Observação:
-Os recursos binários (favicon, ícones, imagens e fontes) foram adiados para a Fase 5 para evitar problemas de sincronização com o GitHub e manter a fundação composta apenas por arquivos de texto.
+- Histórico
+- Undo / Redo
+- Auto Save
+- Sincronização completa do estado
 
 ---
 
-## Fase 3 — Interface do Usuário
-Status: ✅ Concluída
+# Fase 4B — Signature Engine
+
+**Status:** ⏳ Em planejamento
 
 Escopo:
-- Layout principal
-- Sidebar
-- Header
-- Toolbar
-- Cards
-- Formulários
-- Sistema responsivo
-- Preview vazio
-- Dark Mode
 
----
-## Fase 4A – Estado da Aplicação (Application State)
-Status: ✅ Concluída
-
-Escopo:
-- Gerenciamento centralizado do estado da aplicação
-- Sincronização entre formulário, preview e armazenamento
-- Validações em tempo real
-- Atualização automática da interface quando qualquer campo mudar
-
-## Fase 4B – Motor de Geração (Signature Engine)
-Status: ⏳ Pendente
-
-Escopo:
-- Geração do HTML compatível com clientes de e-mail
-- Renderização do preview com dados reais
-- Exportação para HTML
-- Cópia para a área de transferência.
+- Transformar o Application State em uma representação completa da assinatura.
+- Renderizar o Preview utilizando dados reais.
+- Gerar HTML compatível com clientes de e-mail.
+- Exportar HTML.
+- Copiar HTML para a área de transferência.
+- Reutilizar integralmente o Store, Models e Services implementados na Fase 4A.
 
 ---
 
-## Fase 5 — Assets
-Status: ⏳ Pendente
+# Fase 5 — Assets
+
+**Status:** ⏳ Pendente
 
 Escopo:
+
 - favicon.ico
 - Ícones PWA
 - Ícones sociais
 - Logos
-- Imagens
 - Fontes
+- Imagens
 - Placeholders
 - Otimização
 
 ---
 
-## Fase 6 — Templates
-Status: ⏳ Pendente
+# Fase 6 — Templates
+
+**Status:** ⏳ Pendente
 
 Escopo:
+
 - Template Gravatar
 - Template ObjetivoNET
 - Template Google
@@ -106,56 +91,41 @@ Escopo:
 
 ---
 
-## Fase 7 — Recursos Avançados
-Status: ⏳ Pendente
+# Fase 7 — Recursos Avançados
+
+**Status:** ⏳ Pendente
 
 Escopo:
+
 - QR Code
 - vCard
-- Plugins
 - Favoritos
-- Histórico
-- Undo / Redo
+- Histórico avançado
 - Importação
-- Exportação
+- Exportação estendida
 
 ---
 
-## Fase 8 — PWA Completa
-Status: ⏳ Pendente
+# Fase 8 — PWA Completa
 
-Escopo:
-- Offline
-- Instalação
-- Atualizações
-- Cache inteligente
-- Atalhos
-- Splash Screen
+**Status:** ⏳ Pendente
 
 ---
 
-## Fase 9 — Testes
-Status: ⏳ Pendente
+# Fase 9 — Testes
 
-Escopo:
-- Gmail
-- Outlook
-- Zoho
-- Apple Mail
-- Yahoo
-- Thunderbird
-- Microsoft 365
+**Status:** ⏳ Pendente
 
 ---
 
-## Fase 10 — Deploy
-Status: ⏳ Pendente
+# Fase 10 — Deploy
 
-Escopo:
-- Cloudflare Pages
-- GitHub Pages
-- Netlify
-- Vercel
-- Apache
-- Nginx
-- Domínio personalizado
+**Status:** ⏳ Pendente
+
+---
+
+# Próximo Marco
+
+**v0.5.0**
+
+Conclusão da Fase 4B — Signature Engine.
