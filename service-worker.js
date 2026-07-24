@@ -1,4 +1,3 @@
-```javascript
 // Objetivo: service worker principal da PWA.
 // Responsabilidade:
 // - Cache da aplicação
@@ -106,4 +105,4 @@ async function cacheFirst(request) {
   }
 
 }
-```
+
