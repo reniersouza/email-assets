@@ -2,7 +2,9 @@
 
 ## Status do Projeto
 
-**Versão Atual:** 0.4.0
+**Versão Atual:** 0.5.0
+
+**Última atualização:** 2026-07-24
 
 ---
 
@@ -10,17 +12,58 @@
 
 **Status:** ✅ Concluída
 
+Implementado:
+
+* Documento de requisitos.
+* Arquitetura oficial.
+* Roadmap.
+* Definições técnicas.
+* Regras de desenvolvimento.
+* Estrutura inicial do projeto.
+
 ---
 
 # Fase 2 — Fundação do Projeto
 
 **Status:** ✅ Concluída
 
+Implementado:
+
+* Estrutura de diretórios.
+* Bootstrap da aplicação.
+* Configuração da PWA.
+* Manifest.
+* Service Worker.
+* Sistema de temas.
+* LocalStorage.
+* IndexedDB.
+* Event Bus.
+* Logger.
+* Configurações.
+* Componentes base.
+* CSS global.
+
 ---
 
 # Fase 3 — Interface do Usuário
 
 **Status:** ✅ Concluída
+
+Implementado:
+
+* Layout principal.
+* Header.
+* Sidebar.
+* Toolbar.
+* Editor.
+* Cards.
+* Formulários.
+* Preview estrutural.
+* Code Viewer.
+* Footer.
+* Responsividade.
+* Dark Mode.
+* Estrutura visual completa.
 
 ---
 
@@ -30,48 +73,83 @@
 
 Implementado:
 
-- Store central
-- Models
-- Services
-- Persistência
-- Validation Engine
-- Event Bus
-- Histórico
-- Undo / Redo
-- Auto Save
-- Sincronização completa do estado
+* Store central.
+* Models.
+* Services.
+* Validation Engine.
+* Event Bus integrado.
+* Persistência.
+* IndexedDB.
+* LocalStorage fallback.
+* Histórico.
+* Undo / Redo.
+* Snapshot.
+* Restore.
+* Auto Save.
+* Sincronização completa do estado.
+* Observer Pattern.
+
+Objetivo atingido:
+
+Toda informação permanente da assinatura passou a ser controlada pelo Store central.
 
 ---
 
 # Fase 4B — Signature Engine
 
-**Status:** ⏳ Em planejamento
+**Status:** ✅ Concluída
 
-Escopo:
+Implementado:
 
-- Transformar o Application State em uma representação completa da assinatura.
-- Renderizar o Preview utilizando dados reais.
-- Gerar HTML compatível com clientes de e-mail.
-- Exportar HTML.
-- Copiar HTML para a área de transferência.
-- Reutilizar integralmente o Store, Models e Services implementados na Fase 4A.
+* Signature Engine desacoplado da interface.
+* Integração completa com Store.
+* Integração com Validation Engine.
+* Layout Engine.
+* Style Engine.
+* HTML Renderer.
+* Preview Renderer.
+* Renderização baseada no Application State.
+* Remoção de campos vazios.
+* Escape de caracteres.
+* Estrutura preparada para CSS inline.
+* Exportação HTML.
+* Clipboard Integration.
+* Eventos padronizados de renderização.
+
+Objetivo atingido:
+
+O estado da aplicação agora pode ser transformado em uma assinatura normalizada e renderizada.
 
 ---
 
 # Fase 5 — Assets
 
-**Status:** ⏳ Pendente
+**Status:** ⏳ Próxima fase
+
+Objetivo:
+
+Implementar todos os recursos estáticos oficiais da aplicação.
 
 Escopo:
 
-- favicon.ico
-- Ícones PWA
-- Ícones sociais
-- Logos
-- Fontes
-- Imagens
-- Placeholders
-- Otimização
+* favicon.ico.
+* Ícones PWA.
+* Ícones sociais.
+* Logos.
+* Imagens.
+* Placeholders.
+* Fontes.
+* Otimização de arquivos.
+* Integração com Manifest.
+* Integração com Service Worker.
+* Organização da biblioteca oficial de Assets.
+
+Restrições:
+
+* Não alterar arquitetura.
+* Não modificar o Signature Engine.
+* Não criar dependências externas.
+* Não reorganizar diretórios.
 
 ---
 
@@ -81,13 +159,13 @@ Escopo:
 
 Escopo:
 
-- Template Gravatar
-- Template ObjetivoNET
-- Template Google
-- Template Microsoft
-- Template Apple
-- Template Executivo
-- Template Dark
+* Template Gravatar.
+* Template ObjetivoNET.
+* Template Google.
+* Template Microsoft.
+* Template Apple.
+* Template Executivo.
+* Template Dark.
 
 ---
 
@@ -97,12 +175,13 @@ Escopo:
 
 Escopo:
 
-- QR Code
-- vCard
-- Favoritos
-- Histórico avançado
-- Importação
-- Exportação estendida
+* QR Code.
+* vCard.
+* Favoritos.
+* Histórico avançado.
+* Importação.
+* Exportação estendida.
+* Recursos adicionais.
 
 ---
 
@@ -110,11 +189,32 @@ Escopo:
 
 **Status:** ⏳ Pendente
 
+Escopo:
+
+* Offline completo.
+* Cache inteligente.
+* Atualizações automáticas.
+* Instalação.
+* Splash Screen.
+* Atalhos.
+* Otimização final.
+
 ---
 
 # Fase 9 — Testes
 
 **Status:** ⏳ Pendente
+
+Escopo:
+
+* Testes unitários.
+* Testes de integração.
+* Compatibilidade Gmail.
+* Compatibilidade Outlook.
+* Compatibilidade Microsoft 365.
+* Compatibilidade Apple Mail.
+* Compatibilidade Zoho.
+* Testes Lighthouse.
 
 ---
 
@@ -122,10 +222,20 @@ Escopo:
 
 **Status:** ⏳ Pendente
 
+Escopo:
+
+* Cloudflare Pages.
+* Configuração de domínio.
+* Deploy automático via GitHub.
+* Monitoramento.
+* Publicação oficial.
+
 ---
 
 # Próximo Marco
 
-**v0.5.0**
+**v0.6.0**
 
-Conclusão da Fase 4B — Signature Engine.
+Conclusão da:
+
+**Fase 5 — Assets**
