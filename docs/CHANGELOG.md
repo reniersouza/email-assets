@@ -10,7 +10,7 @@ O projeto segue Semantic Versioning (SemVer).
 
 ### 🎉 Concluído
 
-- ✅ Fase 4A – Core Application Layer (Application State)
+- ✅ Fase 4A – Application State (Core Application Layer)
 
 ### ✨ Implementado
 
@@ -20,7 +20,7 @@ O projeto segue Semantic Versioning (SemVer).
 - Sincronização automática entre estado, validação, preview state, Event Bus, observers, histórico e persistência.
 - Undo/Redo, checkpoint, snapshot e restore com limite configurável.
 - Persistência com IndexedDB e fallback para LocalStorage, incluindo versionamento.
-- Validação em tempo real para email, telefone, WhatsApp, URLs, GitHub, LinkedIn e campos obrigatórios.
+- Validação em tempo real para e-mail, telefone, WhatsApp, URLs, GitHub, LinkedIn e campos obrigatórios.
 
 ### 🧪 Testes
 
@@ -36,38 +36,34 @@ O projeto segue Semantic Versioning (SemVer).
 - ✅ Fase 2 – Fundação da Aplicação (Foundation)
 - ✅ Fase 3 – Interface do Usuário (UI/UX)
 
----
-
 ### ✨ Implementado
 
-- Estrutura completa da Progressive Web App (PWA)
-- Interface responsiva
-- Layout principal
-- Sistema de componentes
-- Header
-- Sidebar
-- Editor
-- Preview (estrutura)
-- Code Viewer
-- Footer
-- Sistema de temas (Light / Dark / Auto)
-- Responsividade
-- Estrutura de navegação
-- Base para Event Bus
-- Base para LocalStorage
-- Base para IndexedDB
-- Service Worker
-- Manifest
-- Bootstrap da aplicação
-
----
+- Estrutura completa da Progressive Web App (PWA).
+- Interface responsiva.
+- Layout principal.
+- Sistema de componentes.
+- Header.
+- Sidebar.
+- Editor.
+- Preview (estrutura).
+- Code Viewer.
+- Footer.
+- Sistema de temas (Light / Dark / Auto).
+- Responsividade.
+- Estrutura de navegação.
+- Base para Event Bus.
+- Base para LocalStorage.
+- Base para IndexedDB.
+- Service Worker.
+- Manifest.
+- Bootstrap da aplicação.
 
 ### 🔄 Alterações Arquiteturais
 
 - Roadmap reorganizado.
 - Criação da Fase exclusiva para Assets.
 - Divisão da antiga Fase 4 em:
-  - Fase 4A – Core Application Layer (Application State)
+  - Fase 4A – Application State (Core Application Layer)
   - Fase 4B – Signature Engine
 - Arquivos binários removidos da Fase 2.
 - favicon.ico adiado para a Fase 5.
@@ -75,8 +71,6 @@ O projeto segue Semantic Versioning (SemVer).
 - Inclusão dos documentos:
   - PROJECT_CONTEXT.md
   - AI_RULES.md
-
----
 
 ### 📚 Documentação
 
@@ -91,24 +85,26 @@ Atualizados:
 
 ### 🚀 Próxima Versão
 
-## 0.4.0
+## [0.5.0]
 
-Escopo previsto:
+### Escopo Previsto
 
-### Fase 4A — Core Application Layer
+#### Fase 4B – Signature Engine
 
 Objetivos:
 
-- Store Central
-- Application State
-- Models
-- Services
-- Validation Engine
-- History Engine
-- Undo / Redo
-- Auto Save
-- IndexedDB
-- LocalStorage Sync
-- Observer Pattern
-- Event Bus Integration
-- State Synchronization
+- Transformar o Application State em uma representação completa da assinatura.
+- Renderizar o Preview utilizando dados reais.
+- Gerar HTML compatível com clientes de e-mail.
+- Exportar HTML.
+- Copiar HTML para a área de transferência.
+- Reutilizar integralmente o Store, Models e Services implementados na Fase 4A.
+- Manter integração com Event Bus, Validation Engine, Storage e Theme System.
+- Preservar integralmente a arquitetura modular definida na Fase 1.
+
+### 📌 Observações
+
+- Nenhuma alteração estrutural na arquitetura será realizada.
+- Nenhuma dependência externa será adicionada.
+- Os recursos binários permanecem previstos para a Fase 5 – Assets.
+- Templates continuam previstos exclusivamente para a Fase 6.
