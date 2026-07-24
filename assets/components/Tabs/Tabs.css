@@ -1,0 +1,7 @@
+/* Objetivo: estilos do componente Tabs.
+   Responsabilidade: isolar a aparência inicial e manter ponto de extensão visual.
+   Dependências: tokens definidos em assets/css/themes.css. */
+
+.component-tabs {
+  display: block;
+}
