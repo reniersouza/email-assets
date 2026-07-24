@@ -63,6 +63,8 @@ export class Store {
       eventBus.emit(EVENTS.STATE_UPDATED, { change, state: this.snapshot() });
       if (change.path) eventBus.emit(EVENTS.FIELD_CHANGED, change);
       eventBus.emit(EVENTS.VALIDATION_UPDATED, this.state.validation);
+      if (change.path?.startsWith('signature.layout')) eventBus.emit(EVENTS.LAYOUT_CHANGED, { change, layout: clone(this.state.signature.layout) });
+      if (change.path?.startsWith('signature.style')) eventBus.emit(EVENTS.STYLE_CHANGED, { change, style: clone(this.state.signature.style) });
       this.notify(change);
     }
     if (this.state.signature.preferences.autoSave && options.persist !== false) this.autoSave();

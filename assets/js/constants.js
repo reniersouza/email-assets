@@ -24,6 +24,12 @@ export const EVENTS = Object.freeze({
   VALIDATION_UPDATED: 'validation:updated',
   APPLICATION_READY: 'application:ready',
   NOTIFICATION_PUSHED: 'notification:pushed',
+  SIGNATURE_UPDATED: 'signature:updated',
+  PREVIEW_UPDATED: 'preview:updated',
+  HTML_RENDERED: 'html:rendered',
+  LAYOUT_CHANGED: 'layout:changed',
+  STYLE_CHANGED: 'style:changed',
+  RENDER_COMPLETED: 'render:completed',
 });
 
 export const COMPONENTS = Object.freeze([
