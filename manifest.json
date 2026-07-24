@@ -1,42 +1,56 @@
 {
-  "name": "OBJETIVONET Email Signature Generator",
-  "short_name": "Email Signatures",
-  "description": "PWA para geração de assinaturas de e-mail da OBJETIVONET.",
-  "start_url": "/",
-  "scope": "/",
-  "display": "standalone",
-  "orientation": "any",
-  "theme_color": "#2563eb",
-  "background_color": "#f8fafc",
-  "categories": ["business", "productivity", "utilities"],
-  "icons": [
-    {
-      "src": "assets/icons/icon-192.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/icons/icon-512.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Abrir Editor",
-      "short_name": "Editor",
-      "description": "Acessa a área de edição.",
-      "url": "/#editor",
-      "icons": [{ "src": "assets/icons/icon-192.svg", "sizes": "192x192" }]
-    },
-    {
-      "name": "Abrir Código",
-      "short_name": "Código",
-      "description": "Acessa o visualizador de código.",
-      "url": "/#code",
-      "icons": [{ "src": "assets/icons/icon-192.svg", "sizes": "192x192" }]
-    }
-  ]
+"name": "OBJETIVONET Email Signature Generator",
+"short_name": "Email Signature",
+"description": "PWA profissional para criação de assinaturas HTML de e-mail da OBJETIVONET.",
+"start_url": "/",
+"scope": "/",
+"display": "standalone",
+"orientation": "any",
+"theme_color": "#2563eb",
+"background_color": "#f8fafc",
+"categories": [
+"business",
+"productivity",
+"utilities"
+],
+"icons": [
+{
+"src": "assets/icons/icon-192.svg",
+"sizes": "192x192",
+"type": "image/svg+xml",
+"purpose": "any maskable"
+},
+{
+"src": "assets/icons/icon-512.svg",
+"sizes": "512x512",
+"type": "image/svg+xml",
+"purpose": "any maskable"
+}
+],
+"shortcuts": [
+{
+"name": "Abrir Editor",
+"short_name": "Editor",
+"description": "Acessa a área de edição.",
+"url": "/#editor",
+"icons": [
+{
+"src": "assets/icons/icon-192.svg",
+"sizes": "192x192"
+}
+]
+},
+{
+"name": "Abrir Código",
+"short_name": "Código",
+"description": "Acessa o visualizador de código.",
+"url": "/#code",
+"icons": [
+{
+"src": "assets/icons/icon-192.svg",
+"sizes": "192x192"
+}
+]
+}
+]
 }
