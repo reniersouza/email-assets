@@ -7,7 +7,7 @@
 "scripts": {
 "start": "python3 -m http.server 4173",
 "lint": "eslint assets/js/**/*.js assets/components/**/*.js config/**/*.js tests/**/*.js service-worker.js",
-"format": "prettier --check "**/*.{html,css,js,json,md}"",
+"format": "prettier --check "/*.{html,css,js,json,md}"",
 "test": "node tests/core.test.js"
 },
 "devDependencies": {
