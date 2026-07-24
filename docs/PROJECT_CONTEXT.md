@@ -2,7 +2,7 @@
 
 ## Project Context
 
-**Versão do Documento:** 1.2.0
+**Versão do Documento:** 1.3.0
 
 **Última Atualização:** 2026-07-24
 
@@ -18,36 +18,36 @@ O projeto é destinado à produção e será publicado no domínio oficial da Ob
 
 # Objetivos
 
-- Gerar assinaturas HTML compatíveis com clientes de e-mail.
-- Permitir personalização completa.
-- Oferecer preview em tempo real.
-- Gerar HTML limpo com CSS inline.
-- Compatibilidade máxima com Gmail, Outlook, Microsoft 365, Apple Mail, Zoho Mail e demais clientes.
-- Ser uma Progressive Web App instalável.
-- Funcionar offline após o primeiro acesso.
-- Possuir arquitetura escalável, modular e de fácil manutenção.
+* Gerar assinaturas HTML compatíveis com clientes de e-mail.
+* Permitir personalização completa.
+* Oferecer preview em tempo real.
+* Gerar HTML limpo com CSS inline.
+* Compatibilidade máxima com Gmail, Outlook, Microsoft 365, Apple Mail, Zoho Mail e demais clientes.
+* Ser uma Progressive Web App instalável.
+* Funcionar offline após o primeiro acesso.
+* Possuir arquitetura escalável, modular e de fácil manutenção.
 
 ---
 
 # Tecnologias
 
-- HTML5
-- CSS3
-- JavaScript ES2023
-- Progressive Web App (PWA)
-- LocalStorage
-- IndexedDB
-- Service Worker
+* HTML5
+* CSS3
+* JavaScript ES2023
+* Progressive Web App (PWA)
+* LocalStorage
+* IndexedDB
+* Service Worker
 
 ## Não utilizar
 
-- React
-- Vue
-- Angular
-- Bootstrap
-- Tailwind CSS
-- jQuery
-- Dependências externas sem aprovação
+* React
+* Vue
+* Angular
+* Bootstrap
+* Tailwind CSS
+* jQuery
+* Dependências externas sem aprovação.
 
 ---
 
@@ -59,17 +59,17 @@ O projeto utiliza arquitetura modular baseada em componentes independentes e res
 
 Todos os módulos devem respeitar os princípios:
 
-- SOLID
-- DRY
-- KISS
-- Separation of Concerns
-- Clean Code
+* SOLID
+* DRY
+* KISS
+* Separation of Concerns
+* Clean Code
 
 ---
 
 # Estrutura Principal
 
-```
+```text
 /
 assets/
 config/
@@ -84,11 +84,12 @@ CHANGELOG.md
 PROJECT_CONTEXT.md
 ROADMAP.md
 AI_RULES.md
+ARCHITECTURE.md
 ```
 
 ## Estrutura JavaScript
 
-```
+```text
 assets/js/
 
 models/
@@ -108,9 +109,9 @@ utils.js
 
 Esta estrutura é considerada oficial.
 
-Novos módulos deverão ser integrados a ela.
+Novos módulos deverão integrar-se a ela.
 
-Não reorganizar diretórios existentes.
+Nunca reorganizar diretórios existentes.
 
 ---
 
@@ -128,14 +129,14 @@ Concluída.
 
 Inclui:
 
-- Bootstrap
-- Configuração
-- Manifest
-- Service Worker
-- Event Bus
-- Logger
-- LocalStorage
-- IndexedDB
+* Bootstrap
+* Configuração
+* Manifest
+* Service Worker
+* Event Bus
+* Logger
+* LocalStorage
+* IndexedDB
 
 ---
 
@@ -145,13 +146,13 @@ Concluída.
 
 Inclui:
 
-- Header
-- Sidebar
-- Editor
-- Preview estrutural
-- Footer
-- Responsividade
-- Dark Mode
+* Header
+* Sidebar
+* Editor
+* Preview estrutural
+* Footer
+* Responsividade
+* Dark Mode
 
 ---
 
@@ -161,70 +162,88 @@ Concluída.
 
 Inclui:
 
-- Store central
-- Models
-- Services
-- Validation
-- Persistência
-- Histórico
-- Undo / Redo
-- Auto Save
-- Event Bus integrado
-- Sincronização automática do estado
+* Store central
+* Models
+* Services
+* Validation Engine
+* Persistência
+* Histórico
+* Undo / Redo
+* Auto Save
+* Event Bus integrado
+* Sincronização automática do estado
+
+---
+
+## ✅ Fase 4B — Signature Engine
+
+Concluída.
+
+Inclui:
+
+* Signature Engine
+* Layout Engine
+* Style Engine
+* HTML Renderer
+* Preview Renderer
+* Integração completa com Store
+* Integração completa com Event Bus
+* Infraestrutura de Exportação HTML
+* Infraestrutura de Clipboard
 
 ---
 
 ## ⏳ Próxima Fase
 
-### Fase 4B — Signature Engine
+### Fase 5 — Assets
 
-Responsável por transformar o estado centralizado da aplicação em uma representação completa da assinatura, renderizar o preview utilizando dados reais e gerar HTML compatível para exportação.
+Responsável pela implementação da biblioteca oficial de recursos estáticos da aplicação, incluindo favicon, ícones PWA, ícones sociais, logos, imagens, placeholders e fontes oficiais.
 
 ---
 
 # Roadmap Atual
 
-- ✅ Fase 1 — Documentação
-- ✅ Fase 2 — Foundation
-- ✅ Fase 3 — UI
-- ✅ Fase 4A — Application State
-- ⏳ Fase 4B — Signature Engine
-- ⏳ Fase 5 — Assets
-- ⏳ Fase 6 — Templates
-- ⏳ Fase 7 — Advanced Features
-- ⏳ Fase 8 — PWA Final
-- ⏳ Fase 9 — Testing
-- ⏳ Fase 10 — Deploy
+* ✅ Fase 1 — Documentação
+* ✅ Fase 2 — Foundation
+* ✅ Fase 3 — UI
+* ✅ Fase 4A — Application State
+* ✅ Fase 4B — Signature Engine
+* ⏳ Fase 5 — Assets
+* ⏳ Fase 6 — Templates
+* ⏳ Fase 7 — Advanced Features
+* ⏳ Fase 8 — PWA Final
+* ⏳ Fase 9 — Testing
+* ⏳ Fase 10 — Deploy
 
 ---
 
 # Decisões Arquiteturais
 
-- Nunca alterar a arquitetura sem ADR.
-- Reutilizar componentes sempre que possível.
-- Evitar duplicação de código.
-- Toda comunicação entre módulos deve ocorrer através do Event Bus.
-- Todo estado da aplicação deve permanecer centralizado no Store.
-- Componentes não devem armazenar dados permanentes da assinatura.
+* Nunca alterar a arquitetura sem ADR.
+* Reutilizar componentes sempre que possível.
+* Evitar duplicação de código.
+* Toda comunicação entre módulos deve ocorrer através do Event Bus.
+* Todo estado da aplicação deve permanecer centralizado no Store.
+* Componentes não devem armazenar dados permanentes da assinatura.
 
 ---
 
 # Compatibilidade
 
-O HTML produzido pelo projeto deverá ser compatível com:
+O HTML produzido deverá ser compatível com:
 
-- Gmail
-- Google Workspace
-- Outlook Desktop
-- Outlook Web
-- Microsoft 365
-- Apple Mail
-- Zoho Mail
-- Yahoo Mail
-- Thunderbird
-- Proton Mail
-- Fastmail
-- Roundcube
+* Gmail
+* Google Workspace
+* Outlook Desktop
+* Outlook Web
+* Microsoft 365
+* Apple Mail
+* Zoho Mail
+* Yahoo Mail
+* Thunderbird
+* Proton Mail
+* Fastmail
+* Roundcube
 
 Nunca utilizar recursos incompatíveis com clientes de e-mail.
 
@@ -238,7 +257,7 @@ Toda nova fase deverá:
 2. Atualizar apenas os arquivos necessários.
 3. Preservar compatibilidade.
 4. Não quebrar funcionalidades anteriores.
-5. Atualizar a documentação quando necessário.
+5. Manter a documentação sincronizada com a implementação.
 
 ---
 
@@ -246,17 +265,17 @@ Toda nova fase deverá:
 
 Versão atual:
 
-v0.4.0
+**v0.5.0**
 
 Status atual:
 
-Application State concluído.
+**Signature Engine concluído.**
 
 Próximo marco:
 
-v0.5.0
+**v0.6.0**
 
-Signature Engine
+**Fase 5 — Assets**
 
 ---
 
@@ -264,7 +283,7 @@ Signature Engine
 
 Cloudflare Pages
 
-Domínio:
+Domínio oficial:
 
 assinatura.objetivonet.com.br
 
@@ -276,11 +295,11 @@ Deploy automático via GitHub.
 
 Lighthouse:
 
-- Performance ≥ 95
-- Accessibility ≥ 95
-- Best Practices ≥ 95
-- SEO ≥ 95
-- PWA ≥ 95
+* Performance ≥ 95
+* Accessibility ≥ 95
+* Best Practices ≥ 95
+* SEO ≥ 95
+* PWA ≥ 95
 
 ---
 
