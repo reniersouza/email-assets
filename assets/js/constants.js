@@ -17,6 +17,13 @@ export const EVENTS = Object.freeze({
   ROUTE_CHANGED: 'route:changed',
   STORAGE_CHANGED: 'storage:changed',
   THEME_CHANGED: 'theme:changed',
+  STATE_UPDATED: 'state:updated',
+  FIELD_CHANGED: 'field:changed',
+  IMAGE_CHANGED: 'image:changed',
+  CONFIG_UPDATED: 'config:updated',
+  VALIDATION_UPDATED: 'validation:updated',
+  APPLICATION_READY: 'application:ready',
+  NOTIFICATION_PUSHED: 'notification:pushed',
 });
 
 export const COMPONENTS = Object.freeze([

@@ -6,6 +6,28 @@ O projeto segue Semantic Versioning (SemVer).
 
 ---
 
+## [0.4.0] - 2026-07-24
+
+### 🎉 Concluído
+
+- ✅ Fase 4A – Core Application Layer (Application State)
+
+### ✨ Implementado
+
+- Store central sem dependências externas com state, getters, actions, mutations, subscribers, observers, dispatch, commit, watch, snapshot e restore.
+- Modelos independentes para pessoa, empresa, foto, redes sociais, tema, estilo, layout, configurações, validação e aplicação.
+- Serviços centrais desacoplados para persistência, validação, tema, histórico, eventos, configuração, logger, imagem, clipboard e notificações.
+- Sincronização automática entre estado, validação, preview state, Event Bus, observers, histórico e persistência.
+- Undo/Redo, checkpoint, snapshot e restore com limite configurável.
+- Persistência com IndexedDB e fallback para LocalStorage, incluindo versionamento.
+- Validação em tempo real para email, telefone, WhatsApp, URLs, GitHub, LinkedIn e campos obrigatórios.
+
+### 🧪 Testes
+
+- Testes básicos para Store, Validation, History, Storage, Theme, Observers e Event Bus.
+
+---
+
 ## [0.3.0] - 2026-07-24
 
 ### 🎉 Concluído

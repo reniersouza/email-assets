@@ -1,6 +1,6 @@
 // Objetivo: bootstrap principal da aplicação.
 // Responsabilidade: inicializar tema, roteador, configurações, componentes e service worker.
-// Dependências: constants.js, config.js, events.js, helpers.js, logger.js, router.js e storage.js.
+// Dependências: constants.js, config.js, events.js, helpers.js, logger.js, router.js e store.js.
 
 import { APP_VERSION, COMPONENTS, EVENTS } from './constants.js';
 import { configLoader } from './config.js';
@@ -8,7 +8,7 @@ import { eventBus } from './events.js';
 import { $, lazyImport, setBusy } from './helpers.js';
 import { logger } from './logger.js';
 import { router } from './router.js';
-import { storage } from './storage.js';
+import { store } from './store.js';
 
 export class ThemeManager {
   constructor() {
@@ -17,8 +17,8 @@ export class ThemeManager {
   }
 
   init() {
-    const savedTheme = storage.load().settings.theme ?? 'auto';
-    this.apply(savedTheme);
+    const savedTheme = store.get('theme.preference') ?? 'auto';
+    this.apply(savedTheme, { persist: false });
     this.bindSystemThemeListener();
     this.bindToggle();
   }
@@ -46,7 +46,7 @@ export class ThemeManager {
     document.documentElement.style.colorScheme = this.resolveColorScheme(preference);
 
     if (persist) {
-      storage.save({ theme: preference });
+      store.dispatch('updateField', { path: 'theme.preference', value: preference });
     }
 
     document.querySelector('#theme-toggle')?.replaceChildren(document.createTextNode(`Tema: ${preference.charAt(0).toUpperCase()}${preference.slice(1)}`));
@@ -72,6 +72,7 @@ export class App {
     logger.info(`Inicializando versão ${APP_VERSION}`);
     setBusy(this.root, true);
 
+    await store.dispatch('hydrate');
     this.themeManager.init();
     router.start();
     await configLoader.loadAll();
@@ -80,7 +81,9 @@ export class App {
 
     this.root?.setAttribute('data-state', 'ready');
     setBusy(this.root, false);
+    store.commit('SET_FIELD', { path: 'application.ready', value: true }, { persist: false });
     eventBus.emit(EVENTS.APP_READY, { version: APP_VERSION });
+    eventBus.emit(EVENTS.APPLICATION_READY, { version: APP_VERSION });
   }
 
   async loadComponents() {
