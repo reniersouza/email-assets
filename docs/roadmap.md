@@ -57,7 +57,7 @@ Escopo:
 - Dark Mode
 
 ---
-##Fase 4A – Estado da Aplicação (Application State)
+## Fase 4A – Estado da Aplicação (Application State)
 Status: ⏳ Em Andamento
 
 Escopo:
