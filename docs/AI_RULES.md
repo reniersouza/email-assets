@@ -2,7 +2,7 @@
 
 - Nunca alterar a arquitetura aprovada
 - Nunca recriar arquivos existentes sem necessidade
-- sempre preservar compatibilidade com fases concluídas
+- Sempre preservar compatibilidade com fases concluídas
 - Não introduzir dependências externas sem aprovação
 - Seguir os padrões de código do projeto
 - Atualizar o CHANGELOG.md quando houver mudanças relevantes
