@@ -1,6 +1,6 @@
 # Email Assets
 
-Arquivos utilizados nas assinaturas de e-mail da ObjetivoNETe OnlyNET.
+Arquivos utilizados nas assinaturas de e-mail da ObjetivoNET e OnlyNET.
 
 ## Imagens
 
