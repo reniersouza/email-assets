@@ -66,7 +66,7 @@ Escopo:
 - Validações em tempo real
 - Atualização automática da interface quando qualquer campo mudar
 
-##Fase 4B – Motor de Geração (Signature Engine)
+## Fase 4B – Motor de Geração (Signature Engine)
 Status: ⏳ Pendente
 
 Escopo:
