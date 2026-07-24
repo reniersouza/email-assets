@@ -2,7 +2,7 @@
 
 # ARCHITECTURE
 
-**Versão:** 1.0.0
+**Versão:** 1.1.0
 
 **Última atualização:** 2026-07-24
 
@@ -16,9 +16,9 @@ Seu objetivo é registrar as decisões arquiteturais permanentes, definir respon
 
 Este documento complementa:
 
-- PROJECT_CONTEXT.md
-- ROADMAP.md
-- AI_RULES.md
+* PROJECT_CONTEXT.md
+* ROADMAP.md
+* AI_RULES.md
 
 Em caso de conflito, alterações arquiteturais somente poderão ocorrer mediante uma Architectural Decision Record (ADR).
 
@@ -28,11 +28,11 @@ Em caso de conflito, alterações arquiteturais somente poderão ocorrer mediant
 
 O projeto foi desenvolvido seguindo os princípios:
 
-- SOLID
-- DRY
-- KISS
-- Separation of Concerns
-- Clean Code
+* SOLID
+* DRY
+* KISS
+* Separation of Concerns
+* Clean Code
 
 Toda implementação deverá preservar esses princípios.
 
@@ -46,15 +46,17 @@ Não são utilizados frameworks.
 
 Todo módulo possui responsabilidade única.
 
-A comunicação ocorre através do Event Bus.
+Toda comunicação ocorre através do Event Bus.
 
-O estado da aplicação permanece centralizado no Store.
+Todo estado da aplicação permanece centralizado no Store.
+
+Toda renderização é derivada do estado da aplicação.
 
 ---
 
 # Estrutura Oficial
 
-```
+```text
 /
 assets/
 config/
@@ -74,7 +76,7 @@ ARCHITECTURE.md
 
 ## Estrutura JavaScript
 
-```
+```text
 assets/js/
 
 models/
@@ -94,7 +96,97 @@ utils.js
 
 Esta estrutura é considerada oficial.
 
-Não reorganizar diretórios existentes.
+Novos módulos deverão integrar-se a esta estrutura.
+
+Nunca reorganizar diretórios existentes.
+
+---
+
+# Camadas da Aplicação
+
+A arquitetura está organizada nas seguintes camadas:
+
+## Interface Layer
+
+Responsável apenas pela interação com o usuário.
+
+Não contém regras de negócio.
+
+Não realiza persistência.
+
+Não armazena estado permanente.
+
+---
+
+## Core Application Layer
+
+Responsável por todo o funcionamento interno da aplicação.
+
+Inclui:
+
+* Store
+* Models
+* Services
+* Validation Engine
+* History Engine
+* Theme Engine
+* Storage Engine
+* Event Bus
+
+Esta camada foi implementada na Fase 4A.
+
+---
+
+## Signature Engine Layer
+
+Responsável por transformar o Application State em uma representação normalizada da assinatura.
+
+Inclui:
+
+* Signature Engine
+* Layout Engine
+* Style Engine
+
+Esta camada foi implementada na Fase 4B.
+
+---
+
+## Rendering Layer
+
+Responsável pela geração dos resultados derivados da assinatura.
+
+Inclui:
+
+* Preview Renderer
+* HTML Renderer
+
+Ambos utilizam exclusivamente a saída do Signature Engine.
+
+---
+
+## Assets Layer
+
+Será implementada na Fase 5.
+
+Será responsável por:
+
+* favicon
+* ícones PWA
+* ícones sociais
+* logos
+* imagens
+* placeholders
+* fontes
+
+Nenhuma regra de negócio deverá existir nesta camada.
+
+---
+
+## Templates Layer
+
+Será implementada na Fase 6.
+
+Será responsável apenas por definir modelos visuais reutilizando integralmente o Signature Engine.
 
 ---
 
@@ -114,28 +206,37 @@ Nenhum componente pode armazenar estado próprio referente aos dados da assinatu
 
 Representam os domínios da aplicação.
 
-Cada Model deve possuir responsabilidade única.
+Cada Model possui responsabilidade única.
+
+São responsáveis por:
+
+* valores padrão
+* serialização
+* desserialização
+* validação estrutural
 
 ---
 
 ## Services
 
-Implementam regras de negócio reutilizáveis.
+Implementam regras reutilizáveis da aplicação.
 
-Não devem manipular interface diretamente.
+Não manipulam interface diretamente.
+
+Toda persistência deve ocorrer através dos Services.
 
 ---
 
 ## Event Bus
 
-Toda comunicação entre módulos deve ocorrer através do Event Bus.
+Toda comunicação entre módulos ocorre através do Event Bus.
 
 É proibido acoplamento direto entre componentes.
 
 Fluxo:
 
-```
-Componente
+```text
+Interface
     ↓
 Store
     ↓
@@ -146,69 +247,75 @@ Subscribers
 
 ---
 
-
 ## Signature Engine
 
-Responsável por transformar o Application State em uma representação normalizada da assinatura.
+Responsável por transformar o estado da aplicação em uma assinatura normalizada.
 
 Regras obrigatórias:
 
-- Consumir dados exclusivamente do Store.
-- Utilizar os Models e a Validation Engine existentes.
-- Remover campos vazios e campos inválidos antes da renderização.
-- Não acessar componentes da interface.
-- Disponibilizar a mesma estrutura para Preview, HTML Renderer e infraestrutura de exportação.
+* consumir dados exclusivamente do Store;
+* utilizar os Models e Validation Engine;
+* remover campos vazios;
+* remover dados inválidos;
+* não acessar componentes da interface;
+* disponibilizar estrutura única para Preview e HTML Renderer.
+
+---
 
 ## Layout Engine
 
-Responsável por resolver a estrutura lógica de layout da assinatura.
+Resolve exclusivamente a estrutura lógica da assinatura.
 
-Layouts suportados nesta fase:
+Layouts suportados:
 
-- horizontal
-- vertical
-- compacto
+* Horizontal
+* Vertical
+* Compacto
 
-Novos layouts deverão ser adicionados sem alterar os layouts existentes.
+Novos layouts deverão ser adicionados sem alterar os existentes.
+
+---
 
 ## Style Engine
 
-Responsável por resolver tokens visuais reutilizáveis, incluindo cores, tipografia, espaçamentos, alinhamentos, bordas, separadores, ícones e foto.
+Resolve os tokens visuais reutilizados por toda a aplicação.
 
-A lógica visual permanece desacoplada do Signature Engine.
+Inclui:
 
-## HTML Renderer e Preview Renderer
+* cores
+* tipografia
+* espaçamentos
+* alinhamentos
+* bordas
+* separadores
+* foto
+* ícones
 
-O HTML Renderer gera HTML sem JavaScript, sem dependências externas, com caracteres escapados e preparado para CSS inline.
+Toda lógica visual permanece desacoplada do Signature Engine.
 
-O Preview Renderer consome obrigatoriamente o fluxo:
+---
 
-```
-Store
-↓
-Signature Engine
-↓
-Renderer
-↓
-Preview
-```
+## Preview Renderer
 
-## Eventos da Fase 4B
+Responsável apenas pela renderização do Preview.
 
-- SIGNATURE_UPDATED: assinatura normalizada atualizada.
-- PREVIEW_UPDATED: preview atualizado com HTML renderizado.
-- HTML_RENDERED: HTML da assinatura gerado.
-- LAYOUT_CHANGED: reservado para alterações de layout.
-- STYLE_CHANGED: reservado para alterações de estilo.
-- RENDER_COMPLETED: ciclo de renderização concluído.
+Nunca modifica o estado da aplicação.
 
-## Interface
+Nunca realiza persistência.
 
-A interface deve apenas consumir dados.
+---
 
-Não deve conter regras de negócio.
+## HTML Renderer
 
-Não deve realizar persistência.
+Responsável pela geração do HTML compatível com clientes de e-mail.
+
+Regras obrigatórias:
+
+* HTML sem JavaScript
+* escape de caracteres
+* remoção de campos vazios
+* preparado para CSS inline
+* sem dependências externas
 
 ---
 
@@ -216,73 +323,88 @@ Não deve realizar persistência.
 
 A persistência utiliza:
 
-- IndexedDB
-- LocalStorage (fallback)
+* IndexedDB
+* LocalStorage (fallback)
 
-O acesso deve ocorrer exclusivamente através dos serviços responsáveis.
+O acesso ocorre exclusivamente através dos Services.
 
 ---
 
-# Fluxo da Aplicação
+# Fluxo Principal da Aplicação
 
-```
+```text
 Usuário
-
-↓
-
+    ↓
 Interface
-
-↓
-
+    ↓
 Store
-
-↓
-
+    ↓
+Validation Engine
+    ↓
 Services
-
-↓
-
+    ↓
 Event Bus
-
-↓
-
-Renderização
+    ↓
+Signature Engine
+    ↓
+Preview Renderer
+HTML Renderer
 ```
 
-Toda alteração deve passar pelo Store.
+Toda alteração deve obrigatoriamente passar pelo Store.
 
 ---
 
 # Fluxo de Renderização
 
-```
+```text
 Application State
-
-↓
-
+        ↓
 Signature Engine
-
-↓
-
-Preview
-
-↓
-
-HTML Renderer
+      ↙     ↘
+Preview     HTML Renderer
+Renderer
 ```
 
-O Signature Engine será responsável por transformar o estado da aplicação em uma representação da assinatura.
+O Preview Renderer e o HTML Renderer utilizam exatamente a mesma representação da assinatura.
+
+Isso garante consistência entre Preview e HTML exportado.
+
+---
+
+# Eventos Padronizados
+
+## Application State
+
+* STATE_UPDATED
+* FIELD_CHANGED
+* CONFIG_UPDATED
+* VALIDATION_UPDATED
+* THEME_CHANGED
+
+## Signature Engine
+
+* SIGNATURE_UPDATED
+* LAYOUT_CHANGED
+* STYLE_CHANGED
+
+## Rendering
+
+* PREVIEW_UPDATED
+* HTML_RENDERED
+* RENDER_COMPLETED
 
 ---
 
 # Convenções
 
-- ES Modules
-- Uma responsabilidade por arquivo
-- Componentes reutilizáveis
-- Nomes descritivos
-- Comentários apenas quando agregarem valor
-- Evitar duplicação de código
+* ES Modules
+* Uma responsabilidade por arquivo
+* Componentes reutilizáveis
+* Nomes descritivos
+* Comentários apenas quando agregarem valor
+* Evitar duplicação de código
+* Reutilizar implementações existentes sempre que possível
 
 ---
 
@@ -290,21 +412,33 @@ O Signature Engine será responsável por transformar o estado da aplicação em
 
 É proibido:
 
-- adicionar frameworks
-- reorganizar diretórios
-- substituir módulos existentes
-- criar dependências externas sem aprovação
-- duplicar funcionalidades existentes
+* adicionar frameworks;
+* reorganizar diretórios;
+* substituir módulos existentes;
+* criar dependências externas sem aprovação;
+* duplicar funcionalidades existentes;
+* acessar diretamente o estado fora do Store;
+* criar comunicação direta entre módulos sem o Event Bus.
 
 ---
 
 # Evolução Arquitetural
 
-A evolução prevista é:
-
-```
+```text
+Fase 1
+Documentação
+        │
+        ▼
+Fase 2
+Foundation
+        │
+        ▼
+Fase 3
+UI
+        │
+        ▼
 Fase 4A
-Application State
+Core Application Layer
         │
         ▼
 Fase 4B
@@ -325,9 +459,17 @@ Advanced Features
         ▼
 Fase 8
 PWA Final
+        │
+        ▼
+Fase 9
+Testing
+        │
+        ▼
+Fase 10
+Deploy
 ```
 
-Novas fases deverão reutilizar integralmente a infraestrutura construída nas fases anteriores.
+Cada fase deve reutilizar integralmente a infraestrutura construída nas fases anteriores.
 
 ---
 
