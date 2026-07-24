@@ -6,6 +6,28 @@ O projeto segue Semantic Versioning (SemVer).
 
 ---
 
+## [0.5.0] - 2026-07-24
+
+### 🎉 Concluído
+
+- ✅ Fase 4B – Signature Engine.
+
+### ✨ Implementado
+
+- Signature Engine desacoplado da interface consumindo o Store e a Validation Engine.
+- Layout Engine com suporte inicial a layouts horizontal, vertical e compacto.
+- Style Engine para tokens visuais reutilizáveis por Preview e HTML Renderer.
+- HTML Renderer sem JavaScript, com escape de caracteres, remoção de campos vazios e base para CSS inline compatível com clientes de e-mail.
+- Preview integrado ao fluxo Store → Signature Engine → Renderer → Preview com debounce, cache e prevenção de renderizações redundantes.
+- Infraestrutura de exportação HTML e Clipboard reutilizando o HTML Renderer.
+- Eventos padronizados: SIGNATURE_UPDATED, PREVIEW_UPDATED, HTML_RENDERED, LAYOUT_CHANGED, STYLE_CHANGED e RENDER_COMPLETED.
+
+### 🧪 Testes
+
+- Testes básicos para Signature Engine, Layout Engine, Style Engine, HTML Renderer, Preview Renderer, integração com Store, Event Bus e exportação.
+
+---
+
 ## [0.4.0] - 2026-07-24
 
 ### 🎉 Concluído

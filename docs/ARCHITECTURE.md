@@ -146,6 +146,62 @@ Subscribers
 
 ---
 
+
+## Signature Engine
+
+Responsável por transformar o Application State em uma representação normalizada da assinatura.
+
+Regras obrigatórias:
+
+- Consumir dados exclusivamente do Store.
+- Utilizar os Models e a Validation Engine existentes.
+- Remover campos vazios e campos inválidos antes da renderização.
+- Não acessar componentes da interface.
+- Disponibilizar a mesma estrutura para Preview, HTML Renderer e infraestrutura de exportação.
+
+## Layout Engine
+
+Responsável por resolver a estrutura lógica de layout da assinatura.
+
+Layouts suportados nesta fase:
+
+- horizontal
+- vertical
+- compacto
+
+Novos layouts deverão ser adicionados sem alterar os layouts existentes.
+
+## Style Engine
+
+Responsável por resolver tokens visuais reutilizáveis, incluindo cores, tipografia, espaçamentos, alinhamentos, bordas, separadores, ícones e foto.
+
+A lógica visual permanece desacoplada do Signature Engine.
+
+## HTML Renderer e Preview Renderer
+
+O HTML Renderer gera HTML sem JavaScript, sem dependências externas, com caracteres escapados e preparado para CSS inline.
+
+O Preview Renderer consome obrigatoriamente o fluxo:
+
+```
+Store
+↓
+Signature Engine
+↓
+Renderer
+↓
+Preview
+```
+
+## Eventos da Fase 4B
+
+- SIGNATURE_UPDATED: assinatura normalizada atualizada.
+- PREVIEW_UPDATED: preview atualizado com HTML renderizado.
+- HTML_RENDERED: HTML da assinatura gerado.
+- LAYOUT_CHANGED: reservado para alterações de layout.
+- STYLE_CHANGED: reservado para alterações de estilo.
+- RENDER_COMPLETED: ciclo de renderização concluído.
+
 ## Interface
 
 A interface deve apenas consumir dados.
