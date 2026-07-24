@@ -57,17 +57,23 @@ Escopo:
 - Dark Mode
 
 ---
-
-## Fase 4 — Motor da Assinatura
+##Fase 4A – Estado da Aplicação (Application State)
 Status: ⏳ Pendente
 
 Escopo:
-- Signature Engine
-- HTML Generator
-- Preview em tempo real
-- Renderização
-- CSS Inline
-- Compatibilidade com clientes de e-mail
+- Gerenciamento centralizado do estado da aplicação
+- Sincronização entre formulário, preview e armazenamento
+- Validações em tempo real
+- Atualização automática da interface quando qualquer campo mudar
+
+##Fase 4B – Motor de Geração (Signature Engine)
+Status: ⏳ Pendente
+
+Escopo:
+- Geração do HTML compatível com clientes de e-mail
+- Renderização do preview com dados reais
+- Exportação para HTML
+- Cópia para a área de transferência.
 
 ---
 
