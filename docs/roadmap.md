@@ -43,7 +43,7 @@ Os recursos binários (favicon, ícones, imagens e fontes) foram adiados para a 
 ---
 
 ## Fase 3 — Interface do Usuário
-Status: ⏳ Em andamento
+Status: ✅ Concluída
 
 Escopo:
 - Layout principal
@@ -58,7 +58,7 @@ Escopo:
 
 ---
 ##Fase 4A – Estado da Aplicação (Application State)
-Status: ⏳ Pendente
+Status: ⏳ Em Andamento
 
 Escopo:
 - Gerenciamento centralizado do estado da aplicação
