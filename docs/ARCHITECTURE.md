@@ -80,7 +80,9 @@ ARCHITECTURE.md
 assets/js/
 
 models/
+signature-models.js
 services/
+core-services.js
 
 app.js
 config.js
@@ -93,6 +95,26 @@ storage.js
 store.js
 utils.js
 ```
+A pasta `models` concentra os modelos de domínio da aplicação.
+
+A pasta `services` concentra serviços desacoplados utilizados pela aplicação.
+
+Serviços podem ser agrupados quando possuem responsabilidade relacionada e não devem criar acoplamento entre módulos.
+
+O arquivo `core-services.js` contém os serviços fundamentais da aplicação:
+
+- StorageService
+- ValidationService
+- HistoryService
+- ThemeService
+- ImageService
+- ClipboardService
+- NotificationService
+- LoggerService
+- EventService
+- ConfigService
+
+Novos serviços devem respeitar a responsabilidade única e permanecer desacoplados da interface.
 
 Esta estrutura é considerada oficial.
 
