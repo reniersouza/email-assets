@@ -2,9 +2,9 @@
 
 ## Project Context
 
-**Versão do Documento:** 1.1.0
+**Versão do Documento:** 1.2.0
 
-**Última Atualização:** 2026
+**Última Atualização:** 2026-07-24
 
 ---
 
@@ -22,10 +22,10 @@ O projeto é destinado à produção e será publicado no domínio oficial da Ob
 - Permitir personalização completa.
 - Oferecer preview em tempo real.
 - Gerar HTML limpo com CSS inline.
-- Compatibilidade máxima com Gmail, Outlook, Zoho, Apple Mail e demais clientes.
+- Compatibilidade máxima com Gmail, Outlook, Microsoft 365, Apple Mail, Zoho Mail e demais clientes.
 - Ser uma Progressive Web App instalável.
 - Funcionar offline após o primeiro acesso.
-- Possuir arquitetura escalável e modular.
+- Possuir arquitetura escalável, modular e de fácil manutenção.
 
 ---
 
@@ -34,234 +34,184 @@ O projeto é destinado à produção e será publicado no domínio oficial da Ob
 - HTML5
 - CSS3
 - JavaScript ES2023
-- Progressive Web App
+- Progressive Web App (PWA)
 - LocalStorage
 - IndexedDB
 - Service Worker
 
-Não utilizar:
+## Não utilizar
 
 - React
 - Vue
 - Angular
 - Bootstrap
-- Tailwind
+- Tailwind CSS
 - jQuery
+- Dependências externas sem aprovação
 
 ---
 
 # Arquitetura
 
-A arquitetura definida na Fase 1 NÃO deve ser alterada.
+A arquitetura aprovada na Fase 1 é definitiva e não deve ser alterada sem uma Architectural Decision Record (ADR).
 
-O projeto utiliza arquitetura modular baseada em componentes.
+O projeto utiliza arquitetura modular baseada em componentes independentes e responsabilidades bem definidas.
 
-Separação de responsabilidades obrigatória.
+Todos os módulos devem respeitar os princípios:
 
-Estrutura baseada em módulos independentes.
-
-Cada módulo possui responsabilidade única.
+- SOLID
+- DRY
+- KISS
+- Separation of Concerns
+- Clean Code
 
 ---
 
 # Estrutura Principal
 
+```
 /
 assets/
-components/
 config/
-css/
-data/
 docs/
-fonts/
-icons/
-images/
-js/
-templates/
-
-manifest.json
-
-service-worker.js
+tests/
 
 index.html
-
+manifest.json
+service-worker.js
 README.md
-
 CHANGELOG.md
+PROJECT_CONTEXT.md
+ROADMAP.md
+AI_RULES.md
+```
+
+## Estrutura JavaScript
+
+```
+assets/js/
+
+models/
+services/
+
+app.js
+config.js
+constants.js
+events.js
+helpers.js
+logger.js
+router.js
+storage.js
+store.js
+utils.js
+```
+
+Esta estrutura é considerada oficial.
+
+Novos módulos deverão ser integrados a ela.
+
+Não reorganizar diretórios existentes.
 
 ---
 
 # Estado Atual do Projeto
 
-## Fase 1
+## ✅ Fase 1 — Planejamento e Arquitetura
 
-Status:
-
-✅ Concluída
-
-Escopo:
-
-- Documentação
-- Arquitetura
-- Roadmap
-- Especificações
+Concluída.
 
 ---
 
-## Fase 2
+## ✅ Fase 2 — Fundação
 
-Status:
+Concluída.
 
-✅ Concluída
+Inclui:
 
-Escopo:
-
-- Fundação da aplicação
 - Bootstrap
 - Configuração
-- PWA Base
-- Componentes
-- Service Worker
 - Manifest
-- Local Storage
-- IndexedDB
-- Logger
+- Service Worker
 - Event Bus
-
-Observação:
-
-Arquivos binários foram removidos desta fase.
+- Logger
+- LocalStorage
+- IndexedDB
 
 ---
 
-## Fase 3
+## ✅ Fase 3 — Interface
 
-Status:
+Concluída.
 
-✅ Concluída
+Inclui:
 
-Escopo:
-
-- Interface completa
-- Layout
-- Sidebar
 - Header
+- Sidebar
 - Editor
-- Preview (estrutura)
-- Code Viewer
+- Preview estrutural
 - Footer
-- Dark Mode
 - Responsividade
+- Dark Mode
 
 ---
 
-## Próxima Fase
+## ✅ Fase 4A — Application State
 
-Fase 4A
+Concluída.
 
-Application State
+Inclui:
+
+- Store central
+- Models
+- Services
+- Validation
+- Persistência
+- Histórico
+- Undo / Redo
+- Auto Save
+- Event Bus integrado
+- Sincronização automática do estado
+
+---
+
+## ⏳ Próxima Fase
+
+### Fase 4B — Signature Engine
+
+Responsável por transformar o estado centralizado da aplicação em uma representação completa da assinatura, renderizar o preview utilizando dados reais e gerar HTML compatível para exportação.
 
 ---
 
 # Roadmap Atual
 
-## ✅ Fase 1
-
-Documentação
-
-## ✅ Fase 2
-
-Foundation
-
-## ✅ Fase 3
-
-UI
-
-## ⏳ Fase 4A
-
-Application State
-
-## ⏳ Fase 4B
-
-Signature Engine
-
-## ⏳ Fase 5
-
-Assets
-
-## ⏳ Fase 6
-
-Templates
-
-## ⏳ Fase 7
-
-Advanced Features
-
-## ⏳ Fase 8
-
-PWA Final
-
-## ⏳ Fase 9
-
-Testing
-
-## ⏳ Fase 10
-
-Deploy
+- ✅ Fase 1 — Documentação
+- ✅ Fase 2 — Foundation
+- ✅ Fase 3 — UI
+- ✅ Fase 4A — Application State
+- ⏳ Fase 4B — Signature Engine
+- ⏳ Fase 5 — Assets
+- ⏳ Fase 6 — Templates
+- ⏳ Fase 7 — Advanced Features
+- ⏳ Fase 8 — PWA Final
+- ⏳ Fase 9 — Testing
+- ⏳ Fase 10 — Deploy
 
 ---
 
 # Decisões Arquiteturais
 
-## Arquitetura
-
-Não modificar.
-
-## Componentes
-
-Sempre reutilizar componentes existentes.
-
-Nunca duplicar componentes.
-
-## Comunicação
-
-Todos os módulos comunicam-se através do Event Bus.
-
-Não acessar módulos diretamente.
-
-## Estado
-
-A partir da Fase 4A todo o estado da aplicação deverá ser centralizado.
-
-Nenhum componente deverá armazenar estado próprio que represente dados da assinatura.
+- Nunca alterar a arquitetura sem ADR.
+- Reutilizar componentes sempre que possível.
+- Evitar duplicação de código.
+- Toda comunicação entre módulos deve ocorrer através do Event Bus.
+- Todo estado da aplicação deve permanecer centralizado no Store.
+- Componentes não devem armazenar dados permanentes da assinatura.
 
 ---
 
-# Convenções
+# Compatibilidade
 
-- ES Modules
-- SOLID
-- DRY
-- KISS
-- Clean Code
-- Separation of Concerns
-
----
-
-# Padrões de Código
-
-- Uma responsabilidade por módulo.
-- Funções pequenas.
-- Código comentado.
-- Nomes descritivos.
-- Sem duplicação.
-- Componentes reutilizáveis.
-
----
-
-# Compatibilidade da Assinatura
-
-O HTML gerado deverá ser compatível com:
+O HTML produzido pelo projeto deverá ser compatível com:
 
 - Gmail
 - Google Workspace
@@ -280,53 +230,37 @@ Nunca utilizar recursos incompatíveis com clientes de e-mail.
 
 ---
 
-# Regras Importantes
-
-Nunca alterar fases concluídas.
-
-Nunca modificar arquitetura sem ADR.
-
-Nunca mover arquivos existentes sem justificativa.
-
-Nunca criar dependências externas sem aprovação.
-
-Nunca utilizar frameworks.
-
----
-
 # Fluxo de Desenvolvimento
 
 Toda nova fase deverá:
 
-1. Utilizar o código existente.
-2. Atualizar somente os arquivos necessários.
+1. Reutilizar código existente.
+2. Atualizar apenas os arquivos necessários.
 3. Preservar compatibilidade.
 4. Não quebrar funcionalidades anteriores.
-5. Manter arquitetura modular.
+5. Atualizar a documentação quando necessário.
 
 ---
 
 # Controle de Versões
 
-Marco atual:
-
-v0.3.0
-
-Status:
-
-UI Completa
-
-Próximo marco:
+Versão atual:
 
 v0.4.0
 
-Application State
+Status atual:
+
+Application State concluído.
+
+Próximo marco:
+
+v0.5.0
+
+Signature Engine
 
 ---
 
 # Hospedagem
-
-Destino:
 
 Cloudflare Pages
 
@@ -338,24 +272,18 @@ Deploy automático via GitHub.
 
 ---
 
-# Qualidade
+# Metas de Qualidade
 
-Objetivos Lighthouse:
+Lighthouse:
 
-Performance >95
-
-Accessibility >95
-
-Best Practices >95
-
-SEO >95
-
-PWA >95
+- Performance ≥ 95
+- Accessibility ≥ 95
+- Best Practices ≥ 95
+- SEO ≥ 95
+- PWA ≥ 95
 
 ---
 
 # Objetivo Final
 
-Ao término do projeto a aplicação deverá possuir qualidade equivalente a uma solução SaaS comercial.
-
-O código deverá ser modular, documentado, escalável, pronto para manutenção e preparado para futuras expansões sem necessidade de reestruturação da arquitetura.
+Entregar uma solução SaaS profissional para geração de assinaturas HTML, com arquitetura escalável, documentação completa, alta compatibilidade entre clientes de e-mail e preparada para evolução contínua sem necessidade de reestruturação da base do projeto.
