@@ -1,24 +1,92 @@
-# Changelog
+# CHANGELOG
 
-## 0.3.0 - 2026-07-24
+Todas as alterações relevantes deste projeto serão documentadas neste arquivo.
 
-- Inicializa a fundação funcional da PWA estática.
+O projeto segue Semantic Versioning (SemVer).
 
-### Concluído
+---
 
-- Fase 1 – Documentação
-- Fase 2 – Fundação
-- Fase 3 – Interface completa
+## [0.3.0] - 2026-07-24
 
-### Próxima fase
+### 🎉 Concluído
 
-- Fase 4A – Gerenciamento de Estado
-  
-### Alterações no decorrer do projeto
+- ✅ Fase 1 – Documentação e Arquitetura
+- ✅ Fase 2 – Fundação da Aplicação (Foundation)
+- ✅ Fase 3 – Interface do Usuário (UI/UX)
 
-- Reorganização do roadmap.
+---
+
+### ✨ Implementado
+
+- Estrutura completa da Progressive Web App (PWA)
+- Interface responsiva
+- Layout principal
+- Sistema de componentes
+- Header
+- Sidebar
+- Editor
+- Preview (estrutura)
+- Code Viewer
+- Footer
+- Sistema de temas (Light / Dark / Auto)
+- Responsividade
+- Estrutura de navegação
+- Base para Event Bus
+- Base para LocalStorage
+- Base para IndexedDB
+- Service Worker
+- Manifest
+- Bootstrap da aplicação
+
+---
+
+### 🔄 Alterações Arquiteturais
+
+- Roadmap reorganizado.
 - Criação da Fase exclusiva para Assets.
-- Remoção de arquivos binários da Fase 2.
-- Divisão da fase 4 em A e B duas etapas.
+- Divisão da antiga Fase 4 em:
+  - Fase 4A – Core Application Layer (Application State)
+  - Fase 4B – Signature Engine
+- Arquivos binários removidos da Fase 2.
 - favicon.ico adiado para a Fase 5.
 - Estrutura preparada para futura inclusão dos ícones PWA.
+- Inclusão dos documentos:
+  - PROJECT_CONTEXT.md
+  - AI_RULES.md
+
+---
+
+### 📚 Documentação
+
+Atualizados:
+
+- ROADMAP.md
+- PROJECT_CONTEXT.md
+- AI_RULES.md
+- CHANGELOG.md
+
+---
+
+### 🚀 Próxima Versão
+
+## 0.4.0
+
+Escopo previsto:
+
+### Fase 4A — Core Application Layer
+
+Objetivos:
+
+- Store Central
+- Application State
+- Models
+- Services
+- Validation Engine
+- History Engine
+- Undo / Redo
+- Auto Save
+- IndexedDB
+- LocalStorage Sync
+- Observer Pattern
+- Event Bus Integration
+- State Synchronization
