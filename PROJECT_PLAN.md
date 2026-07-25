@@ -1,234 +1,362 @@
-# OBJETIVONET Email Signature Generator — Arquitetura e Plano
+# OBJETIVONET Email Signature Generator — Plano Mestre do Projeto
 
-Este documento registra a fase inicial aprovada para o projeto: arquitetura completa, estrutura de pastas, plano de desenvolvimento e cronograma. A implementação será feita em fases incrementais, sempre mantendo uma versão funcional e testável antes de avançar.
+Este documento estabelece a visão de longo prazo do **OBJETIVONET Email Signature Generator**, definindo seus objetivos, arquitetura, organização do código, princípios de desenvolvimento e critérios globais de qualidade.
 
-## 1. Arquitetura completa
+Diferentemente do **ROADMAP.md**, este documento não acompanha o andamento das fases. Seu objetivo é registrar a arquitetura oficial e servir como referência permanente para a evolução do projeto.
 
-### Visão geral
+---
 
-A aplicação será uma Progressive Web App estática, sem frameworks, construída com HTML5, CSS3 e JavaScript ES2023 em módulos ES6. A interface terá três áreas principais: painel de edição, preview em tempo real e código HTML gerado. O motor de assinatura será independente da interface para garantir testabilidade, manutenção e compatibilidade com clientes de e-mail.
+# 1. Visão Geral
 
-### Camadas
+O OBJETIVONET Email Signature Generator é uma Progressive Web App (PWA) desenvolvida para criar assinaturas HTML profissionais compatíveis com os principais clientes de e-mail do mercado.
 
-1. **Shell PWA**
-   - `index.html` com metadados, políticas de segurança, pontos de montagem e links para manifest, CSS e módulos JavaScript.
-   - `manifest.json` com identidade visual, ícones, atalhos, modo standalone e splash screen.
-   - `service-worker.js` com estratégia offline first, cache first para assets versionados e atualização controlada.
+A aplicação foi projetada para ser totalmente estática, modular, escalável e independente de frameworks, utilizando exclusivamente tecnologias nativas da Web.
 
-2. **Camada de UI**
-   - Componentes de formulário, personalização visual, redes sociais, foto, preview, exportação e importação.
-   - Componentes acessíveis com labels, ARIA, foco visível, navegação por teclado e mensagens de erro em tempo real.
-   - Layout responsivo com tema claro/escuro inspirado no Google Workspace.
+Seu desenvolvimento ocorre por fases incrementais, garantindo que cada etapa seja funcional, testável e documentada antes do avanço para a próxima.
 
-3. **Camada de estado**
-   - Store central baseada em módulos ES6.
-   - Histórico de undo/redo.
-   - Persistência automática em Local Storage.
-   - Persistência estruturada em IndexedDB para modelos, fotos, configurações e histórico.
+---
 
-4. **Camada de domínio**
-   - Motor exclusivo de geração de assinatura HTML.
-   - Normalização, sanitização e validação de dados.
-   - Sistema de templates em JSON.
-   - Sistema extensível de provedores de ícones.
-   - Sistema base para temas, idiomas e plugins.
+# 2. Objetivos do Projeto
 
-5. **Camada de compatibilidade de e-mail**
-   - Geração de HTML baseado em tabelas com `role="presentation"`.
-   - CSS 100% inline na assinatura gerada.
-   - Imagens com `display:block`, `border:0`, `outline:none`, `text-decoration:none`, `vertical-align:middle` e `-ms-interpolation-mode:bicubic`.
-   - Proibição no HTML gerado de Flexbox, Grid, `position:absolute`, JavaScript e CSS externo.
+O projeto possui como objetivos principais:
 
-6. **Camada de qualidade**
-   - Validações em tempo real para email, telefone, WhatsApp, URLs, LinkedIn, GitHub e website.
-   - Utilitários de escape HTML e sanitização de URLs para reduzir risco de XSS.
-   - Checklist Lighthouse para performance, acessibilidade, boas práticas, SEO e PWA.
-   - Testes manuais documentados por fase e testes automatizáveis para módulos puros.
+* gerar assinaturas HTML compatíveis com clientes de e-mail;
+* oferecer preview em tempo real;
+* permitir personalização completa do layout;
+* utilizar arquitetura modular desacoplada;
+* funcionar como Progressive Web App;
+* possuir suporte offline;
+* permitir futura expansão para recursos premium;
+* manter alta compatibilidade entre navegadores e plataformas.
 
-### Módulos JavaScript planejados
+---
 
-- `assets/js/app.js`: inicialização, registro do service worker e composição dos módulos.
-- `assets/js/state/store.js`: estado global, assinatura, subscribe/dispatch e snapshots.
-- `assets/js/state/history.js`: undo/redo com limite de memória.
-- `assets/js/storage/local-storage.js`: autosave e restauração rápida.
-- `assets/js/storage/indexed-db.js`: persistência de modelos, fotos, configurações e histórico.
-- `assets/js/signature/generator.js`: geração do HTML final compatível com e-mail.
-- `assets/js/signature/styles.js`: montagem segura dos estilos inline suportados.
-- `assets/js/signature/sanitizer.js`: escape HTML, normalização e validação de URLs.
-- `assets/js/signature/validators.js`: regras de validação dos campos.
-- `assets/js/templates/templates-service.js`: carga, clonagem, importação e exportação de modelos JSON.
-- `assets/js/icons/icon-provider.js`: contrato comum para provedores de ícones.
-- `assets/js/media/photo-editor.js`: upload, drag and drop, crop, zoom, reposicionamento e base64 opcional.
-- `assets/js/media/gravatar.js`: leitura de email, hash ou URL e geração de URL Gravatar.
-- `assets/js/export/exporters.js`: HTML, TXT, JSON, configuração e vCard.
-- `assets/js/import/importers.js`: JSON, HTML compatível e configuração.
-- `assets/js/premium/qrcode.js`: QR Code automático sem dependências externas em runtime.
-- `assets/js/i18n/i18n.js`: base para idiomas.
-- `assets/js/plugins/plugin-registry.js`: registro seguro de plugins locais.
+# 3. Princípios Arquiteturais
 
-## 2. Estrutura de pastas
+O projeto segue os seguintes princípios:
+
+* Arquitetura modular.
+* Responsabilidade única por módulo.
+* Baixo acoplamento.
+* Alta coesão.
+* Código reutilizável.
+* Componentização.
+* Evolução incremental.
+* Documentação sincronizada.
+* Compatibilidade com clientes de e-mail.
+* Ausência de frameworks JavaScript.
+
+Toda nova funcionalidade deverá respeitar estes princípios.
+
+---
+
+# 4. Arquitetura da Aplicação
+
+A aplicação está organizada em camadas independentes.
+
+## Shell PWA
+
+Responsável por:
+
+* inicialização da aplicação;
+* instalação da PWA;
+* manifest;
+* Service Worker;
+* cache offline;
+* versionamento dos assets.
+
+---
+
+## Interface
+
+Responsável por:
+
+* componentes HTML;
+* formulários;
+* preview;
+* navegação;
+* layout responsivo;
+* temas;
+* acessibilidade.
+
+---
+
+## Estado Global
+
+Responsável por:
+
+* Store central;
+* gerenciamento do estado;
+* histórico;
+* persistência;
+* validações;
+* sincronização entre módulos.
+
+---
+
+## Domínio
+
+Responsável por:
+
+* modelos da aplicação;
+* motor de geração da assinatura;
+* templates;
+* regras de negócio.
+
+---
+
+## Serviços
+
+Responsáveis por:
+
+* persistência;
+* validações;
+* histórico;
+* tema;
+* clipboard;
+* notificações;
+* imagens;
+* configuração;
+* eventos;
+* logging.
+
+---
+
+## Qualidade
+
+Responsável por:
+
+* testes;
+* validações;
+* compatibilidade;
+* acessibilidade;
+* segurança;
+* documentação.
+
+---
+
+# 5. Estrutura Oficial do Projeto
 
 ```text
 /
-├── index.html
-├── 404.html
-├── manifest.json
-├── service-worker.js
-├── robots.txt
-├── sitemap.xml
-├── README.md
-├── CHANGELOG.md
-├── LICENSE
-├── PROJECT_PLAN.md
-├── assets/
-│   ├── css/
-│   │   ├── base.css
-│   │   ├── layout.css
-│   │   ├── components.css
-│   │   ├── themes.css
-│   │   └── print.css
-│   ├── js/
-│   │   ├── app.js
-│   │   ├── config/
-│   │   ├── state/
-│   │   ├── storage/
-│   │   ├── signature/
-│   │   ├── templates/
-│   │   ├── icons/
-│   │   ├── media/
-│   │   ├── export/
-│   │   ├── import/
-│   │   ├── premium/
-│   │   ├── i18n/
-│   │   └── plugins/
-│   ├── components/
-│   ├── templates/
-│   │   ├── gravatar.json
-│   │   ├── objetivonet.json
-│   │   ├── google.json
-│   │   ├── microsoft.json
-│   │   ├── apple.json
-│   │   ├── executivo.json
-│   │   ├── minimalista.json
-│   │   ├── dark.json
-│   │   └── corporativo.json
-│   ├── data/
-│   │   ├── social-networks.json
-│   │   ├── validators.json
-│   │   └── locales.json
-│   ├── icons/
-│   │   ├── app/
-│   │   ├── social/
-│   │   └── providers/
-│   ├── images/
-│   ├── fonts/
-│   └── config/
-│       ├── app.json
-│       ├── cache.json
-│       └── security.json
-└── signatures/
+assets/
+config/
+docs/
+signatures/
+tests/
+
+404.html
+favicon.ico
+index.html
+LICENSE
+manifest.json
+package.json
+PROJECT_PLAN.md
+README.md
+robots.txt
+service-worker.js
 ```
 
-## 3. Plano de desenvolvimento
+---
 
-### Fase 0 — Fundação e documentação inicial
+## Estrutura JavaScript
 
-- Confirmar arquitetura, estrutura, critérios de qualidade e fases.
-- Criar documentação inicial do plano.
-- Definir critérios de aceite por fase.
+```text
+assets/js/
 
-**Entregável testável:** documentação revisada e versionada.
+models/
+    signature-models.js
 
-### Fase 1 — Shell estático, design system e PWA base
+services/
+    core-services.js
 
-- Criar `index.html`, `404.html`, `manifest.json`, `service-worker.js`, `robots.txt` e `sitemap.xml`.
-- Implementar CSS base, layout responsivo, tema claro/escuro e tokens visuais.
-- Implementar instalação PWA, cache versionado, offline fallback e atualização automática.
+app.js
+config.js
+constants.js
+events.js
+helpers.js
+logger.js
+router.js
+storage.js
+store.js
+utils.js
+```
 
-**Entregável testável:** aplicação abre offline após primeiro carregamento e passa checklist PWA básico.
+A pasta **models** concentra os modelos de domínio da aplicação.
 
-### Fase 2 — Estado, formulário e validações
+A pasta **services** concentra serviços reutilizáveis desacoplados da interface.
 
-- Implementar store modular, autosave em Local Storage e restauração automática.
-- Implementar campos principais do formulário.
-- Implementar validação em tempo real com mensagens acessíveis.
-- Implementar undo/redo.
+O arquivo **core-services.js** reúne os serviços fundamentais do projeto:
 
-**Entregável testável:** dados persistem, validações aparecem sem recarregar a página e undo/redo funciona.
+* StorageService
+* ValidationService
+* HistoryService
+* ThemeService
+* ImageService
+* ClipboardService
+* NotificationService
+* LoggerService
+* EventService
+* ConfigService
 
-### Fase 3 — Motor de assinatura HTML
+Novos serviços devem seguir o princípio da responsabilidade única.
 
-- Implementar sanitização, escape HTML e validação de URLs.
-- Implementar geração por tabela com CSS inline.
-- Garantir compatibilidade com Gmail, Outlook, Apple Mail e webmails tradicionais.
-- Implementar painel de código HTML e cópia.
+---
 
-**Entregável testável:** assinatura gerada sem JavaScript, sem CSS externo e sem layout moderno incompatível.
+## Estrutura de Assets
 
-### Fase 4 — Templates, personalização e preview
+```text
+assets/
 
-- Implementar templates JSON editáveis.
-- Implementar personalização de cores, bordas, espaçamentos, dimensões, fontes, ícones e foto.
-- Implementar simulações Desktop, Mobile, Gmail, Outlook, Apple Mail, Zoho, Yahoo e Dark Mode.
+components/
+config/
+css/
+fonts/
+icons/
+images/
+js/
+placeholders/
+social/
+```
 
-**Entregável testável:** troca de template e personalização atualizam preview e HTML instantaneamente.
+Toda expansão futura deverá preservar esta organização.
 
-### Fase 5 — Foto, Gravatar e redes sociais
+---
 
-- Implementar Gravatar por email, hash ou URL.
-- Implementar upload, drag and drop, crop, zoom, reposicionamento, centralização e base64 opcional.
-- Implementar redes sociais com ativação, desativação, reordenação por drag and drop e ocultação quando vazias.
-- Implementar sistema de provedores de ícones.
+# 6. Tecnologias Utilizadas
 
-**Entregável testável:** imagem e redes sociais aparecem corretamente no preview e no HTML gerado.
+## Linguagens
 
-### Fase 6 — Importação, exportação e IndexedDB
+* HTML5
+* CSS3
+* JavaScript ES2023
 
-- Implementar exportação HTML, TXT, JSON, configuração e vCard.
-- Implementar importação JSON, HTML compatível e configuração.
-- Implementar IndexedDB para modelos, fotos, configurações e histórico.
+## APIs
 
-**Entregável testável:** configuração completa pode ser exportada, removida, importada e restaurada.
+* LocalStorage
+* IndexedDB
+* Service Worker
+* Cache API
+* Clipboard API
+* Fetch API
 
-### Fase 7 — Funcionalidades premium e extensibilidade
+## Progressive Web App
 
-- Implementar QR Code automático.
-- Implementar favoritos, duplicação de modelos, importação/exportação de modelos.
-- Implementar registros de plugins, temas e idiomas.
+* Manifest
+* Offline Cache
+* Instalação
+* Atualização controlada
 
-**Entregável testável:** recursos premium funcionam sem dependências externas obrigatórias em runtime.
+---
 
-### Fase 8 — Hardening, performance e documentação final
+# 7. Compatibilidade
 
-- Revisar CSP, Referrer Policy e Permissions Policy.
-- Auditar acessibilidade WCAG AA.
-- Otimizar cache, imagens, CSS e JavaScript.
-- Documentar módulos, arquivos, implantação e operação.
-- Executar Lighthouse e checklist manual de clientes de e-mail.
+O HTML produzido deverá permanecer compatível com:
 
-**Entregável testável:** build estático pronto para produção com documentação completa.
+* Gmail
+* Outlook
+* Outlook Web
+* Apple Mail
+* Thunderbird
+* Yahoo Mail
+* Zoho Mail
 
-## 4. Cronograma das fases
+A assinatura gerada deverá utilizar:
 
-| Fase | Duração estimada | Resultado |
-| --- | ---: | --- |
-| 0 — Fundação | 0,5 dia | Plano aprovado e versionado |
-| 1 — Shell + PWA | 1,5 dias | Aplicação instalável e offline |
-| 2 — Estado + formulário | 2 dias | Editor funcional com validações |
-| 3 — Motor HTML | 2 dias | Assinatura compatível gerada em tempo real |
-| 4 — Templates + preview | 2 dias | Modelos e simulações visuais completas |
-| 5 — Foto + redes | 2 dias | Mídia, Gravatar e redes sociais completos |
-| 6 — Import/export + IndexedDB | 1,5 dia | Persistência e portabilidade completas |
-| 7 — Premium/extensibilidade | 2 dias | QR Code, vCard, favoritos, plugins, temas e idiomas |
-| 8 — Qualidade + docs | 2 dias | Projeto pronto para produção |
+* tabelas HTML;
+* CSS inline;
+* imagens compatíveis;
+* estrutura compatível com clientes tradicionais.
 
-Tempo total estimado: aproximadamente 15,5 dias úteis, podendo ser ajustado após validação visual, testes em clientes de e-mail reais e eventuais mudanças de escopo.
+Não será permitido utilizar no HTML exportado:
 
-## Critérios de aceite globais
+* JavaScript;
+* CSS externo;
+* Flexbox;
+* CSS Grid;
+* Position Absolute.
 
-- Aplicação estática, sem frameworks e sem dependências obrigatórias de runtime.
-- HTML gerado compatível com clientes de e-mail tradicionais.
-- Funcionalidades entregues somente quando completas, funcionais e testáveis.
-- Código modular, legível e comentado onde a intenção não for óbvia.
-- Segurança aplicada por padrão: escape HTML, sanitização de URLs e políticas do navegador.
-- Acessibilidade WCAG AA como requisito, não como melhoria opcional.
+---
+
+# 8. Segurança
+
+O projeto deverá manter:
+
+* escape HTML;
+* sanitização de URLs;
+* validação dos dados;
+* políticas de segurança do navegador;
+* armazenamento controlado;
+* prevenção de XSS sempre que aplicável.
+
+---
+
+# 9. Estratégia de Evolução
+
+O desenvolvimento é incremental.
+
+Cada fase somente poderá ser considerada concluída quando:
+
+* estiver funcional;
+* possuir documentação atualizada;
+* possuir testes compatíveis com a fase;
+* preservar compatibilidade com fases anteriores.
+
+O andamento detalhado das entregas encontra-se exclusivamente em:
+
+* ROADMAP.md
+* CHANGELOG.md
+* PROJECT_CONTEXT.md
+
+---
+
+# 10. Critérios Globais de Qualidade
+
+Todo código deverá seguir os seguintes critérios:
+
+* arquitetura modular;
+* responsabilidade única;
+* documentação sincronizada;
+* nomenclatura consistente;
+* baixo acoplamento;
+* alta legibilidade;
+* ausência de duplicação;
+* comentários apenas quando agregarem valor;
+* componentes reutilizáveis;
+* compatibilidade entre módulos.
+
+---
+
+# 11. Governança da Arquitetura
+
+Alterações estruturais deverão obedecer às seguintes regras:
+
+* não reorganizar diretórios existentes sem justificativa arquitetural;
+* não introduzir dependências externas sem aprovação;
+* não duplicar funcionalidades já existentes;
+* preservar compatibilidade entre versões;
+* registrar decisões arquiteturais relevantes por meio de ADRs quando necessário.
+
+---
+
+# 12. Documentação Oficial
+
+A documentação oficial do projeto é composta pelos seguintes arquivos:
+
+* README.md
+* PROJECT_CONTEXT.md
+* ROADMAP.md
+* CHANGELOG.md
+* ARCHITECTURE.md
+* AI_RULES.md
+* PROJECT_PLAN.md
+
+Cada documento possui uma responsabilidade específica e deve permanecer sincronizado com os demais.
+
+---
+
+# 13. Visão de Longo Prazo
+
+O objetivo final do projeto é entregar uma plataforma profissional para geração de assinaturas HTML, preparada para crescimento contínuo, alta compatibilidade com clientes de e-mail, arquitetura sustentável e manutenção de longo prazo.
+
+Toda evolução futura deverá preservar os princípios estabelecidos neste documento.
