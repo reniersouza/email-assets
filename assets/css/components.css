@@ -1,2 +1,729 @@
-/* Objetivo: componentes comuns. Responsabilidade: cards, botões, feedbacks e placeholders. Dependências: tokens globais. */
-.panel,.card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--space-6)}.app-card header,.panel-heading{align-items:flex-start;display:flex;gap:.875rem;justify-content:space-between;margin-bottom:1rem}.app-card header span{font-size:1.6rem}.app-card h1,.app-card h2,.panel h2{font-size:1.15rem;margin:0}.app-card p,.panel p{color:var(--color-muted);margin:.2rem 0 0}.button,button{background:var(--color-primary);border:0;border-radius:999px;color:var(--color-primary-contrast);cursor:pointer;padding:.65rem 1rem;position:relative;transition:filter var(--transition),transform var(--transition),box-shadow var(--transition)}button:hover,.button:hover{filter:brightness(1.05);box-shadow:0 8px 20px rgb(37 99 235 / .16)}button:active,.button:active{transform:translateY(1px)}button:disabled,[aria-disabled=true]{cursor:not-allowed;opacity:.55}.button-ghost,.button-row button,.preview-modes button{background:var(--color-bg);border:1px solid var(--color-border);color:var(--color-text)}label{color:var(--color-muted);display:grid;font-size:.82rem;font-weight:650;gap:.35rem}input,select,textarea{background:var(--color-bg);border:1px solid var(--color-border);border-radius:12px;color:var(--color-text);padding:.75rem;transition:border-color var(--transition),box-shadow var(--transition)}input:hover,select:hover{border-color:color-mix(in srgb,var(--color-primary),var(--color-border) 45%)}input:focus,select:focus{border-color:var(--color-primary);box-shadow:0 0 0 4px rgb(37 99 235 / .12);outline:0}.form-grid{display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr))}.compact{grid-template-columns:repeat(3,minmax(0,1fr))}.photo-grid{display:grid;gap:1rem;grid-template-columns:1fr 1fr}.drop-zone{align-items:center;border:1px dashed var(--color-border);border-radius:18px;display:grid;gap:.5rem;justify-items:center;min-height:16rem;padding:1rem;text-align:center}.avatar-preview{background:linear-gradient(135deg,#2563eb,#06b6d4);border-radius:50%;color:#fff;display:grid;font-size:2rem;font-weight:800;height:6rem;place-items:center;width:6rem}.control-stack{display:grid;gap:1rem}.button-row{display:flex;flex-wrap:wrap;gap:.5rem}.social-grid{display:grid;gap:.75rem}.social-item{align-items:center;background:var(--color-bg);border:1px solid var(--color-border);border-radius:14px;display:grid;gap:.75rem;grid-template-columns:auto minmax(9rem,12rem) 1fr auto auto;padding:.75rem}.drag-handle{color:var(--color-muted);cursor:grab}.social-icon{background:var(--color-surface);border:1px solid var(--color-border);border-radius:9px;display:inline-grid;height:1.7rem;margin-inline:.35rem;place-items:center;width:1.7rem}.order-badge{color:var(--color-muted);font-size:.8rem}.template-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr))}.template-card{background:var(--color-bg);border:1px solid var(--color-border);border-radius:16px;color:var(--color-text);display:grid;gap:.5rem;justify-items:start;padding:1rem;text-align:left}.template-thumb{background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;display:grid;gap:.35rem;height:5rem;padding:.7rem;width:100%}.template-thumb span{background:color-mix(in srgb,var(--color-primary),transparent 70%);border-radius:999px}.muted-card{background:color-mix(in srgb,var(--color-surface),var(--color-bg) 35%)}.preview-panel,.code-panel{align-self:start;position:sticky;top:5.5rem}.preview-modes{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}.signature-mock{background:linear-gradient(180deg,var(--color-surface),var(--color-bg));border:1px solid var(--color-border);border-radius:18px;display:grid;gap:.35rem;margin-top:1rem;padding:1.25rem}.signature-mock span,.signature-mock p{color:var(--color-muted)}.mock-bar{background:var(--color-primary);border-radius:999px;height:.35rem;margin-top:.75rem;width:70%}pre{background:#07111f;border-radius:var(--radius);color:#dbeafe;overflow:auto;padding:var(--space-4);tab-size:2}code span{display:block;white-space:pre}code em{color:#64748b;display:inline-block;font-style:normal;margin-right:1rem;text-align:right;width:2rem}.placeholder{border:1px dashed var(--color-border);border-radius:var(--radius);color:var(--color-muted);padding:var(--space-6)}.toast,.snackbar,.modal,.dialog,.skeleton,.spinner{border-radius:var(--radius)}.skeleton{animation:pulse 1.4s infinite;background:linear-gradient(90deg,var(--color-border),var(--color-bg),var(--color-border));min-height:1rem}.spinner{animation:spin .8s linear infinite;border:3px solid var(--color-border);border-top-color:var(--color-primary);height:2rem;width:2rem}
+/*
+Objetivo: componentes comuns.
+Responsabilidade: cards, botões, feedbacks e placeholders.
+Dependências: tokens globais.
+*/
+
+
+.panel,
+.card {
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    padding: var(--space-6);
+
+}
+
+
+
+.app-card header,
+.panel-heading {
+
+    align-items: flex-start;
+
+    display: flex;
+
+    gap: .875rem;
+
+    justify-content: space-between;
+
+    margin-bottom: 1rem;
+
+}
+
+
+
+.app-card header span {
+
+    font-size: 1.6rem;
+
+}
+
+
+
+.app-card h1,
+.app-card h2,
+.panel h2 {
+
+    font-size: 1.15rem;
+
+    margin: 0;
+
+}
+
+
+
+.app-card p,
+.panel p {
+
+    color: var(--color-muted);
+
+    margin: .2rem 0 0;
+
+}
+
+
+
+/*
+==================================================
+BOTÕES
+==================================================
+*/
+
+
+.button,
+button {
+
+    background: var(--color-primary);
+
+    border: 0;
+
+    border-radius: 999px;
+
+    color: var(--color-primary-contrast);
+
+    cursor: pointer;
+
+    padding: .65rem 1rem;
+
+    position: relative;
+
+    transition:
+        filter var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+
+}
+
+
+
+button:hover,
+.button:hover {
+
+    filter: brightness(1.05);
+
+    box-shadow:
+        0 8px 20px rgb(37 99 235 / .16);
+
+}
+
+
+
+button:active,
+.button:active {
+
+    transform: translateY(1px);
+
+}
+
+
+
+button:disabled,
+[aria-disabled="true"] {
+
+    cursor: not-allowed;
+
+    opacity: .55;
+
+}
+
+
+
+.button-ghost,
+.button-row button,
+.preview-modes button {
+
+    background: var(--color-bg);
+
+    border: 1px solid var(--color-border);
+
+    color: var(--color-text);
+
+}
+
+
+
+/*
+==================================================
+FORMULÁRIOS
+==================================================
+*/
+
+
+label {
+
+    color: var(--color-muted);
+
+    display: grid;
+
+    font-size: .82rem;
+
+    font-weight: 650;
+
+    gap: .35rem;
+
+}
+
+
+
+input,
+select,
+textarea {
+
+    background: var(--color-bg);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 12px;
+
+    color: var(--color-text);
+
+    padding: .75rem;
+
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+
+}
+
+
+
+input:hover,
+select:hover {
+
+    border-color:
+        color-mix(
+            in srgb,
+            var(--color-primary),
+            var(--color-border) 45%
+        );
+
+}
+
+
+
+input:focus,
+select:focus {
+
+    border-color: var(--color-primary);
+
+    box-shadow:
+        0 0 0 4px rgb(37 99 235 / .12);
+
+    outline: 0;
+
+}
+
+
+
+/*
+==================================================
+GRIDS
+==================================================
+*/
+
+
+.form-grid {
+
+    display: grid;
+
+    gap: 1rem;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+}
+
+
+
+.compact {
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+}
+
+
+
+.photo-grid {
+
+    display: grid;
+
+    gap: 1rem;
+
+    grid-template-columns:
+        1fr 1fr;
+
+}
+
+
+
+/*
+==================================================
+FOTO
+==================================================
+*/
+
+
+.drop-zone {
+
+    align-items: center;
+
+    border:
+        1px dashed var(--color-border);
+
+    border-radius: 18px;
+
+    display: grid;
+
+    gap: .5rem;
+
+    justify-items: center;
+
+    min-height: 16rem;
+
+    padding: 1rem;
+
+    text-align: center;
+
+}
+
+
+
+.avatar-preview {
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-accent)
+        );
+
+    border-radius: 50%;
+
+    color: var(--color-primary-contrast);
+
+    display: grid;
+
+    font-size: 2rem;
+
+    font-weight: 800;
+
+    height: 6rem;
+
+    place-items: center;
+
+    width: 6rem;
+
+}
+
+
+
+/*
+==================================================
+SOCIAIS
+==================================================
+*/
+
+
+.control-stack {
+
+    display: grid;
+
+    gap: 1rem;
+
+}
+
+
+
+.button-row {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: .5rem;
+
+}
+
+
+
+.social-grid {
+
+    display: grid;
+
+    gap: .75rem;
+
+}
+
+
+
+.social-item {
+
+    align-items: center;
+
+    background: var(--color-bg);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 14px;
+
+    display: grid;
+
+    gap: .75rem;
+
+    grid-template-columns:
+        auto minmax(9rem,12rem) 1fr auto auto;
+
+    padding: .75rem;
+
+}
+
+
+
+.drag-handle {
+
+    color: var(--color-muted);
+
+    cursor: grab;
+
+}
+
+
+
+.social-icon {
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 9px;
+
+    display: inline-grid;
+
+    height: 1.7rem;
+
+    margin-inline: .35rem;
+
+    place-items: center;
+
+    width: 1.7rem;
+
+}
+
+
+
+.order-badge {
+
+    color: var(--color-muted);
+
+    font-size: .8rem;
+
+}
+
+
+
+/*
+==================================================
+TEMPLATES
+==================================================
+*/
+
+
+.template-grid {
+
+    display: grid;
+
+    gap: 1rem;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(8.5rem,1fr));
+
+}
+
+
+
+.template-card {
+
+    background: var(--color-bg);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 16px;
+
+    color: var(--color-text);
+
+    display: grid;
+
+    gap: .5rem;
+
+    justify-items: start;
+
+    padding: 1rem;
+
+    text-align: left;
+
+}
+
+
+
+.template-thumb {
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 12px;
+
+    display: grid;
+
+    gap: .35rem;
+
+    height: 5rem;
+
+    padding: .7rem;
+
+    width: 100%;
+
+}
+
+
+
+.template-thumb span {
+
+    background:
+        color-mix(
+            in srgb,
+            var(--color-primary),
+            transparent 70%
+        );
+
+    border-radius: 999px;
+
+}
+
+
+
+.muted-card {
+
+    background:
+        color-mix(
+            in srgb,
+            var(--color-surface),
+            var(--color-bg) 35%
+        );
+
+}
+
+
+
+/*
+==================================================
+PREVIEW
+==================================================
+*/
+
+
+.preview-panel,
+.code-panel {
+
+    align-self: start;
+
+    position: sticky;
+
+    top: 5.5rem;
+
+}
+
+
+
+.preview-modes {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: .5rem;
+
+    margin: 1rem 0;
+
+}
+
+
+
+.signature-mock {
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--color-surface),
+            var(--color-bg)
+        );
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 18px;
+
+    display: grid;
+
+    gap: .35rem;
+
+    margin-top: 1rem;
+
+    padding: 1.25rem;
+
+}
+
+
+
+.signature-mock span,
+.signature-mock p {
+
+    color: var(--color-muted);
+
+}
+
+
+
+.mock-bar {
+
+    background: var(--color-primary);
+
+    border-radius: 999px;
+
+    height: .35rem;
+
+    margin-top: .75rem;
+
+    width: 70%;
+
+}
+
+
+
+/*
+==================================================
+EDITOR DE CÓDIGO IDE
+==================================================
+*/
+
+
+pre {
+
+    background: var(--code-bg);
+
+    border-radius: var(--radius);
+
+    color: var(--code-text);
+
+    overflow: auto;
+
+    padding: var(--space-4);
+
+    tab-size: 2;
+
+}
+
+
+
+code span {
+
+    display: block;
+
+    white-space: pre;
+
+}
+
+
+
+code em {
+
+    color: var(--color-muted);
+
+    display: inline-block;
+
+    font-style: normal;
+
+    margin-right: 1rem;
+
+    text-align: right;
+
+    width: 2rem;
+
+}
+
+
+
+/*
+==================================================
+ESTADOS
+==================================================
+*/
+
+
+.placeholder {
+
+    border:
+        1px dashed var(--color-border);
+
+    border-radius: var(--radius);
+
+    color: var(--color-muted);
+
+    padding: var(--space-6);
+
+}
+
+
+
+.toast,
+.snackbar,
+.modal,
+.dialog,
+.skeleton,
+.spinner {
+
+    border-radius: var(--radius);
+
+}
+
+
+
+.skeleton {
+
+    animation: pulse 1.4s infinite;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--color-border),
+            var(--color-bg),
+            var(--color-border)
+        );
+
+    min-height: 1rem;
+
+}
+
+
+
+.spinner {
+
+    animation: spin .8s linear infinite;
+
+    border:
+        3px solid var(--color-border);
+
+    border-top-color: var(--color-primary);
+
+    height: 2rem;
+
+    width: 2rem;
+
+}
