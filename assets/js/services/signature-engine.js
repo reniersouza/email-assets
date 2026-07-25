@@ -1,7 +1,7 @@
 // Objetivo: motor de assinatura da Fase 4B.
-// Responsabilidade: transformar o Store em uma assinatura renderizável,
+// Responsabilidade: transformar Store em assinatura renderizável,
 // aplicar layout/estilo, gerar HTML e preparar exportação.
-// Dependências: constants.js, events.js, store.js, utils.js e services/core-services.js.
+// Dependências: constants.js, events.js, store.js, utils.js e core-services.js.
 
 import { EVENTS } from '../constants.js';
 import { eventBus } from '../events.js';
@@ -10,32 +10,28 @@ import { escapeHtml, sanitizeUrl, debounce } from '../utils.js';
 import { ClipboardService, ValidationService } from './core-services.js';
 
 
-const clone = (value) => {
-  if (value === undefined || value === null) {
-    return value;
-  }
-
-  return JSON.parse(JSON.stringify(value));
-};
+const clone = (value) =>
+  value === undefined || value === null
+    ? value
+    : JSON.parse(JSON.stringify(value));
 
 
-const isFilled = (value) => (
+const isFilled = (value) =>
   value !== undefined &&
   value !== null &&
-  String(value).trim() !== ''
-);
+  String(value).trim() !== '';
 
 
-const fieldErrorSet = (validation) => (
+const fieldErrorSet = (validation) =>
   new Set(
-    validation?.errors?.map((error) => error.field) ?? []
-  )
-);
+    validation?.errors?.map(
+      (error) => error.field
+    ) ?? []
+  );
 
 
-const validField = (errors, field) => (
-  !errors.has(field)
-);
+const validField = (errors, field) =>
+  !errors.has(field);
 
 
 const CONTACT_ORDER = Object.freeze([
@@ -54,11 +50,6 @@ const SUPPORTED_LAYOUTS = Object.freeze([
 ]);
 
 
-/**
- * Normalização de dados antes da renderização.
- * Responsabilidade exclusiva:
- * transformar Store State em Signature Model renderizável.
- */
 export class SignatureEngine {
 
   constructor({
@@ -78,24 +69,28 @@ export class SignatureEngine {
 
     const state = this.store.snapshot();
 
-    const cacheKey = this.createCacheKey(state);
+    const cacheKey =
+      this.createCacheKey(state);
 
 
     if (
       cacheKey === this.cacheKey &&
       this.cacheValue
     ) {
-
       return clone(this.cacheValue);
     }
 
 
-    const validation = this.validationService.validate(state);
+    const validation =
+      this.validationService.validate(state);
 
-    const errors = fieldErrorSet(validation);
+
+    const errors =
+      fieldErrorSet(validation);
 
 
-    const signature = state.signature ?? {};
+    const signature =
+      state.signature ?? {};
 
 
     const model = {
@@ -105,57 +100,66 @@ export class SignatureEngine {
         generatedAt: new Date().toISOString()
       },
 
-      person: this.buildPerson(
-        signature.person,
-        errors
-      ),
+      person:
+        this.buildPerson(
+          signature.person,
+          errors
+        ),
 
-      company: this.buildCompany(
-        signature.company
-      ),
+      company:
+        this.buildCompany(
+          signature.company
+        ),
 
-      photo: this.buildPhoto(
-        signature.photo
-      ),
+      photo:
+        this.buildPhoto(
+          signature.photo
+        ),
 
-      socials: this.buildSocials(
-        signature.socials,
-        errors
-      ),
+      socials:
+        this.buildSocials(
+          signature.socials,
+          errors
+        ),
 
-      layout: LayoutEngine.resolve(
-        signature.layout
-      ),
+      layout:
+        LayoutEngine.resolve(
+          signature.layout
+        ),
 
-      style: StyleEngine.resolve(
-        signature.style
-      ),
+      style:
+        StyleEngine.resolve(
+          signature.style
+        ),
 
       contacts: []
 
     };
 
 
-    model.contacts = this.buildContacts(model);
+    model.contacts =
+      this.buildContacts(model);
 
 
-    const cleanedModel = this.removeEmpty(model);
+    const cleaned =
+      this.removeEmpty(model);
 
 
     this.cacheKey = cacheKey;
-    this.cacheValue = cleanedModel;
+    this.cacheValue = cleaned;
 
 
     eventBus.emit(
       EVENTS.SIGNATURE_UPDATED,
       {
-        signature: clone(cleanedModel),
+        signature: clone(cleaned),
         validation
       }
     );
 
 
-    return clone(cleanedModel);
+    return clone(cleaned);
+
   }
 
 
@@ -163,21 +167,18 @@ export class SignatureEngine {
 
     return JSON.stringify({
 
-      signature: state.signature,
+      signature:
+        state.signature,
 
-      theme: state.theme,
-
-      validation: state.validation
+      theme:
+        state.theme
 
     });
 
   }
 
 
-  buildPerson(
-    person = {},
-    errors
-  ) {
+  buildPerson(person = {}, errors) {
 
     return {
 
@@ -191,11 +192,11 @@ export class SignatureEngine {
 
 
       role:
-        person.role?.trim(),
+        person.role?.trim() ?? '',
 
 
       department:
-        person.department?.trim(),
+        person.department?.trim() ?? '',
 
 
       email:
@@ -227,24 +228,30 @@ export class SignatureEngine {
     };
 
   }
+
+
   buildCompany(company = {}) {
 
     return {
 
       name:
-        company.name?.trim(),
+        company.name?.trim() ?? '',
+
 
       website:
-        company.website?.trim(),
+        company.website?.trim() ?? '',
+
 
       address:
-        company.address?.trim(),
+        company.address?.trim() ?? '',
+
 
       city:
-        company.city?.trim(),
+        company.city?.trim() ?? '',
+
 
       country:
-        company.country?.trim()
+        company.country?.trim() ?? ''
 
     };
 
@@ -265,11 +272,14 @@ export class SignatureEngine {
 
     return {
 
-      url: photo.url,
+      url:
+        photo.url,
+
 
       alt:
         photo.alt ||
         'Foto do perfil',
+
 
       size:
         Number(photo.size) || 96
@@ -285,7 +295,9 @@ export class SignatureEngine {
   ) {
 
     return (
+
       socials.items ?? []
+
     )
 
       .map(
@@ -294,11 +306,14 @@ export class SignatureEngine {
           network:
             item.network?.trim(),
 
+
           url:
             item.url?.trim(),
 
+
           order:
             item.order ?? index,
+
 
           index
 
@@ -307,24 +322,21 @@ export class SignatureEngine {
 
 
       .filter(
-        (item) => (
+        (item) =>
 
           isFilled(item.network) &&
-
           isFilled(item.url) &&
-
           validField(
             errors,
             `signature.socials.items.${item.index}.url`
           )
 
-        )
       )
 
 
       .sort(
-        (a, b) =>
-          a.order - b.order
+        (a,b)=>
+          a.order-b.order
       )
 
 
@@ -333,12 +345,10 @@ export class SignatureEngine {
           network,
           url,
           order
-        }) => ({
+        })=>({
 
           network,
-
           url,
-
           order
 
         })
@@ -346,10 +356,12 @@ export class SignatureEngine {
 
   }
 
+
   buildContacts(model) {
 
     const person =
       model.person ?? {};
+
 
     const company =
       model.company ?? {};
@@ -357,81 +369,57 @@ export class SignatureEngine {
 
     const contacts = {
 
-
       email:
         person.email
           ? {
 
-              type: 'email',
-
-              label: 'Email',
-
-              value:
-                person.email,
-
-              href:
-                `mailto:${person.email}`
+              type:'email',
+              label:'Email',
+              value:person.email,
+              href:`mailto:${person.email}`
 
             }
           : null,
-
 
 
       phone:
         person.phone
           ? {
 
-              type: 'phone',
-
-              label: 'Telefone',
-
-              value:
-                person.phone,
-
-              href:
-                `tel:${person.phone}`
+              type:'phone',
+              label:'Telefone',
+              value:person.phone,
+              href:`tel:${person.phone}`
 
             }
           : null,
-
 
 
       whatsapp:
         person.whatsapp
           ? {
 
-              type: 'whatsapp',
-
-              label: 'WhatsApp',
-
-              value:
-                person.whatsapp,
-
+              type:'whatsapp',
+              label:'WhatsApp',
+              value:person.whatsapp,
               href:
-                `tel:${person.whatsapp}`
+                `https://wa.me/${person.whatsapp.replace(/\D/g,'')}`
 
             }
           : null,
-
 
 
       website:
         company.website
           ? {
 
-              type: 'website',
-
-              label: 'Website',
-
-              value:
-                company.website,
-
-              href:
-                company.website
+              type:'website',
+              label:'Website',
+              value:company.website,
+              href:company.website
 
             }
           : null,
-
 
 
       address:
@@ -442,62 +430,39 @@ export class SignatureEngine {
         )
           ? {
 
-              type: 'address',
-
-              label: 'Endereço',
-
-              value:
-                [
-                  company.address,
-                  company.city,
-                  company.country
-
-                ]
-                  .filter(Boolean)
-                  .join(', ')
+              type:'address',
+              label:'Endereço',
+              value:[
+                company.address,
+                company.city,
+                company.country
+              ]
+              .filter(Boolean)
+              .join(', ')
 
             }
           : null
-
 
     };
 
 
     return CONTACT_ORDER
-
       .map(
-        (key) =>
-          contacts[key]
+        key=>contacts[key]
       )
-
       .filter(Boolean);
 
   }
-
-
-
-  removeEmpty(
-    value,
-    isRoot = true
-  ) {
-
+  removeEmpty(value, isRoot = true) {
 
     const protectedKeys = [
-
       'person',
-
       'company',
-
       'socials',
-
       'layout',
-
       'style',
-
       'meta'
-
     ];
-
 
 
     if (
@@ -507,12 +472,10 @@ export class SignatureEngine {
       !Array.isArray(value)
     ) {
 
-
       return Object.entries(value)
 
         .reduce(
           (result, [key, item]) => {
-
 
             const cleaned =
               this.removeEmpty(
@@ -534,7 +497,6 @@ export class SignatureEngine {
 
 
             if (
-              cleaned !== '' &&
               cleaned !== null &&
               cleaned !== undefined
             ) {
@@ -547,23 +509,19 @@ export class SignatureEngine {
 
             return result;
 
-
           },
           {}
         );
 
-
     }
-
 
 
     if (Array.isArray(value)) {
 
-
       return value
 
         .map(
-          (item) =>
+          item =>
             this.removeEmpty(
               item,
               false
@@ -571,19 +529,12 @@ export class SignatureEngine {
         )
 
         .filter(
-          (item) =>
+          item =>
             item !== null &&
-            item !== undefined &&
-            !(
-              typeof item === 'object' &&
-              !Array.isArray(item) &&
-              Object.keys(item).length === 0
-            )
+            item !== undefined
         );
 
-
     }
-
 
 
     if (
@@ -591,12 +542,11 @@ export class SignatureEngine {
       typeof value === 'object'
     ) {
 
-
       const entries =
         Object.entries(value)
 
           .map(
-            ([key, item]) => [
+            ([key,item]) => [
 
               key,
 
@@ -609,61 +559,44 @@ export class SignatureEngine {
           )
 
           .filter(
-            ([, item]) => (
-
-              item !== '' &&
+            ([,item]) =>
               item !== null &&
               item !== undefined &&
-
-              !(
-                Array.isArray(item) &&
-                item.length === 0
-              )
-
-            )
+              item !== ''
           );
 
 
-
       return entries.length
-
         ? Object.fromEntries(entries)
-
         : null;
-
 
     }
 
 
-
     return isFilled(value)
-
       ? value
-
-      : '';
+      : null;
 
   }
 
 }
+
+
+
 export class LayoutEngine {
 
 
   static resolve(layout = {}) {
 
-
     const variant =
       SUPPORTED_LAYOUTS.includes(
         layout.variant
       )
-
         ? layout.variant
-
         : 'horizontal';
 
 
-
     return {
-
 
       variant,
 
@@ -673,11 +606,9 @@ export class LayoutEngine {
         'normal',
 
 
-
       photoPosition:
         layout.photoPosition ||
         'left',
-
 
 
       sections:
@@ -689,8 +620,8 @@ export class LayoutEngine {
 
   }
 
-  static sectionsFor(variant) {
 
+  static sectionsFor(variant) {
 
     const sections = {
 
@@ -698,44 +629,32 @@ export class LayoutEngine {
       horizontal: [
 
         'photo',
-
         'identity',
-
         'contacts',
-
         'socials'
 
       ],
-
 
 
       vertical: [
 
         'photo',
-
         'identity',
-
         'contacts',
-
         'socials'
 
       ],
 
 
-
       compact: [
 
         'identity',
-
         'contacts',
-
         'socials'
 
       ]
 
-
     };
-
 
 
     return (
@@ -747,11 +666,12 @@ export class LayoutEngine {
 
 }
 
+
+
 export class StyleEngine {
 
 
   static resolve(style = {}) {
-
 
     return {
 
@@ -761,11 +681,9 @@ export class StyleEngine {
         '#0f62fe',
 
 
-
       textColor:
         style.textColor ||
         '#1f2937',
-
 
 
       mutedColor:
@@ -773,11 +691,14 @@ export class StyleEngine {
         '#4b5563',
 
 
+      backgroundColor:
+        style.backgroundColor ||
+        '#ffffff',
+
 
       fontFamily:
         style.fontFamily ||
         'Arial, sans-serif',
-
 
 
       fontSize:
@@ -785,11 +706,9 @@ export class StyleEngine {
         14,
 
 
-
       spacing:
-        style.spacing ||
+        Number(style.spacing) ||
         8,
-
 
 
       alignment:
@@ -797,11 +716,9 @@ export class StyleEngine {
         'left',
 
 
-
       borderColor:
         style.borderColor ||
         '#e5e7eb',
-
 
 
       separator:
@@ -809,12 +726,10 @@ export class StyleEngine {
         '•',
 
 
-
       iconColor:
         style.iconColor ||
         style.primaryColor ||
         '#0f62fe',
-
 
 
       photoRadius:
@@ -828,7 +743,6 @@ export class StyleEngine {
 
 
   static inline(style) {
-
 
     return [
 
@@ -848,33 +762,29 @@ export class StyleEngine {
 
 }
 
+
+
 export class HtmlRenderer {
 
 
   render(signature) {
 
-
     const style =
       signature.style;
-
 
 
     const layout =
       signature.layout;
 
 
-
     const textStyle =
       StyleEngine.inline(style);
-
 
 
     const html = [];
 
 
-
     html.push(
-
 
       `<div class="signature-mock" ` +
 
@@ -884,7 +794,7 @@ export class HtmlRenderer {
 
       `border-radius:8px;` +
 
-      `background-color:#ffffff;` +
+      `background-color:${style.backgroundColor};` +
 
       `border:1px solid ${style.borderColor};` +
 
@@ -892,11 +802,10 @@ export class HtmlRenderer {
 
       `text-align:${style.alignment};">`
 
-
     );
 
-    html.push(
 
+    html.push(
 
       `<table role="presentation" ` +
 
@@ -912,38 +821,27 @@ export class HtmlRenderer {
 
       `width:100%;">`
 
-
     );
-
 
 
     html.push('<tr>');
 
 
-
     if (
-
       signature.photo &&
-
       layout.sections.includes('photo')
-
     ) {
-
 
       html.push(
 
         this.photoCell(
-
           signature.photo,
-
           style
-
         )
 
       );
 
     }
-
 
 
     html.push(
@@ -953,31 +851,22 @@ export class HtmlRenderer {
     );
 
 
-
     html.push(
-
       this.identity(signature)
-
     );
 
 
-
     html.push(
-
       this.contacts(signature)
-
     );
 
 
-
     html.push(
-
       this.socials(signature)
-
     );
 
-    html.push(
 
+    html.push(
 
       `<div class="mock-bar" ` +
 
@@ -997,69 +886,50 @@ export class HtmlRenderer {
 
       `</div>`
 
-
     );
-
 
 
     html.push(
 
       '</td>',
-
       '</tr>',
-
       '</table>',
-
       '</div>'
 
     );
 
 
-
     const output =
       html.join('');
 
-    eventBus.emit(
 
+    eventBus.emit(
       EVENTS.HTML_RENDERED,
-
       {
-
         html: output,
-
         signature
-
       }
-
     );
+
 
     eventBus.emit(
-
       EVENTS.RENDER_COMPLETED,
-
       {
-
         target:'html'
-
       }
-
     );
+
 
     return output;
 
   }
-  photoCell(
-    photo,
-    style
-  ) {
-
+  photoCell(photo, style) {
 
     return (
 
       `<td ` +
 
       `style="padding:0 ${style.spacing * 2}px 0 0;vertical-align:top;">` +
-
 
       `<img ` +
 
@@ -1081,24 +951,21 @@ export class HtmlRenderer {
 
       `max-width:${photo.size}px;">` +
 
-
       `</td>`
 
     );
 
   }
 
-  identity(signature) {
 
+
+  identity(signature) {
 
     const person =
       signature.person ?? {};
 
-
-
     const style =
       signature.style;
-
 
 
     const name =
@@ -1106,11 +973,9 @@ export class HtmlRenderer {
       'Ana Silva';
 
 
-
     const role =
       person.role ||
       'Head de Operações';
-
 
 
     const department =
@@ -1118,9 +983,7 @@ export class HtmlRenderer {
       'Atendimento';
 
 
-
     return (
-
 
       `<div ` +
 
@@ -1139,7 +1002,6 @@ export class HtmlRenderer {
       `${escapeHtml(name)}` +
 
       `</div>` +
-
 
 
       `<div ` +
@@ -1162,18 +1024,16 @@ export class HtmlRenderer {
 
       `</div>`
 
-
     );
-
 
   }
 
-  contacts(signature) {
 
+
+  contacts(signature) {
 
     const style =
       signature.style;
-
 
 
     return (
@@ -1186,7 +1046,6 @@ export class HtmlRenderer {
 
         (contact) => {
 
-
           const value =
             escapeHtml(
               contact.value
@@ -1197,7 +1056,6 @@ export class HtmlRenderer {
             escapeHtml(
               contact.label
             );
-
 
 
           const content =
@@ -1245,7 +1103,6 @@ export class HtmlRenderer {
 
           );
 
-
         }
 
       )
@@ -1254,8 +1111,9 @@ export class HtmlRenderer {
 
   }
 
-  socials(signature) {
 
+
+  socials(signature) {
 
     if (
       !signature.socials ||
@@ -1267,10 +1125,8 @@ export class HtmlRenderer {
     }
 
 
-
     const style =
       signature.style;
-
 
 
     return (
@@ -1331,6 +1187,8 @@ export class HtmlRenderer {
 
 }
 
+
+
 export class PreviewRenderer {
 
 
@@ -1341,8 +1199,10 @@ export class PreviewRenderer {
     signatureEngine =
       new SignatureEngine(),
 
+
     htmlRenderer =
       new HtmlRenderer(),
+
 
     delay = 100
 
@@ -1365,26 +1225,21 @@ export class PreviewRenderer {
       '';
 
 
-
     this.target =
       this.resolveTarget();
 
 
-
     this.renderDebounced =
       debounce(
-
         () => this.render(),
-
         delay
-
       );
-
 
   }
 
-  resolveTarget() {
 
+
+  resolveTarget() {
 
     if (!this.root) {
 
@@ -1393,49 +1248,48 @@ export class PreviewRenderer {
     }
 
 
-
-    return (
-
-      this.root.querySelector(
-        '.signature-mock'
-      )
-
-      ||
-
-      this.root.querySelector(
-        '#signature-render-target'
-      )
-
-      ||
-
-      this.root
-
+    return this.root.querySelector(
+      '#signature-render-target'
     );
 
   }
-  start() {
 
+
+
+  start() {
 
     this.render();
 
 
+    const unsubscribeState =
+      eventBus.on(
+        EVENTS.STATE_UPDATED,
+        () =>
+          this.renderDebounced()
+      );
 
-    return eventBus.on(
 
-      EVENTS.STATE_UPDATED,
+    const unsubscribeSignature =
+      eventBus.on(
+        EVENTS.SIGNATURE_UPDATED,
+        () =>
+          this.renderDebounced()
+      );
 
-      () => {
 
-        this.renderDebounced();
+    return () => {
 
-      }
+      unsubscribeState();
 
-    );
+      unsubscribeSignature();
+
+    };
 
   }
 
-  render() {
 
+
+  render() {
 
     if (!this.root) {
 
@@ -1444,17 +1298,14 @@ export class PreviewRenderer {
     }
 
 
-
     const signature =
       this.signatureEngine.build();
-
 
 
     const html =
       this.getPlaceholderOrHtml(
         signature
       );
-
 
 
     if (
@@ -1470,50 +1321,36 @@ export class PreviewRenderer {
         html;
 
 
-
       this.lastHtml =
         html;
 
 
-
       eventBus.emit(
-
         EVENTS.PREVIEW_UPDATED,
-
         {
-
           html,
-
           signature
-
         }
-
       );
 
     }
 
 
-
     eventBus.emit(
-
       EVENTS.RENDER_COMPLETED,
-
       {
-
         target:'preview'
-
       }
-
     );
-
 
 
     return html;
 
   }
 
-  getPlaceholderOrHtml(signature) {
 
+
+  getPlaceholderOrHtml(signature) {
 
     const hasData = (
 
@@ -1530,13 +1367,11 @@ export class PreviewRenderer {
     );
 
 
-
     if (!hasData) {
 
 
       const placeholder =
         clone(signature);
-
 
 
       placeholder.person = {
@@ -1546,10 +1381,8 @@ export class PreviewRenderer {
           'Ana Silva',
 
 
-
         role:
           'Head de Operações',
-
 
 
         department:
@@ -1559,27 +1392,23 @@ export class PreviewRenderer {
       };
 
 
-
       return this.htmlRenderer.render(
-
         placeholder
-
       );
-
 
     }
 
 
-
     return this.htmlRenderer.render(
-
       signature
-
     );
 
   }
 
 }
+
+
+
 
 export class ExportService {
 
@@ -1617,42 +1446,29 @@ export class ExportService {
 
 
 
-
-
   getHtml() {
-
 
     const signature =
       this.signatureEngine.build();
 
 
-
     return this.htmlRenderer.render(
-
       signature
-
     );
 
   }
 
 
 
-
-
   async copyHtml() {
-
 
     const html =
       this.getHtml();
 
 
-
     await this.clipboardService.writeText(
-
       html
-
     );
-
 
 
     return html;
@@ -1660,4 +1476,3 @@ export class ExportService {
   }
 
 }
-// Fim do arquivo signature-engine.js
