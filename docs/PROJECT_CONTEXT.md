@@ -72,19 +72,32 @@ Todos os módulos devem respeitar os princípios:
 ```text
 /
 assets/
+├── components/
+├── config/
+├── css/
+├── fonts/
+├── icons/
+├── images/
+├── js/
+├── placeholders/
+└── social/
+
 config/
 docs/
+├── adr/
+
+signatures/
 tests/
 
+404.html
+favicon.ico
 index.html
+LICENSE
 manifest.json
-service-worker.js
+package.json
 README.md
-CHANGELOG.md
-PROJECT_CONTEXT.md
-ROADMAP.md
-AI_RULES.md
-ARCHITECTURE.md
+robots.txt
+service-worker.js
 ```
 
 ## Estrutura JavaScript
@@ -93,9 +106,11 @@ ARCHITECTURE.md
 assets/js/
 
 models/
-signature-models.js
+└── signature-models.js
+
 services/
-core-services.js
+├── core-services.js
+└── signature-engine.js
 
 app.js
 config.js
@@ -217,6 +232,7 @@ Inclui:
 ### Fase 6 — Templates
 
 Responsável pela definição dos modelos visuais reutilizando integralmente o Signature Engine.
+Engine, Layout Engine, Style Engine, HTML Renderer e Asset Pipeline implementados nas fases anteriores.
 
 ---
 

@@ -59,19 +59,32 @@ Toda renderização é derivada do estado da aplicação.
 ```text
 /
 assets/
+├── components/
+├── config/
+├── css/
+├── fonts/
+├── icons/
+├── images/
+├── js/
+├── placeholders/
+└── social/
+
 config/
 docs/
+├── adr/
+
+signatures/
 tests/
 
+404.html
+favicon.ico
 index.html
+LICENSE
 manifest.json
-service-worker.js
+package.json
 README.md
-CHANGELOG.md
-PROJECT_CONTEXT.md
-ROADMAP.md
-AI_RULES.md
-ARCHITECTURE.md
+robots.txt
+service-worker.js
 ```
 
 ## Estrutura JavaScript
@@ -80,9 +93,11 @@ ARCHITECTURE.md
 assets/js/
 
 models/
-signature-models.js
+└── signature-models.js
+
 services/
-core-services.js
+├── core-services.js
+└── signature-engine.js
 
 app.js
 config.js
@@ -95,13 +110,14 @@ storage.js
 store.js
 utils.js
 ```
+
 A pasta `models` concentra os modelos de domínio da aplicação.
 
 A pasta `services` concentra serviços desacoplados utilizados pela aplicação.
 
-Serviços podem ser agrupados quando possuem responsabilidade relacionada e não devem criar acoplamento entre módulos.
+Os serviços podem ser agrupados quando possuem responsabilidades relacionadas, mantendo baixo acoplamento entre os módulos.
 
-O arquivo `core-services.js` contém os serviços fundamentais da aplicação:
+O arquivo `core-services.js` concentra os serviços fundamentais da aplicação, incluindo:
 
 - StorageService
 - ValidationService
@@ -114,13 +130,22 @@ O arquivo `core-services.js` contém os serviços fundamentais da aplicação:
 - EventService
 - ConfigService
 
-Novos serviços devem respeitar a responsabilidade única e permanecer desacoplados da interface.
+O arquivo `signature-engine.js` concentra a infraestrutura de geração da assinatura HTML, incluindo:
+
+- Signature Engine
+- Layout Engine
+- Style Engine
+- HTML Renderer
+- Preview Renderer
+- Pipeline de renderização
+
+Novos módulos devem respeitar o princípio da responsabilidade única (SRP), permanecer desacoplados da interface e reutilizar a infraestrutura existente.
 
 Esta estrutura é considerada oficial.
 
-Novos módulos deverão integrar-se a esta estrutura.
+Novos módulos deverão integrar-se a esta organização.
 
-Nunca reorganizar diretórios existentes.
+Nunca reorganizar diretórios existentes sem aprovação por meio de uma Architectural Decision Record (ADR).
 
 ---
 

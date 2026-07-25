@@ -17,7 +17,8 @@ O projeto utiliza HTML5, CSS3 e JavaScript ES Modules, sem frameworks externos, 
 ✅ Fase 3 — Interface
 ✅ Fase 4A — Application State
 ✅ Fase 4B — Signature Engine
-⏳ Fase 5 — Assets
+✅ Fase 5 — Assets
+⏳ Fase 6 — Templates
 
 ---
 

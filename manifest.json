@@ -2,6 +2,7 @@
 "name": "OBJETIVONET Email Signature Generator",
 "short_name": "Email Signature",
 "description": "PWA profissional para criação de assinaturas HTML de e-mail da OBJETIVONET.",
+"id": "/",
 "start_url": "/",
 "scope": "/",
 "display": "standalone",
