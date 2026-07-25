@@ -92,9 +92,32 @@ export class SignatureEngine {
   }
 
   removeEmpty(value, isRoot = true) {
-    // Lista de nós do modelo raiz que NUNCA devem ser deletados, mesmo vazios
     const protectedKeys = ['person', 'company', 'socials', 'layout', 'style', 'meta'];
 
+    // Se estivermos na raiz e o valor for o modelo principal
+    if (isRoot && value && typeof value === 'object' && !Array.isArray(value)) {
+      const cleanedRoot = {};
+      
+      for (const [key, item] of Object.entries(value)) {
+        // Executa a limpeza nos filhos passando isRoot como false
+        const cleanedItem = this.removeEmpty(item, false);
+        
+        // Se for uma chave protegida e o resultado veio vazio, garante que vire um objeto vazio em vez de sumir
+        if (protectedKeys.includes(key)) {
+          if (cleanedItem === '' || cleanedItem === null || cleanedItem === undefined || (typeof cleanedItem === 'object' && !Array.isArray(cleanedItem) && !Object.keys(cleanedItem).length)) {
+            cleanedRoot[key] = Array.isArray(item) ? [] : {};
+          } else {
+            cleanedRoot[key] = cleanedItem;
+          }
+        } else if (cleanedItem !== '' && cleanedItem !== null && cleanedItem !== undefined && !(Array.isArray(cleanedItem) && !cleanedItem.length) && !(typeof cleanedItem === 'object' && !Array.isArray(cleanedItem) && !Object.keys(cleanedItem).length)) {
+          // Para chaves não protegidas, só adiciona se tiver conteúdo relevante
+          cleanedRoot[key] = cleanedItem;
+        }
+      }
+      return cleanedRoot;
+    }
+
+    // Comportamento padrão recursivo para nós internos e arrays
     if (Array.isArray(value)) {
       return value
         .map((item) => this.removeEmpty(item, false))
@@ -102,21 +125,15 @@ export class SignatureEngine {
     }
 
     if (value && typeof value === 'object') {
-      return Object.fromEntries(
-        Object.entries(value)
-          .map(([key, item]) => [key, this.removeEmpty(item, false)])
-          .filter(([key, item]) => {
-            // Se for uma chave protegida na raiz do modelo, NUNCA removemos ela
-            if (isRoot && protectedKeys.includes(key)) {
-              return true;
-            }
-            return item !== '' && item !== null && item !== undefined && !(Array.isArray(item) && !item.length) && !(typeof item === 'object' && !Array.isArray(item) && !Object.keys(item).length);
-          })
-      );
+      const entries = Object.entries(value)
+        .map(([key, item]) => [key, this.removeEmpty(item, false)])
+        .filter(([, item]) => item !== '' && item !== null && item !== undefined && !(Array.isArray(item) && !item.length) && !(typeof item === 'object' && !Array.isArray(item) && !Object.keys(item).length));
+      return Object.fromEntries(entries);
     }
 
     return isFilled(value) ? value : '';
   }
+
 
 }
 
@@ -159,7 +176,7 @@ export class HtmlRenderer {
     return output;
   }
   photoCell(photo, style) { return `<td style="padding:0 ${style.spacing * 2}px 0 0;vertical-align:top;"><img src="${sanitizeUrl(photo.url)}" alt="${escapeHtml(photo.alt)}" width="${photo.size}" height="${photo.size}" style="display:block;border:0;border-radius:${style.photoRadius}px;max-width:${photo.size}px;"></td>`; }
-  identity(signature) { console.log("IDENTITY RECEIVED =", signature); const person = signature?.person ?? {}; const company = signature?.company ?? {}; const name = person.name || ''; return `<div style="font-weight:bold;color:${signature.style.primaryColor};font-size:${signature.style.fontSize}px;">${name}</div>`; }
+  identity(signature) { console.log("IDENTITY RECEIVED =", signature); const person = signature?.person || {}; const company = signature?.company || {}; const name = person.name || ''; return `<div style="font-weight:bold;color:${signature.style.primaryColor};font-size:${signature.style.fontSize}px;">${name}</div>`; }
   contacts(signature) { return (signature.contacts ?? []).map((contact) => `<div>${escapeHtml(contact.label)}: ${contact.href ? `<a href="${sanitizeUrl(contact.href)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(contact.value)}</a>` : escapeHtml(contact.value)}</div>`).join(''); }
   socials(signature) { if (!signature.socials?.length) return ''; return `<div style="padding-top:${signature.style.spacing}px;">${signature.socials.map((social) => `<a href="${sanitizeUrl(social.url)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(social.network)}</a>`).join(` <span aria-hidden="true">${escapeHtml(signature.style.separator)}</span> `)}</div>`; }
 }
