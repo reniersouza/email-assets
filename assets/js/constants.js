@@ -11,7 +11,7 @@
 
 export const APP_NAME = 'OBJETIVONET Email Signature Generator';
 
-export const APP_VERSION = '0.5.0';
+export const APP_VERSION = '0.6.0';
 
 export const STORAGE_VERSION = 2;
 

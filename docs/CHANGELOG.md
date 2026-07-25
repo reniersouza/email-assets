@@ -6,6 +6,30 @@ O projeto segue Semantic Versioning (SemVer).
 
 ---
 
+## [0.6.0] - 2026-07-24
+
+### 🎉 Concluído
+
+* ✅ Fase 5 — Assets
+
+### ✨ Implementado
+
+* Estrutura oficial de assets.
+* Ícones PWA (`assets/icons/icon-192.svg`, `assets/icons/icon-512.svg`).
+* Favicon (`favicon.ico`).
+* Ícones sociais (`assets/social/github.svg`, `assets/social/linkedin.svg`).
+* Placeholders (`assets/placeholders/profile-placeholder.svg`, `assets/placeholders/logo-placeholder.svg`).
+* Preparação para imagens (`assets/images/`) e fontes (`assets/fonts/`).
+* Integração dos assets com Manifest e Service Worker.
+
+### 🧪 Testes
+
+* Validação dos arquivos estáticos.
+* Validação PWA.
+* Verificação de carregamento dos assets.
+
+---
+
 ## [0.5.0] - 2026-07-24
 
 ### 🎉 Concluído
@@ -116,32 +140,6 @@ Atualizados:
 * PROJECT_CONTEXT.md
 * AI_RULES.md
 * CHANGELOG.md
-
----
-
----
-
-## [0.6.0] - 2026-07-24
-
-### 🎉 Concluído
-
-* ✅ Fase 5 — Assets
-
-### ✨ Implementado
-
-* Estrutura oficial de assets.
-* Ícones PWA (`assets/icons/icon-192.svg`, `assets/icons/icon-512.svg`).
-* Favicon (`favicon.ico`).
-* Ícones sociais (`assets/social/github.svg`, `assets/social/linkedin.svg`).
-* Placeholders (`assets/placeholders/profile-placeholder.svg`, `assets/placeholders/logo-placeholder.svg`).
-* Preparação para imagens (`assets/images/`) e fontes (`assets/fonts/`).
-* Integração dos assets com Manifest e Service Worker.
-
-### 🧪 Testes
-
-* Validação dos arquivos estáticos.
-* Validação PWA.
-* Verificação de carregamento dos assets.
 
 ---
 
