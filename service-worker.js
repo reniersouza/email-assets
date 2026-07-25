@@ -5,7 +5,7 @@
 // - Atualização de versões
 // - Gerenciamento do App Shell
 
-const CACHE_VERSION = 'v0.5.0';
+const CACHE_VERSION = 'v0.6.0';
 const CACHE_NAME = `objetivonet-email-signature-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -36,7 +36,15 @@ const APP_SHELL = [
   '/assets/config/settings.json',
   '/assets/config/themes.json',
   '/assets/config/templates.json',
-  '/assets/config/icons.json'
+  '/assets/config/icons.json',
+
+  '/favicon.ico',
+  '/assets/icons/icon-192.svg',
+  '/assets/icons/icon-512.svg',
+  '/assets/social/github.svg',
+  '/assets/social/linkedin.svg',
+  '/assets/placeholders/profile-placeholder.svg',
+  '/assets/placeholders/logo-placeholder.svg'
 ];
 
 self.addEventListener('install', (event) => {

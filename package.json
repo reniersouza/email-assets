@@ -1,6 +1,6 @@
 {
 "name": "objetivonet-email-signature-generator",
-"version": "0.5.0",
+"version": "0.6.0",
 "private": true,
 "type": "module",
 "description": "Progressive Web App modular for generating professional HTML email signatures with real-time preview and compatibility with major email clients.",
@@ -8,7 +8,7 @@
 "start": "python3 -m http.server 4173",
 "lint": "eslint assets/js/**/*.js assets/components/**/*.js config/**/*.js tests/**/*.js service-worker.js",
 "format": "prettier --check "/*.{html,css,js,json,md}"",
-"test": "node tests/core.test.js"
+"test": "node tests/core.test.js && node tests/assets.test.js"
 },
 "devDependencies": {
 "@eslint/js": "latest",

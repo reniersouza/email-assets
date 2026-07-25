@@ -121,27 +121,47 @@ Atualizados:
 
 ---
 
+## [0.6.0] - 2026-07-24
+
+### 🎉 Concluído
+
+* ✅ Fase 5 — Assets
+
+### ✨ Implementado
+
+* Estrutura oficial de assets.
+* Ícones PWA (`assets/icons/icon-192.svg`, `assets/icons/icon-512.svg`).
+* Favicon (`favicon.ico`).
+* Ícones sociais (`assets/social/github.svg`, `assets/social/linkedin.svg`).
+* Placeholders (`assets/placeholders/profile-placeholder.svg`, `assets/placeholders/logo-placeholder.svg`).
+* Preparação para imagens (`assets/images/`) e fontes (`assets/fonts/`).
+* Integração dos assets com Manifest e Service Worker.
+
+### 🧪 Testes
+
+* Validação dos arquivos estáticos.
+* Validação PWA.
+* Verificação de carregamento dos assets.
+
+---
+
 # Próxima Versão
 
-## [0.6.0]
+## [0.7.0]
 
-### Fase 5 — Assets
+### Fase 6 — Templates
 
 Objetivos:
 
-- Implementar recursos visuais oficiais da aplicação.
-- Adicionar favicon.
-- Adicionar ícones PWA.
-- Adicionar ícones sociais.
-- Adicionar logos.
-- Adicionar imagens.
-- Adicionar fontes.
-- Criar estrutura definitiva de assets.
-- Otimizar recursos para performance.
-- Preparar recursos utilizados pelos templates futuros.
+- Template Gravatar.
+- Template ObjetivoNET.
+- Template Google.
+- Template Microsoft.
+- Template Apple.
+- Template Executivo.
+- Template Dark.
 
 Observações:
 
-- Nenhuma alteração arquitetural será realizada.
-- Templates continuam exclusivos da Fase 6.
-- O Signature Engine continuará consumindo os assets através de serviços desacoplados.
+- Templates reutilizam integralmente o Signature Engine.
+- Assets oficiais já disponíveis para uso nos templates.

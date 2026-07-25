@@ -197,11 +197,26 @@ Inclui:
 
 ---
 
+## ✅ Fase 5 — Assets
+
+Concluída.
+
+Inclui:
+
+* Ícones PWA (`icon-192.svg`, `icon-512.svg`)
+* Favicon (`favicon.ico`)
+* Ícones sociais (GitHub, LinkedIn)
+* Placeholders (foto de perfil, logo)
+* Estrutura preparada para imagens e fontes
+* Integração com Manifest e Service Worker
+
+---
+
 ## ⏳ Próxima Fase
 
-### Fase 5 — Assets
+### Fase 6 — Templates
 
-Responsável pela implementação da biblioteca oficial de recursos estáticos da aplicação, incluindo favicon, ícones PWA, ícones sociais, logos, imagens, placeholders e fontes oficiais.
+Responsável pela definição dos modelos visuais reutilizando integralmente o Signature Engine.
 
 ---
 
@@ -212,7 +227,7 @@ Responsável pela implementação da biblioteca oficial de recursos estáticos d
 * ✅ Fase 3 — UI
 * ✅ Fase 4A — Application State
 * ✅ Fase 4B — Signature Engine
-* ⏳ Fase 5 — Assets
+* ✅ Fase 5 — Assets
 * ⏳ Fase 6 — Templates
 * ⏳ Fase 7 — Advanced Features
 * ⏳ Fase 8 — PWA Final
@@ -269,17 +284,17 @@ Toda nova fase deverá:
 
 Versão atual:
 
-**v0.5.0**
+**v0.6.0**
 
 Status atual:
 
-**Signature Engine concluído.**
+**Fase 5 concluída.**
 
 Próximo marco:
 
-**v0.6.0**
+**v0.7.0**
 
-**Fase 5 — Assets**
+**Fase 6 — Templates**
 
 ---
 

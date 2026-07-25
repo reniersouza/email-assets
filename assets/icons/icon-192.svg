@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192"><rect width="192" height="192" rx="42" fill="#2563eb"/><path fill="#fff" d="M40 58h112v76H40z"/><path fill="#2563eb" d="M48 66l48 38 48-38v16l-48 38-48-38z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192" fill="none" role="img" aria-label="OBJETIVONET Email Signature Generator">
+  <path d="M36 52c0-8.837 7.163-16 16-16h88c8.837 0 16 7.163 16 16v76c0 8.837-7.163 16-16 16H52c-8.837 0-16-7.163-16-16V52z" fill="#2563eb"/>
+  <path d="M52 52l44 36 44-36" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M64 124c10 10 28 10 38 0" stroke="#ffffff" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <circle cx="136" cy="136" r="20" fill="#2563eb"/>
+  <path d="M128 136h16M136 128v16" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+</svg>

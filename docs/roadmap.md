@@ -2,7 +2,7 @@
 
 ## Status do Projeto
 
-**Versão Atual:** 0.5.0
+**Versão Atual:** 0.6.0
 
 **Última atualização:** 2026-07-24
 
@@ -121,38 +121,32 @@ O estado da aplicação agora pode ser transformado em uma assinatura normalizad
 
 # Fase 5 — Assets
 
-**Status:** ⏳ Próxima fase
+**Status:** ✅ Concluída
 
-Objetivo:
+Implementado:
 
-Implementar todos os recursos estáticos oficiais da aplicação.
-
-Escopo:
-
-* favicon.ico.
 * Ícones PWA.
-* Ícones sociais.
-* Logos.
-* Imagens.
+* Favicon.
+* Assets sociais.
+* Estrutura de imagens.
 * Placeholders.
-* Fontes.
-* Otimização de arquivos.
+* Preparação para fontes.
 * Integração com Manifest.
 * Integração com Service Worker.
 * Organização da biblioteca oficial de Assets.
 
-Restrições:
+Restrições respeitadas:
 
-* Não alterar arquitetura.
-* Não modificar o Signature Engine.
-* Não criar dependências externas.
-* Não reorganizar diretórios.
+* Arquitetura preservada.
+* Signature Engine inalterado.
+* Sem dependências externas.
+* Diretórios existentes preservados.
 
 ---
 
 # Fase 6 — Templates
 
-**Status:** ⏳ Pendente
+**Status:** ⏳ Próxima fase
 
 Escopo:
 
@@ -231,8 +225,8 @@ Escopo:
 
 # Próximo Marco
 
-**v0.6.0**
+**v0.7.0**
 
 Conclusão da:
 
-**Fase 5 — Assets**
+**Fase 6 — Templates**
