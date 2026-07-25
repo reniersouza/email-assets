@@ -91,11 +91,33 @@ export class SignatureEngine {
     return CONTACT_ORDER.map((key) => contactMap[key]).filter(Boolean);
   }
 
-  removeEmpty(value) {
-    if (Array.isArray(value)) return value.map((item) => this.removeEmpty(item)).filter((item) => item !== null && item !== undefined && !(typeof item === 'object' && !Array.isArray(item) && !Object.keys(item).length));
-    if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, this.removeEmpty(item)]).filter(([, item]) => item !== '' && item !== null && item !== undefined && !(Array.isArray(item) && !item.length) && !(typeof item === 'object' && !Array.isArray(item) && !Object.keys(item).length)));
+  removeEmpty(value, isRoot = true) {
+    // Lista de nós do modelo raiz que NUNCA devem ser deletados, mesmo vazios
+    const protectedKeys = ['person', 'company', 'socials', 'layout', 'style', 'meta'];
+
+    if (Array.isArray(value)) {
+      return value
+        .map((item) => this.removeEmpty(item, false))
+        .filter((item) => item !== null && item !== undefined && !(typeof item === 'object' && !Array.isArray(item) && !Object.keys(item).length));
+    }
+
+    if (value && typeof value === 'object') {
+      return Object.fromEntries(
+        Object.entries(value)
+          .map(([key, item]) => [key, this.removeEmpty(item, false)])
+          .filter(([key, item]) => {
+            // Se for uma chave protegida na raiz do modelo, NUNCA removemos ela
+            if (isRoot && protectedKeys.includes(key)) {
+              return true;
+            }
+            return item !== '' && item !== null && item !== undefined && !(Array.isArray(item) && !item.length) && !(typeof item === 'object' && !Array.isArray(item) && !Object.keys(item).length);
+          })
+      );
+    }
+
     return isFilled(value) ? value : '';
   }
+
 }
 
 export class LayoutEngine {
@@ -137,7 +159,7 @@ export class HtmlRenderer {
     return output;
   }
   photoCell(photo, style) { return `<td style="padding:0 ${style.spacing * 2}px 0 0;vertical-align:top;"><img src="${sanitizeUrl(photo.url)}" alt="${escapeHtml(photo.alt)}" width="${photo.size}" height="${photo.size}" style="display:block;border:0;border-radius:${style.photoRadius}px;max-width:${photo.size}px;"></td>`; }
-  identity(signature) { console.log("IDENTITY RECEIVED =", signature); const person = signature.person; const company = signature.company ?? {}; return `<div style="font-weight:bold;color:${signature.style.primaryColor};font-size:${signature.style.fontSize + 2}px;">${escapeHtml(person.name)}</div>${person.role ? `<div>${escapeHtml(person.role)}</div>` : ''}${person.department ? `<div>${escapeHtml(person.department)}</div>` : ''}${company.name ? `<div style="color:${signature.style.mutedColor};">${escapeHtml(company.name)}</div>` : ''}`; }
+  identity(signature) { console.log("IDENTITY RECEIVED =", signature); const person = signature?.person ?? {}; const company = signature?.company ?? {}; const name = person.name || ''; return `<div style="font-weight:bold;color:${signature.style.primaryColor};font-size:${signature.style.fontSize}px;">${name}</div>`; }
   contacts(signature) { return (signature.contacts ?? []).map((contact) => `<div>${escapeHtml(contact.label)}: ${contact.href ? `<a href="${sanitizeUrl(contact.href)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(contact.value)}</a>` : escapeHtml(contact.value)}</div>`).join(''); }
   socials(signature) { if (!signature.socials?.length) return ''; return `<div style="padding-top:${signature.style.spacing}px;">${signature.socials.map((social) => `<a href="${sanitizeUrl(social.url)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(social.network)}</a>`).join(` <span aria-hidden="true">${escapeHtml(signature.style.separator)}</span> `)}</div>`; }
 }
