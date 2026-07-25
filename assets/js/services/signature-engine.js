@@ -54,18 +54,26 @@ export class SignatureEngine {
   }
 
   buildPerson(person = {}, errors) {
-    return this.removeEmpty({
+    // IMPORTANTE: Removemo o 'this.removeEmpty' daqui de dentro para 
+    // evitar que o nó 'person' seja limpo antes do buildContacts ler os campos
+    return {
       name: validField(errors, 'signature.person.name') ? person.name?.trim() : '',
       role: person.role?.trim(),
       department: person.department?.trim(),
       email: validField(errors, 'signature.person.email') ? person.email?.trim() : '',
       phone: validField(errors, 'signature.person.phone') ? person.phone?.trim() : '',
       whatsapp: validField(errors, 'signature.person.whatsapp') ? person.whatsapp?.trim() : '',
-    });
+    };
   }
 
   buildCompany(company = {}) {
-    return this.removeEmpty({ name: company.name?.trim(), website: company.website?.trim(), address: company.address?.trim(), city: company.city?.trim(), country: company.country?.trim() });
+    return { 
+      name: company.name?.trim(), 
+      website: company.website?.trim(), 
+      address: company.address?.trim(), 
+      city: company.city?.trim(), 
+      country: company.country?.trim() 
+    };
   }
 
   buildPhoto(photo = {}) {
@@ -81,12 +89,13 @@ export class SignatureEngine {
   }
 
   buildContacts(model) {
+    // Como os nós filhos preservam as propriedades até a higienização final, as checagens voltam a funcionar estavelmente
     const contactMap = {
-      email: model.person.email && { type: 'email', label: 'Email', value: model.person.email, href: `mailto:${model.person.email}` },
-      phone: model.person.phone && { type: 'phone', label: 'Telefone', value: model.person.phone, href: `tel:${model.person.phone}` },
-      whatsapp: model.person.whatsapp && { type: 'whatsapp', label: 'WhatsApp', value: model.person.whatsapp, href: `tel:${model.person.whatsapp}` },
-      website: model.company.website && { type: 'website', label: 'Website', value: model.company.website, href: model.company.website },
-      address: (model.company.address || model.company.city || model.company.country) && { type: 'address', label: 'Endereço', value: [model.company.address, model.company.city, model.company.country].filter(Boolean).join(', ') },
+      email: model.person?.email && { type: 'email', label: 'Email', value: model.person.email, href: `mailto:${model.person.email}` },
+      phone: model.person?.phone && { type: 'phone', label: 'Telefone', value: model.person.phone, href: `tel:${model.person.phone}` },
+      whatsapp: model.person?.whatsapp && { type: 'whatsapp', label: 'WhatsApp', value: model.person.whatsapp, href: `tel:${model.person.whatsapp}` },
+      website: model.company?.website && { type: 'website', label: 'Website', value: model.company.website, href: model.company.website },
+      address: (model.company?.address || model.company?.city || model.company?.country) && { type: 'address', label: 'Endereço', value: [model.company.address, model.company.city, model.company.country].filter(Boolean).join(', ') },
     };
     return CONTACT_ORDER.map((key) => contactMap[key]).filter(Boolean);
   }
@@ -98,7 +107,7 @@ export class SignatureEngine {
       const cleanedRoot = {};
       for (const [key, item] of Object.entries(value)) {
         if (protectedKeys.includes(key)) {
-          // Mantém a chave raiz viva, mas limpa o conteúdo interno dela de forma profunda
+          // Mantém as estruturas necessárias na raiz intactas, permitindo renderização imediata
           cleanedRoot[key] = this.removeEmpty(item, false) || {};
         } else {
           const cleanedItem = this.removeEmpty(item, false);
@@ -126,26 +135,8 @@ export class SignatureEngine {
 
     return isFilled(value) ? value : '';
   }
-
-    // Comportamento padrão recursivo para nós internos e arrays
-    if (Array.isArray(value)) {
-      return value
-        .map((item) => this.removeEmpty(item, false))
-        .filter((item) => item !== null && item !== undefined && !(typeof item === 'object' && !Array.isArray(item) && !Object.keys(item).length));
-    }
-
-    if (value && typeof value === 'object') {
-      const entries = Object.entries(value)
-        .map(([key, item]) => [key, this.removeEmpty(item, false)])
-        .filter(([, item]) => item !== '' && item !== null && item !== undefined && !(Array.isArray(item) && !item.length) && !(typeof item === 'object' && !Array.isArray(item) && !Object.keys(item).length));
-      return Object.fromEntries(entries);
-    }
-
-    return isFilled(value) ? value : '';
-  }
-
-
 }
+
 
 export class LayoutEngine {
   static resolve(layout = {}) {
