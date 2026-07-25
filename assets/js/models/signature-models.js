@@ -1,63 +1,643 @@
 // Objetivo: modelos de domínio da assinatura.
-// Responsabilidade: prover valores padrão, validação, serialização e desserialização.
-// Dependências: nenhuma.
+// Responsabilidade:
+// - Prover valores padrão
+// - Validar dados do domínio
+// - Serializar e desserializar modelos
+//
+// Dependências:
+// nenhuma.
 
-const clone = (value) => JSON.parse(JSON.stringify(value));
-const merge = (defaults, value = {}) => ({ ...clone(defaults), ...value });
+const clone = (value) => {
+
+
+  if (
+    typeof structuredClone === 'function'
+  ) {
+
+    return structuredClone(value);
+
+  }
+
+
+  return JSON.parse(
+    JSON.stringify(value)
+  );
+
+
+};
+
+
+const merge = (
+  defaults,
+  value = {}
+) => {
+
+
+  return {
+
+
+    ...clone(defaults),
+
+
+    ...(value ?? {}),
+
+
+  };
+
+
+};
 
 export class BaseModel {
+
+
   static defaults = {};
-  static from(data = {}) { return merge(this.defaults, data); }
-  static serialize(data = {}) { return clone(this.from(data)); }
-  static deserialize(data = {}) { return this.from(data); }
-  static validate() { return []; }
+
+
+
+  static from(data = {}) {
+
+
+    return merge(
+      this.defaults,
+      data
+    );
+
+
+  }
+
+
+
+
+
+  static serialize(data = {}) {
+
+
+    return clone(
+      this.from(data)
+    );
+
+
+  }
+
+  static deserialize(data = {}) {
+
+
+    return this.from(
+      data
+    );
+
+
+  }
+
+
+  static validate() {
+
+
+    return [];
+
+
+  }
+
+
 }
 
 export class PersonModel extends BaseModel {
-  static defaults = { name: '', role: '', department: '', email: '', phone: '', whatsapp: '' };
+
+
+  static defaults = {
+
+
+    name:
+      '',
+
+
+    role:
+      '',
+
+
+    department:
+      '',
+
+
+    email:
+      '',
+
+
+    phone:
+      '',
+
+
+    whatsapp:
+      '',
+
+
+  };
+
   static validate(data = {}) {
+
+
     const errors = [];
-    if (!data.name?.trim()) errors.push({ field: 'signature.person.name', message: 'Nome é obrigatório.' });
-    if (!data.email?.trim()) errors.push({ field: 'signature.person.email', message: 'Email é obrigatório.' });
+
+
+
+    if (
+      !data.name?.trim()
+    ) {
+
+
+      errors.push({
+
+        field:
+          'signature.person.name',
+
+        message:
+          'Nome é obrigatório.',
+
+      });
+
+
+    }
+
+
+
+
+
+    if (
+      !data.email?.trim()
+    ) {
+
+
+      errors.push({
+
+        field:
+          'signature.person.email',
+
+        message:
+          'Email é obrigatório.',
+
+      });
+
+
+    }
+
+
+
     return errors;
+
+
   }
+
+
 }
 
 export class CompanyModel extends BaseModel {
-  static defaults = { name: 'ObjetivoNET', website: '', address: '', city: '', country: 'Brasil' };
+
+
+  static defaults = {
+
+
+    name:
+      'ObjetivoNET',
+
+
+    website:
+      '',
+
+
+    address:
+      '',
+
+
+    city:
+      '',
+
+
+    country:
+      'Brasil',
+
+
+  };
+
+
 }
 
+
 export class PhotoModel extends BaseModel {
-  static defaults = { url: '', alt: '', enabled: false, size: 96 };
+
+
+  static defaults = {
+
+
+    url:
+      '',
+
+
+    alt:
+      '',
+
+
+    enabled:
+      false,
+
+
+    size:
+      96,
+
+
+  };
+
+  static validate(data = {}) {
+
+
+    const errors = [];
+
+
+
+    if (
+      data.enabled &&
+      !data.url
+    ) {
+
+
+      errors.push({
+
+        field:
+          'signature.photo.url',
+
+        message:
+          'Imagem ativada sem URL.',
+
+      });
+
+
+    }
+
+
+
+    return errors;
+
+
+  }
+
+
 }
 
 export class SocialModel extends BaseModel {
-  static defaults = { items: [] };
+
+
+  static defaults = {
+
+
+    items:
+      [],
+
+
+  };
+
+
+
+
+
+  static from(data = {}) {
+
+
+    return {
+
+
+      items:
+        Array.isArray(data.items)
+
+          ? clone(data.items)
+
+          : [],
+
+
+    };
+
+
+  }
+
+
+
+
+
+  static validate(data = {}) {
+
+
+    const errors = [];
+
+
+
+    data.items?.forEach(
+      (item, index) => {
+
+
+        if (
+          item.url &&
+          !item.network
+        ) {
+
+
+          errors.push({
+
+            field:
+              `signature.socials.items.${index}.network`,
+
+            message:
+              'Rede social sem identificação.',
+
+          });
+
+
+        }
+
+
+      }
+    );
+
+
+
+    return errors;
+
+
+  }
+
+
 }
 
 export class ThemeModel extends BaseModel {
-  static defaults = { preference: 'auto', resolved: 'light' };
-  static validate(data = {}) { return ['light', 'dark', 'auto'].includes(data.preference) ? [] : [{ field: 'theme.preference', message: 'Tema inválido.' }]; }
+
+
+  static defaults = {
+
+
+    preference:
+      'auto',
+
+
+    resolved:
+      'light',
+
+
+  };
+
+
+
+
+
+  static validate(data = {}) {
+
+
+    return [
+
+      'light',
+
+      'dark',
+
+      'auto',
+
+    ].includes(
+      data.preference
+    )
+
+      ? []
+
+      : [{
+
+          field:
+            'theme.preference',
+
+          message:
+            'Tema inválido.',
+
+        }];
+
+
+  }
+
+
 }
 
 export class StyleModel extends BaseModel {
-  static defaults = { primaryColor: '#0f62fe', textColor: '#1f2937', fontFamily: 'Arial, sans-serif', fontSize: 14 };
+
+
+  static defaults = {
+
+
+    primaryColor:
+      '#0f62fe',
+
+
+    textColor:
+      '#1f2937',
+
+
+    mutedColor:
+      '#4b5563',
+
+
+    fontFamily:
+      'Arial, sans-serif',
+
+
+    fontSize:
+      14,
+
+
+    spacing:
+      8,
+
+
+    alignment:
+      'left',
+
+
+    borderColor:
+      '#e5e7eb',
+
+
+    separator:
+      '•',
+
+
+    iconColor:
+      '#0f62fe',
+
+
+    photoRadius:
+      48,
+
+
+  };
+
+
 }
 
+
 export class LayoutModel extends BaseModel {
-  static defaults = { variant: 'default', spacing: 'normal', photoPosition: 'left' };
+
+
+  static defaults = {
+
+
+    variant:
+      'horizontal',
+
+
+    spacing:
+      'normal',
+
+
+    photoPosition:
+      'left',
+
+
+  };
+
+  static validate(data = {}) {
+
+
+    const allowed = [
+
+      'horizontal',
+
+      'vertical',
+
+      'compact',
+
+    ];
+
+
+
+    return allowed.includes(
+      data.variant
+    )
+
+      ? []
+
+      : [{
+
+          field:
+            'signature.layout.variant',
+
+          message:
+            'Layout inválido.',
+
+        }];
+
+
+  }
+
+
 }
 
 export class SettingsModel extends BaseModel {
-  static defaults = { autoSave: true, autoSaveDelay: 350, historyLimit: 50, locale: 'pt-BR' };
+
+
+  static defaults = {
+
+
+    autoSave:
+      true,
+
+
+    autoSaveDelay:
+      350,
+
+
+    historyLimit:
+      50,
+
+
+    locale:
+      'pt-BR',
+
+
+  };
+
+
 }
 
+
 export class ValidationModel extends BaseModel {
-  static defaults = { valid: false, errors: [], warnings: [], touched: {} };
+
+
+  static defaults = {
+
+
+    valid:
+      false,
+
+
+    errors:
+      [],
+
+
+    warnings:
+      [],
+
+
+    touched:
+      {},
+
+
+  };
+
+
+
 }
 
 export class ApplicationModel extends BaseModel {
-  static defaults = { ready: false, busy: false, route: 'dados-pessoais', lastError: null, updatedAt: null };
+
+
+  static defaults = {
+
+
+    ready:
+      false,
+
+
+    busy:
+      false,
+
+
+    route:
+      'dados-pessoais',
+
+
+    lastError:
+      null,
+
+
+    updatedAt:
+      null,
+
+
+  };
+
+
 }
 
-export const MODEL_REGISTRY = Object.freeze({ PersonModel, CompanyModel, PhotoModel, SocialModel, ThemeModel, StyleModel, LayoutModel, SettingsModel, ValidationModel, ApplicationModel });
+export const MODEL_REGISTRY = Object.freeze({
+
+  PersonModel,
+
+  CompanyModel,
+
+  PhotoModel,
+
+  SocialModel,
+
+  ThemeModel,
+
+  StyleModel,
+
+  LayoutModel,
+
+  SettingsModel,
+
+  ValidationModel,
+
+  ApplicationModel,
+
+});
