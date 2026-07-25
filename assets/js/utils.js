@@ -1,66 +1,314 @@
 // Objetivo: utilidades puras compartilhadas.
-// Responsabilidade: oferecer helpers de performance e segurança sem dependências de UI.
-// Dependências: nenhuma.
+// Responsabilidade:
+// - Helpers de performance
+// - Segurança de conteúdo
+// - Manipulação comum sem acoplamento de negócio.
+//
+// Dependências:
+// nenhuma.
+
 
 const HTML_ESCAPE_MAP = Object.freeze({
+
   '&': '&amp;',
+
   '<': '&lt;',
+
   '>': '&gt;',
+
   '"': '&quot;',
+
   "'": '&#39;',
+
 });
 
-export function debounce(callback, delay = 250) {
-  let timerId;
+export function debounce(
+  callback,
+  delay = 250
+) {
 
-  return (...args) => {
-    window.clearTimeout(timerId);
-    timerId = window.setTimeout(() => callback(...args), delay);
-  };
+
+  let timerId = null;
+
+
+
+  const debounced =
+    (...args) => {
+
+
+      if (timerId) {
+
+        globalThis.clearTimeout(
+          timerId
+        );
+
+      }
+
+
+
+      timerId =
+        globalThis.setTimeout(
+          () => {
+
+            timerId = null;
+
+            callback(...args);
+
+          },
+          delay
+        );
+
+
+    };
+
+
+
+  debounced.cancel =
+    () => {
+
+
+      if (timerId) {
+
+
+        globalThis.clearTimeout(
+          timerId
+        );
+
+
+        timerId = null;
+
+
+      }
+
+
+    };
+
+
+
+  return debounced;
+
+
 }
 
-export function throttle(callback, limit = 250) {
+
+export function throttle(
+  callback,
+  limit = 250
+) {
+
+
   let waiting = false;
 
-  return (...args) => {
-    if (waiting) {
-      return;
-    }
+  let timeoutId = null;
 
-    callback(...args);
-    waiting = true;
-    window.setTimeout(() => {
+
+
+  const throttled =
+    (...args) => {
+
+
+      if (waiting) {
+
+        return;
+
+      }
+
+
+
+      callback(...args);
+
+
+
+      waiting = true;
+
+
+
+      timeoutId =
+        globalThis.setTimeout(
+          () => {
+
+            waiting = false;
+
+            timeoutId = null;
+
+          },
+          limit
+        );
+
+
+    };
+
+
+
+  throttled.cancel =
+    () => {
+
+
+      if (timeoutId) {
+
+
+        globalThis.clearTimeout(
+          timeoutId
+        );
+
+
+        timeoutId = null;
+
+
+      }
+
+
+
       waiting = false;
-    }, limit);
-  };
+
+
+    };
+
+
+
+  return throttled;
+
+
 }
 
-export function escapeHtml(value = '') {
-  return String(value).replace(/[&<>'"]/g, (character) => HTML_ESCAPE_MAP[character]);
+export function escapeHtml(
+  value = ''
+) {
+
+
+  return String(value)
+    .replace(
+      /[&<>'"]/g,
+      (character) =>
+        HTML_ESCAPE_MAP[character]
+    );
+
+
 }
 
-export function sanitizeUrl(value = '') {
+
+export function sanitizeUrl(
+  value = ''
+) {
+
+
   try {
-    const url = new URL(value, window.location.origin);
-    const allowedProtocols = ['http:', 'https:', 'mailto:', 'tel:'];
-    return allowedProtocols.includes(url.protocol) ? url.href : '#';
-  } catch {
-    return '#';
+
+
+    const url =
+      new URL(
+        value,
+        globalThis.location?.origin
+      );
+
+
+
+    const allowedProtocols = [
+
+      'http:',
+
+      'https:',
+
+      'mailto:',
+
+      'tel:',
+
+    ];
+
+
+
+    if (
+      !allowedProtocols.includes(
+        url.protocol
+      )
+    ) {
+
+      return '#';
+
+    }
+
+
+
+    return url.href;
+
+
   }
+
+  catch {
+
+
+    return '#';
+
+
+  }
+
+
 }
 
-export function createElement(tagName, attributes = {}, textContent = '') {
-  const element = document.createElement(tagName);
 
-  Object.entries(attributes).forEach(([name, value]) => {
-    if (value !== undefined && value !== null) {
-      element.setAttribute(name, String(value));
-    }
-  });
+export function createElement(
+  tagName,
+  attributes = {},
+  textContent = ''
+) {
 
-  if (textContent) {
-    element.textContent = textContent;
+
+  if (
+    !globalThis.document
+  ) {
+
+    return null;
+
   }
+
+
+
+  const element =
+    document.createElement(
+      tagName
+    );
+
+
+
+  Object.entries(attributes)
+    .forEach(
+      ([name, value]) => {
+
+
+        if (
+          value !== undefined &&
+          value !== null
+        ) {
+
+
+          element.setAttribute(
+            name,
+            String(value)
+          );
+
+
+        }
+
+
+      }
+    );
+
+
+
+  if (
+    textContent !== ''
+  ) {
+
+
+    element.textContent =
+      textContent;
+
+
+  }
+
+
 
   return element;
+
+
 }
