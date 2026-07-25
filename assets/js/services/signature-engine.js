@@ -155,18 +155,28 @@ export class HtmlRenderer {
     const style = signature.style; 
     const layout = signature.layout; 
     
-    // RESTAURADO: Adicionada a estrutura de contêiner/borda para envolver a assinatura dentro do quadrado correto
+    // Alinha o estilo base com as fontes e cores que o usuário escolhe no painel
+    const textStyle = `font-family:${style.fontFamily};font-size:${style.fontSize}px;color:${style.textColor};line-height:1.4;`;
+    
     const html = [
-      `<div class="signature-mock" style="padding: 20px; border-radius: 8px; background-color: rgba(255,255,255,0.03); border: 1px solid ${style.borderColor || '#e5e7eb'}; margin-top: 15px;">`,
-      `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="${StyleEngine.inline(style)}border-collapse:collapse; width:100%;">`, 
+      // SOLUÇÃO DE CONTRASTE: Usamos uma cor de fundo neutra e clara (ex: branca ou cinza bem claro) 
+      // para simular um fundo de e-mail padrão. Assim a cor personalizada do usuário sempre aparece!
+      `<div class="signature-mock" style="padding: 20px; border-radius: 8px; background-color: #ffffff; border: 1px solid #e5e7eb; margin-top: 15px;">`,
+      `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="${textStyle}border-collapse:collapse; width:100%;">`, 
       '<tr>'
     ]; 
     
     if (signature.photo && layout.sections.includes('photo')) html.push(this.photoCell(signature.photo, style)); 
     
-    html.push(`<td style="padding:0 0 0 ${layout.variant === 'horizontal' && signature.photo ? style.spacing * 2 : 0}px;vertical-align:top;">`); 
-    html.push(this.identity(signature), this.contacts(signature), this.socials(signature)); 
-    html.push('</td></tr></table>', '</div>'); // Fecha a div do contêiner restaurado
+    html.push(`<td style="vertical-align:top;">`); 
+    html.push(this.identity(signature));     // 1. Nome, Cargo e Empresa (Dinâmico)
+    html.push(this.contacts(signature));     // 2. Contatos (Dinâmico)
+    html.push(this.socials(signature));      // 3. Redes Sociais (Dinâmico)
+    
+    // POSICIONAMENTO E COR DINÂMICA: A barra usa a cor primária que o usuário escolher no painel
+    html.push(`<div class="mock-bar" style="height: 4px; width: 120px; background-color: ${style.primaryColor}; border-radius: 2px; margin-top: 14px;"></div>`);
+    
+    html.push('</td></tr></table>', '</div>'); 
     
     const output = html.join(''); 
     eventBus.emit(EVENTS.HTML_RENDERED, { html: output, signature }); 
@@ -177,27 +187,28 @@ export class HtmlRenderer {
   photoCell(photo, style) { return `<td style="padding:0 ${style.spacing * 2}px 0 0;vertical-align:top;"><img src="${sanitizeUrl(photo.url)}" alt="${escapeHtml(photo.alt)}" width="${photo.size}" height="${photo.size}" style="display:block;border:0;border-radius:${style.photoRadius}px;max-width:${photo.size}px;"></td>`; } 
   
   identity(signature) { 
-    console.log("IDENTITY RECEIVED =", signature); 
     const person = signature?.person || {}; 
-    const style = signature?.style || { primaryColor: '#0f62fe', fontSize: 14, textColor: '#1f2937', mutedColor: '#4b5563' }; 
-    
+    const style = signature?.style || {}; 
     const name = person.name || 'Ana Silva'; 
     const role = person.role || 'Head de Operações'; 
     const department = person.department || 'ObjetivoNET'; 
     
-    let html = `<div style="font-weight:bold;color:#ffffff;font-size:${style.fontSize + 2}px;margin-bottom:4px;">${name}</div>`; 
+    // Usa a cor primária para o Nome e a cor secundária/muted para os cargos
+    let html = `<div style="font-weight:bold;color:${style.primaryColor};font-size:${style.fontSize + 2}px;margin-bottom:4px;">${name}</div>`; 
     if (role || department) {
       html += `<div style="color:${style.mutedColor};font-size:${style.fontSize - 1}px;margin-bottom:8px;">${role} · ${department}</div>`;
     }
-    
-    // RESTAURADO: Adicionada a barra azul decorativa inferior que estava no layout anterior
-    html += `<div class="mock-bar" style="height: 4px; width: 120px; background-color: ${style.primaryColor}; border-radius: 2px; margin-top: 12px; margin-bottom: 12px;"></div>`;
-    
     return html; 
   } 
   
-  contacts(signature) { return (signature.contacts ?? []).map((contact) => `<div style="margin-bottom:2px;">${escapeHtml(contact.label)}: ${contact.href ? `<a href="${sanitizeUrl(contact.href)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(contact.value)}</a>` : escapeHtml(contact.value)}</div>`).join(''); } 
-  socials(signature) { if (!signature.socials?.length) return ''; return `<div style="padding-top:${signature.style.spacing}px;">${signature.socials.map((social) => `<a href="${sanitizeUrl(social.url)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(social.network)}</a>`).join(` <span aria-hidden="true">${escapeHtml(signature.style.separator)}</span> `)}</div>`; } 
+  contacts(signature) { 
+    const style = signature.style;
+    return (signature.contacts ?? []).map((contact) => 
+      `<div style="margin-bottom:2px; color:${style.textColor}; font-size:${style.fontSize - 1}px;">${escapeHtml(contact.label)}: ${contact.href ? `<a href="${sanitizeUrl(contact.href)}" style="color:${style.primaryColor};text-decoration:none;">${escapeHtml(contact.value)}</a>` : escapeHtml(contact.value)}</div>`
+    ).join(''); 
+  } 
+  
+  socials(signature) { if (!signature.socials?.length) return ''; return `<div style="padding-top:${signature.style.spacing}px;">${signature.socials.map((social) => `<a href="${sanitizeUrl(social.url)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(social.network)}</a>`).join(` <span aria-hidden="true" style="color:${signature.style.mutedColor};">${escapeHtml(signature.style.separator)}</span> `)}</div>`; } 
 }
 
 export class PreviewRenderer { 
