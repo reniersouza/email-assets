@@ -1,71 +1,326 @@
 // Objetivo: persistência local versionada.
-// Responsabilidade: salvar, restaurar, resetar e versionar configurações da aplicação.
-// Dependências: constants.js e events.js.
+// Responsabilidade:
+// - Salvar configurações locais
+// - Restaurar estado persistido
+// - Resetar armazenamento
+// - Controlar migrações de versão
+//
+// Dependências:
+// constants.js
+// events.js.
 
-import { EVENTS, STORAGE_KEY, STORAGE_VERSION } from './constants.js';
-import { eventBus } from './events.js';
+import {
+  EVENTS,
+  STORAGE_KEY,
+  STORAGE_VERSION
+} from './constants.js';
+
+import {
+  eventBus
+} from './events.js';
 
 const DEFAULT_STATE = Object.freeze({
-  version: STORAGE_VERSION,
-  updatedAt: null,
+
+  version:
+    STORAGE_VERSION,
+
+
+  updatedAt:
+    null,
+
+
   settings: {
-    theme: 'auto',
+
+    theme:
+      'auto',
+
   },
+
 });
 
+const clone = (value) => {
+
+
+  if (
+    typeof structuredClone === 'function'
+  ) {
+
+
+    return structuredClone(
+      value
+    );
+
+
+  }
+
+
+
+  return JSON.parse(
+    JSON.stringify(value)
+  );
+
+
+};
+
 export class StorageManager {
+
+
+  constructor() {
+
+    this.key =
+      STORAGE_KEY;
+
+    this.version =
+      STORAGE_VERSION;
+
+  }
+
   load() {
-    const rawValue = window.localStorage.getItem(STORAGE_KEY);
+
+
+    const storage =
+      globalThis.localStorage;
+
+
+
+    if (!storage) {
+
+
+      return clone(
+        DEFAULT_STATE
+      );
+
+
+    }
+
+    const rawValue =
+      storage.getItem(
+        this.key
+      );
 
     if (!rawValue) {
-      return structuredClone(DEFAULT_STATE);
+
+
+      return clone(
+        DEFAULT_STATE
+      );
+
+
     }
 
     try {
-      return this.migrate(JSON.parse(rawValue));
-    } catch {
-      return this.reset();
+
+
+      const parsed =
+        JSON.parse(
+          rawValue
+        );
+
+
+
+      return this.migrate(
+        parsed
+      );
+
+
+
     }
+
+    catch(error) {
+
+
+      return this.reset();
+
+
+    }
+
+
   }
 
-  save(settings) {
-    const current = this.load();
+
+  save(settings = {}) {
+
+
+    const current =
+      this.load();
+
+
     const payload = {
-      version: STORAGE_VERSION,
-      updatedAt: new Date().toISOString(),
+
+
+      version:
+        this.version,
+
+
+      updatedAt:
+        new Date()
+          .toISOString(),
+
+
+
       settings: {
+
+
+        ...DEFAULT_STATE.settings,
+
+
         ...current.settings,
+
+
         ...settings,
+
+
       },
+
+
     };
 
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-    eventBus.emit(EVENTS.STORAGE_CHANGED, payload);
+    const storage =
+      globalThis.localStorage;
+
+    if (storage) {
+
+
+      storage.setItem(
+
+        this.key,
+
+        JSON.stringify(
+          payload
+        )
+
+      );
+
+
+    }
+
+
+    eventBus.emit(
+
+      EVENTS.STORAGE_CHANGED,
+
+      payload
+
+    );
 
     return payload;
+
+
   }
 
   reset() {
-    window.localStorage.removeItem(STORAGE_KEY);
-    const state = structuredClone(DEFAULT_STATE);
-    eventBus.emit(EVENTS.STORAGE_CHANGED, state);
 
-    return state;
-  }
 
-  migrate(data) {
-    if (data?.version === STORAGE_VERSION) {
-      return data;
+    const storage =
+      globalThis.localStorage;
+
+
+    if (storage) {
+
+
+      storage.removeItem(
+        this.key
+      );
+
+
     }
 
-    return {
-      ...structuredClone(DEFAULT_STATE),
-      settings: {
-        ...DEFAULT_STATE.settings,
-        ...data?.settings,
-      },
-    };
+    const state =
+      clone(
+        DEFAULT_STATE
+      );
+
+
+    eventBus.emit(
+
+      EVENTS.STORAGE_CHANGED,
+
+      state
+
+    );
+
+    return state;
+
+
   }
+
+  migrate(data = {}) {
+
+
+    if (
+
+      data?.version ===
+      this.version
+
+    ) {
+
+
+      return {
+
+
+        ...clone(
+          DEFAULT_STATE
+        ),
+
+
+        ...data,
+
+
+        settings: {
+
+
+          ...DEFAULT_STATE.settings,
+
+
+          ...(data.settings ?? {}),
+
+
+        },
+
+
+      };
+
+
+    }
+
+    return this.runMigration(
+      data
+    );
+
+
+  }
+
+  runMigration(data = {}) {
+
+
+    return {
+
+
+      ...clone(
+        DEFAULT_STATE
+      ),
+
+
+
+      settings: {
+
+
+        ...DEFAULT_STATE.settings,
+
+
+        ...(data?.settings ?? {}),
+
+
+      },
+
+
+    };
+
+
+  }
+
+
 }
 
-export const storage = new StorageManager();
+export const storage =
+  new StorageManager();
