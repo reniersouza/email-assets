@@ -2,6 +2,26 @@
    Responsabilidade: isolar a aparência inicial e manter ponto de extensão visual.
    Dependências: tokens definidos em assets/css/themes.css. */
 
-.component-preview {
-  display: block;
-}
+   .component-preview {
+    display: block;
+  }
+  
+  /* ==========================================================================
+     CORREÇÃO DE CONTRASTE: ESTÚDIO DE ASSINATURA (MODO PAPEL)
+     ========================================================================== */
+  
+  /* Força o contêiner de simulação de e-mail a ter SEMPRE fundo branco fixo */
+  .signature-mock {
+    background-color: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+  }
+  
+  /* Obriga as tags de texto internas a usarem cores escuras para contrastar 
+     com o fundo branco, ignorando as variáveis claras do Tema Dark */
+  .signature-mock div, 
+  .signature-mock span, 
+  .signature-mock td,
+  .signature-mock p {
+    color: #1f2937 !important; /* Cor grafite escuro real de e-mails */
+  }
+  
