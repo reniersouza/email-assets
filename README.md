@@ -8,7 +8,7 @@ O projeto utiliza HTML5, CSS3 e JavaScript ES Modules, sem frameworks externos, 
 
 # Status do Projeto
 
-**Versão atual:** v0.5.0
+**Versão atual:** v0.6.0
 
 **Status:**
 
@@ -21,6 +21,28 @@ O projeto utiliza HTML5, CSS3 e JavaScript ES Modules, sem frameworks externos, 
 ⏳ Fase 6 — Templates
 
 ---
+
+Roadmap atual:
+
+✅ Foundation
+
+✅ UI
+
+✅ Application State
+
+✅ Signature Engine
+
+✅ Assets
+
+⏳ Templates
+
+⏳ Advanced Features
+
+⏳ PWA Final
+
+⏳ Testing
+
+⏳ Deploy
 
 # Objetivo
 
@@ -72,49 +94,106 @@ O projeto segue arquitetura modular baseada em:
 
 Documentação oficial:
 
-* PROJECT_CONTEXT.md
-* AI_RULES.md
-* ROADMAP.md
-* ARCHITECTURE.md
-* CHANGELOG.md
+docs/PROJECT_CONTEXT.md
+docs/ROADMAP.md
+docs/ARCHITECTURE.md
+docs/CHANGELOG.md
+docs/AI_RULES.md
 
 ---
 
-# Estrutura Principal
+## Estrutura do Projeto
 
 ```text
 /
 assets/
+├── components/
+├── config/
+├── css/
+├── fonts/
+├── icons/
+├── images/
+├── js/
+├── placeholders/
+└── social/
+
 config/
 docs/
+├── adr/
+
+signatures/
 tests/
 
+404.html
+favicon.ico
 index.html
+LICENSE
 manifest.json
-service-worker.js
-
-PROJECT_CONTEXT.md
-AI_RULES.md
-ROADMAP.md
-ARCHITECTURE.md
-CHANGELOG.md
+package.json
 README.md
+robots.txt
+service-worker.js
 ```
 
 ---
 
+# Instalação
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/reniersouza/email-assets.git
+```
+
+Entre no diretório:
+
+```bash
+cd email-assets
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+# Executando o projeto
+
+Inicie um servidor local:
+
+```bash
+npm start
+```
+
+A aplicação ficará disponível em:
+
+```
+http://localhost:4173
+```
+
 # Scripts
 
-Executar validações:
+Iniciar servidor local:
+
+```bash
+npm start
+```
+
+Executar lint:
 
 ```bash
 npm run lint
 ```
 
-Formatar projeto:
+Verificar formatação:
 
 ```bash
 npm run format
+```
+
+Executar testes:
+
+```bash
+npm test
 ```
 
 ---
@@ -157,3 +236,11 @@ Deploy automático através do GitHub.
 # Objetivo Final
 
 Entregar uma plataforma SaaS profissional para criação de assinaturas HTML, com arquitetura escalável, código sustentável, alta compatibilidade com clientes de e-mail e preparada para evolução contínua.
+
+---
+
+# Licença
+
+Este projeto é distribuído sob a licença MIT.
+
+Consulte o arquivo LICENSE para mais informações.
