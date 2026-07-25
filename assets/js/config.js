@@ -17,20 +17,13 @@ import { eventBus } from './events.js';
 
 const CONFIG_FILES = Object.freeze({
 
-  settings:
-    'assets/config/settings.json',
+  settings: './config/settings.json',
 
+  themes: './config/themes.json',
 
-  themes:
-    'assets/config/themes.json',
+  templates: './config/templates.json',
 
-
-  templates:
-    'assets/config/templates.json',
-
-
-  icons:
-    'assets/config/icons.json',
+  icons: './config/icons.json',
 
 });
 
