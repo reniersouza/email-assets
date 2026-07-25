@@ -159,8 +159,9 @@ export class HtmlRenderer {
     const textStyle = `font-family:${style.fontFamily};font-size:${style.fontSize}px;color:${style.textColor} !important;line-height:1.4;`;
     
     const html = [
-      // CORREÇÃO CIRÚRGICA: Mudamos apenas 'background-color' para 'background' para anular o linear-gradient do CSS global
-      `<div class="signature-mock" style="padding: 20px !important; border-radius: 8px !important; background: #ffffff !important; border: 1px solid #e5e7eb !important; margin-top: 15px !important; text-align: left !important;">`,
+      // 2. SIMULAÇÃO DE E-MAIL: Forçamos o background #ffffff para que as cores padrões escuras apareçam.
+      // Quando a personalização for criada, qualquer cor escura escolhida pelo usuário funcionará perfeitamente aqui!
+      `<div class="signature-mock" style="padding: 20px !important; border-radius: 8px !important; background-color: #ffffff !important; border: 1px solid #e5e7eb !important; margin-top: 15px !important; text-align: left !important;">`,
       `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="${textStyle}border-collapse:collapse; width:100%;">`, 
       '<tr>'
     ]; 
