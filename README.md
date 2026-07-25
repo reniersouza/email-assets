@@ -95,9 +95,13 @@ O projeto segue arquitetura modular baseada em:
 Documentação oficial:
 
 docs/PROJECT_CONTEXT.md
+
 docs/ROADMAP.md
+
 docs/ARCHITECTURE.md
+
 docs/CHANGELOG.md
+
 docs/AI_RULES.md
 
 ---
