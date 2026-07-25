@@ -154,32 +154,51 @@ export class HtmlRenderer {
   render(signature) { 
     const style = signature.style; 
     const layout = signature.layout; 
-    const html = [`<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="${StyleEngine.inline(style)}border-collapse:collapse;">`, '<tr>']; 
+    
+    // RESTAURADO: Adicionada a estrutura de contêiner/borda para envolver a assinatura dentro do quadrado correto
+    const html = [
+      `<div class="signature-mock" style="padding: 20px; border-radius: 8px; background-color: rgba(255,255,255,0.03); border: 1px solid ${style.borderColor || '#e5e7eb'}; margin-top: 15px;">`,
+      `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="${StyleEngine.inline(style)}border-collapse:collapse; width:100%;">`, 
+      '<tr>'
+    ]; 
+    
     if (signature.photo && layout.sections.includes('photo')) html.push(this.photoCell(signature.photo, style)); 
+    
     html.push(`<td style="padding:0 0 0 ${layout.variant === 'horizontal' && signature.photo ? style.spacing * 2 : 0}px;vertical-align:top;">`); 
     html.push(this.identity(signature), this.contacts(signature), this.socials(signature)); 
-    html.push('</td></tr></table>'); 
+    html.push('</td></tr></table>', '</div>'); // Fecha a div do contêiner restaurado
+    
     const output = html.join(''); 
     eventBus.emit(EVENTS.HTML_RENDERED, { html: output, signature }); 
     eventBus.emit(EVENTS.RENDER_COMPLETED, { target: 'html' }); 
     return output; 
   } 
+  
   photoCell(photo, style) { return `<td style="padding:0 ${style.spacing * 2}px 0 0;vertical-align:top;"><img src="${sanitizeUrl(photo.url)}" alt="${escapeHtml(photo.alt)}" width="${photo.size}" height="${photo.size}" style="display:block;border:0;border-radius:${style.photoRadius}px;max-width:${photo.size}px;"></td>`; } 
+  
   identity(signature) { 
     console.log("IDENTITY RECEIVED =", signature); 
     const person = signature?.person || {}; 
-    const style = signature?.style || { primaryColor: '#0f62fe', fontSize: 14 }; 
+    const style = signature?.style || { primaryColor: '#0f62fe', fontSize: 14, textColor: '#1f2937', mutedColor: '#4b5563' }; 
+    
     const name = person.name || 'Ana Silva'; 
     const role = person.role || 'Head de Operações'; 
-    const department = person.department || 'Atendimento'; 
-    let html = `<div style="font-weight:bold;color:${style.primaryColor};font-size:${style.fontSize}px;">${name}</div>`; 
-    if (role) html += `<div style="color:${style.textColor};">${role}</div>`; 
-    if (department) html += `<div style="color:${style.mutedColor};">${department}</div>`; 
+    const department = person.department || 'ObjetivoNET'; 
+    
+    let html = `<div style="font-weight:bold;color:#ffffff;font-size:${style.fontSize + 2}px;margin-bottom:4px;">${name}</div>`; 
+    if (role || department) {
+      html += `<div style="color:${style.mutedColor};font-size:${style.fontSize - 1}px;margin-bottom:8px;">${role} · ${department}</div>`;
+    }
+    
+    // RESTAURADO: Adicionada a barra azul decorativa inferior que estava no layout anterior
+    html += `<div class="mock-bar" style="height: 4px; width: 120px; background-color: ${style.primaryColor}; border-radius: 2px; margin-top: 12px; margin-bottom: 12px;"></div>`;
+    
     return html; 
   } 
-  contacts(signature) { return (signature.contacts ?? []).map((contact) => `<div>${escapeHtml(contact.label)}: ${contact.href ? `<a href="${sanitizeUrl(contact.href)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(contact.value)}</a>` : escapeHtml(contact.value)}</div>`).join(''); } 
+  
+  contacts(signature) { return (signature.contacts ?? []).map((contact) => `<div style="margin-bottom:2px;">${escapeHtml(contact.label)}: ${contact.href ? `<a href="${sanitizeUrl(contact.href)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(contact.value)}</a>` : escapeHtml(contact.value)}</div>`).join(''); } 
   socials(signature) { if (!signature.socials?.length) return ''; return `<div style="padding-top:${signature.style.spacing}px;">${signature.socials.map((social) => `<a href="${sanitizeUrl(social.url)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(social.network)}</a>`).join(` <span aria-hidden="true">${escapeHtml(signature.style.separator)}</span> `)}</div>`; } 
-} 
+}
 
 export class PreviewRenderer { 
   constructor({ root, signatureEngine = new SignatureEngine(), htmlRenderer = new HtmlRenderer(), delay = 100 } = {}) { 
