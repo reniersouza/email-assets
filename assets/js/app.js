@@ -116,7 +116,7 @@ export class App {
     }
 
     navigator.serviceWorker
-      .register('/service-worker.js')
+      .register('./service-worker.js')
       .then((registration) => logger.info('Service worker registrado', registration.scope))
       .catch((error) => logger.warn('Falha ao registrar service worker', error));
   }
