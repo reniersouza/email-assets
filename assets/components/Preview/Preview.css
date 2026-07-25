@@ -6,22 +6,24 @@
     display: block;
   }
   
-  /* ==========================================================================
-     CORREÇÃO DE CONTRASTE: ESTÚDIO DE ASSINATURA (MODO PAPEL)
-     ========================================================================== */
-  
-  /* Força o contêiner de simulação de e-mail a ter SEMPRE fundo branco fixo */
-  .signature-mock {
-    background-color: #ffffff !important;
-    border: 1px solid #e5e7eb !important;
-  }
-  
-  /* Obriga as tags de texto internas a usarem cores escuras para contrastar 
-     com o fundo branco, ignorando as variáveis claras do Tema Dark */
-  .signature-mock div, 
-  .signature-mock span, 
-  .signature-mock td,
-  .signature-mock p {
-    color: #1f2937 !important; /* Cor grafite escuro real de e-mails */
-  }
-  
+  /* css/components/preview/preview.css */
+
+/* 1. Força a caixa de visualização atual a agir como uma folha de papel branca */
+.signature-viewport,
+#signature-viewport,
+#signature-render-target {
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
+  margin-top: 15px !important;
+}
+
+/* 2. Garante que os textos injetados fiquem escuros e legíveis sobre o fundo branco */
+#signature-render-target div,
+#signature-render-target span,
+#signature-render-target td,
+#signature-render-target p,
+#signature-render-target a {
+  color: #1f2937 !important; /* Grafite escuro profissional de e-mails */
+}
