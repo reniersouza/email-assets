@@ -155,13 +155,13 @@ export class HtmlRenderer {
     const style = signature.style; 
     const layout = signature.layout; 
     
-    // Alinha o estilo base com as fontes e cores que o usuário escolhe no painel
-    const textStyle = `font-family:${style.fontFamily};font-size:${style.fontSize}px;color:${style.textColor};line-height:1.4;`;
+    // 1. DINÂMICO: A cor base do texto responde estritamente à escolha do usuário/padrão da Store
+    const textStyle = `font-family:${style.fontFamily};font-size:${style.fontSize}px;color:${style.textColor} !important;line-height:1.4;`;
     
     const html = [
-      // SOLUÇÃO DE CONTRASTE: Usamos uma cor de fundo neutra e clara (ex: branca ou cinza bem claro) 
-      // para simular um fundo de e-mail padrão. Assim a cor personalizada do usuário sempre aparece!
-      `<div class="signature-mock" style="padding: 20px; border-radius: 8px; background-color: #ffffff; border: 1px solid #e5e7eb; margin-top: 15px;">`,
+      // 2. SIMULAÇÃO DE E-MAIL: Forçamos o background #ffffff para que as cores padrões escuras apareçam.
+      // Quando a personalização for criada, qualquer cor escura escolhida pelo usuário funcionará perfeitamente aqui!
+      `<div class="signature-mock" style="padding: 20px !important; border-radius: 8px !important; background-color: #ffffff !important; border: 1px solid #e5e7eb !important; margin-top: 15px !important; text-align: left !important;">`,
       `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="${textStyle}border-collapse:collapse; width:100%;">`, 
       '<tr>'
     ]; 
@@ -169,12 +169,12 @@ export class HtmlRenderer {
     if (signature.photo && layout.sections.includes('photo')) html.push(this.photoCell(signature.photo, style)); 
     
     html.push(`<td style="vertical-align:top;">`); 
-    html.push(this.identity(signature));     // 1. Nome, Cargo e Empresa (Dinâmico)
-    html.push(this.contacts(signature));     // 2. Contatos (Dinâmico)
-    html.push(this.socials(signature));      // 3. Redes Sociais (Dinâmico)
+    html.push(this.identity(signature));     
+    html.push(this.contacts(signature));     
+    html.push(this.socials(signature));      
     
-    // POSICIONAMENTO E COR DINÂMICA: A barra usa a cor primária que o usuário escolher no painel
-    html.push(`<div class="mock-bar" style="height: 4px; width: 120px; background-color: ${style.primaryColor}; border-radius: 2px; margin-top: 14px;"></div>`);
+    // 3. DINÂMICO: A barra responde 100% à cor primária da personalização
+    html.push(`<div class="mock-bar" style="height: 4px !important; width: 120px !important; background-color: ${style.primaryColor} !important; border-radius: 2px !important; margin-top: 16px !important; display: block !important;"></div>`);
     
     html.push('</td></tr></table>', '</div>'); 
     
@@ -191,25 +191,24 @@ export class HtmlRenderer {
     const style = signature?.style || {}; 
     const name = person.name || 'Ana Silva'; 
     const role = person.role || 'Head de Operações'; 
-    const department = person.department || 'ObjetivoNET'; 
+    const department = person.department || 'Atendimento'; 
     
-    // Usa a cor primária para o Nome e a cor secundária/muted para os cargos
-    let html = `<div style="font-weight:bold;color:${style.primaryColor};font-size:${style.fontSize + 2}px;margin-bottom:4px;">${name}</div>`; 
-    if (role || department) {
-      html += `<div style="color:${style.mutedColor};font-size:${style.fontSize - 1}px;margin-bottom:8px;">${role} · ${department}</div>`;
-    }
-    return html; 
+    // 4. DINÂMICO: Cores atreladas aos seletores do projeto
+    return `<div style="font-weight:bold !important;color:${style.primaryColor} !important;font-size:${style.fontSize + 2}px !important;margin-bottom:4px !important;text-align:left !important;">${name}</div>
+            <div style="color:${style.mutedColor} !important;font-size:${style.fontSize - 1}px !important;margin-bottom:8px !important;text-align:left !important;">${role} · ${department}</div>`; 
   } 
   
   contacts(signature) { 
     const style = signature.style;
+    // 5. DINÂMICO: Textos de contato atrelados ao style.textColor
     return (signature.contacts ?? []).map((contact) => 
-      `<div style="margin-bottom:2px; color:${style.textColor}; font-size:${style.fontSize - 1}px;">${escapeHtml(contact.label)}: ${contact.href ? `<a href="${sanitizeUrl(contact.href)}" style="color:${style.primaryColor};text-decoration:none;">${escapeHtml(contact.value)}</a>` : escapeHtml(contact.value)}</div>`
+      `<div style="margin-bottom:2px !important; color:${style.textColor} !important; font-size:${style.fontSize - 1}px !important; text-align:left !important;">${escapeHtml(contact.label)}: ${contact.href ? `<a href="${sanitizeUrl(contact.href)}" style="color:${style.primaryColor} !important;text-decoration:none !important;">${escapeHtml(contact.value)}</a>` : escapeHtml(contact.value)}</div>`
     ).join(''); 
   } 
   
-  socials(signature) { if (!signature.socials?.length) return ''; return `<div style="padding-top:${signature.style.spacing}px;">${signature.socials.map((social) => `<a href="${sanitizeUrl(social.url)}" style="color:${signature.style.primaryColor};text-decoration:none;">${escapeHtml(social.network)}</a>`).join(` <span aria-hidden="true" style="color:${signature.style.mutedColor};">${escapeHtml(signature.style.separator)}</span> `)}</div>`; } 
+  socials(signature) { if (!signature.socials?.length) return ''; return `<div style="padding-top:${signature.style.spacing}px !important; text-align:left !important;">${signature.socials.map((social) => `<a href="${sanitizeUrl(social.url)}" style="color:${signature.style.primaryColor} !important;text-decoration:none !important;">${escapeHtml(social.network)}</a>`).join(` <span aria-hidden="true" style="color:${signature.style.mutedColor} !important;">${escapeHtml(signature.style.separator)}</span> `)}</div>`; } 
 }
+
 
 export class PreviewRenderer { 
   constructor({ root, signatureEngine = new SignatureEngine(), htmlRenderer = new HtmlRenderer(), delay = 100 } = {}) { 
