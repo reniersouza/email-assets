@@ -159,9 +159,8 @@ export class HtmlRenderer {
     const textStyle = `font-family:${style.fontFamily};font-size:${style.fontSize}px;color:${style.textColor} !important;line-height:1.4;`;
     
     const html = [
-      // 2. SIMULAÇÃO DE E-MAIL: Forçamos o background #ffffff para que as cores padrões escuras apareçam.
-      // Quando a personalização for criada, qualquer cor escura escolhida pelo usuário funcionará perfeitamente aqui!
-      `<div class="signature-mock" style="padding: 20px !important; border-radius: 8px !important; background-color: #ffffff !important; border: 1px solid #e5e7eb !important; margin-top: 15px !important; text-align: left !important;">`,
+      // CORREÇÃO CIRÚRGICA: Mudamos apenas 'background-color' para 'background' para anular o linear-gradient do CSS global
+      `<div class="signature-mock" style="padding: 20px !important; border-radius: 8px !important; background: #ffffff !important; border: 1px solid #e5e7eb !important; margin-top: 15px !important; text-align: left !important;">`,
       `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="${textStyle}border-collapse:collapse; width:100%;">`, 
       '<tr>'
     ]; 
@@ -182,7 +181,7 @@ export class HtmlRenderer {
     eventBus.emit(EVENTS.HTML_RENDERED, { html: output, signature }); 
     eventBus.emit(EVENTS.RENDER_COMPLETED, { target: 'html' }); 
     return output; 
-  } 
+  }
   
   photoCell(photo, style) { return `<td style="padding:0 ${style.spacing * 2}px 0 0;vertical-align:top;"><img src="${sanitizeUrl(photo.url)}" alt="${escapeHtml(photo.alt)}" width="${photo.size}" height="${photo.size}" style="display:block;border:0;border-radius:${style.photoRadius}px;max-width:${photo.size}px;"></td>`; } 
   
