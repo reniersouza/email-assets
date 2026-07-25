@@ -209,7 +209,6 @@ export class HtmlRenderer {
   socials(signature) { if (!signature.socials?.length) return ''; return `<div style="padding-top:${signature.style.spacing}px !important; text-align:left !important;">${signature.socials.map((social) => `<a href="${sanitizeUrl(social.url)}" style="color:${signature.style.primaryColor} !important;text-decoration:none !important;">${escapeHtml(social.network)}</a>`).join(` <span aria-hidden="true" style="color:${signature.style.mutedColor} !important;">${escapeHtml(signature.style.separator)}</span> `)}</div>`; } 
 }
 
-
 export class PreviewRenderer { 
   constructor({ root, signatureEngine = new SignatureEngine(), htmlRenderer = new HtmlRenderer(), delay = 100 } = {}) { 
     this.root = root; 
