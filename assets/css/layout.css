@@ -1,2 +1,265 @@
-/* Objetivo: layout. Responsabilidade: grid principal e landmarks. Dependências: themes.css. */
-.app-shell{display:grid;grid-template-areas:"header header" "sidebar main" "footer footer";grid-template-columns:17rem minmax(0,1fr);grid-template-rows:auto 1fr auto;min-height:100vh}.app-header{align-items:center;backdrop-filter:blur(16px);background:color-mix(in srgb,var(--color-surface),transparent 8%);border-bottom:1px solid var(--color-border);display:flex;gap:var(--space-4);grid-area:header;justify-content:space-between;padding:var(--space-3) var(--space-6);position:sticky;top:0;z-index:5}.brand{align-items:center;display:flex;gap:.75rem;text-decoration:none}.brand-mark{background:linear-gradient(135deg,var(--color-primary),#7c3aed);border-radius:14px;color:#fff;display:grid;font-weight:800;height:2.75rem;place-items:center;width:2.75rem}.brand small,.app-header span{color:var(--color-muted);display:block;font-size:.8125rem}.header-status{align-items:center;color:var(--color-muted);display:flex;font-size:.875rem;gap:.5rem;margin-inline:auto}.status-dot{background:#22c55e;border-radius:999px;box-shadow:0 0 0 6px rgb(34 197 94 / .12);height:.625rem;width:.625rem}.header-actions{align-items:center;display:flex;flex-wrap:wrap;gap:.5rem}.user-menu{background:var(--color-bg);border:1px solid var(--color-border);border-radius:999px;color:var(--color-text);cursor:pointer;height:2.5rem;width:2.5rem}.app-sidebar{background:var(--color-surface);border-right:1px solid var(--color-border);grid-area:sidebar;padding:var(--space-4);position:sticky;top:4.5rem;height:calc(100vh - 4.5rem)}.side-nav{display:grid;gap:var(--space-2)}.side-nav a{border-radius:12px;color:var(--color-muted);padding:.75rem .9rem;text-decoration:none;transition:background var(--transition),color var(--transition),transform var(--transition)}.side-nav a[aria-current=page],.side-nav a:hover{background:color-mix(in srgb,var(--color-primary),transparent 88%);color:var(--color-primary);transform:translateX(2px)}.app-main{display:grid;gap:var(--space-4);grid-area:main;grid-template-columns:minmax(26rem,1.45fr) minmax(20rem,.8fr) minmax(18rem,.75fr);padding:var(--space-6)}.editor-stack{display:grid;gap:var(--space-4);min-width:0}.app-footer{align-items:center;border-top:1px solid var(--color-border);color:var(--color-muted);display:flex;gap:1rem;grid-area:footer;justify-content:space-between;padding:var(--space-4) var(--space-6)}.app-footer nav{display:flex;gap:1rem}
+/* ==========================================================
+   Objetivo: Layout principal da aplicação.
+   Responsabilidade: Grid principal, Header, Sidebar,
+   Main e Footer.
+   Dependências: themes.css
+========================================================== */
+
+/* ==========================================================
+   APP SHELL
+========================================================== */
+
+.app-shell {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+    grid-template-columns: 17rem minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: var(--space-4);
+
+    grid-area: header;
+
+    padding: var(--space-3) var(--space-6);
+
+    background: color-mix(
+        in srgb,
+        var(--color-surface),
+        transparent 8%
+    );
+
+    border-bottom: 1px solid var(--color-border);
+
+    backdrop-filter: blur(16px);
+
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+/* ==========================================================
+   BRAND
+========================================================== */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+
+    text-decoration: none;
+}
+
+.brand-mark {
+    display: grid;
+    place-items: center;
+
+    width: 2.75rem;
+    height: 2.75rem;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        var(--color-primary),
+        #7c3aed
+    );
+
+    color: #fff;
+    font-weight: 800;
+}
+
+.brand small,
+.app-header span {
+    display: block;
+
+    color: var(--color-muted);
+    font-size: .8125rem;
+}
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+.header-status {
+    display: flex;
+    align-items: center;
+
+    gap: .5rem;
+
+    margin-inline: auto;
+
+    color: var(--color-muted);
+    font-size: .875rem;
+}
+
+.status-dot {
+    width: .625rem;
+    height: .625rem;
+
+    border-radius: 999px;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 6px rgb(34 197 94 / .12);
+}
+
+/* ==========================================================
+   ACTIONS
+========================================================== */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: .5rem;
+}
+
+.user-menu {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+
+    background: var(--color-bg);
+
+    color: var(--color-text);
+
+    cursor: pointer;
+}
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+.app-sidebar {
+    grid-area: sidebar;
+
+    padding: var(--space-4);
+
+    background: var(--color-surface);
+
+    border-right: 1px solid var(--color-border);
+
+    position: sticky;
+    top: 4.5rem;
+
+    height: calc(100vh - 4.5rem);
+
+    overflow: auto;
+}
+
+.side-nav {
+    display: grid;
+    gap: var(--space-2);
+}
+
+.side-nav a {
+    padding: .75rem .9rem;
+
+    border-radius: 12px;
+
+    color: var(--color-muted);
+
+    text-decoration: none;
+
+    transition:
+        background var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.side-nav a:hover,
+.side-nav a[aria-current="page"] {
+
+    background:
+        color-mix(
+            in srgb,
+            var(--color-primary),
+            transparent 88%
+        );
+
+    color: var(--color-primary);
+
+    transform: translateX(2px);
+}
+
+/* ==========================================================
+   MAIN CONTENT
+========================================================== */
+
+.app-main {
+
+    display: grid;
+
+    grid-area: main;
+
+    gap: var(--space-4);
+
+    grid-template-columns:
+        minmax(0, 1.6fr)
+        minmax(20rem, .9fr)
+        minmax(18rem, .85fr);
+
+    align-items: start;
+
+    min-width: 0;
+
+    padding: var(--space-6);
+}
+
+.editor-stack {
+
+    display: grid;
+
+    gap: var(--space-4);
+
+    min-width: 0;
+
+    overflow: hidden;
+}
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.app-footer {
+
+    grid-area: footer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    padding:
+        var(--space-4)
+        var(--space-6);
+
+    border-top: 1px solid var(--color-border);
+
+    color: var(--color-muted);
+}
+
+.app-footer nav {
+
+    display: flex;
+
+    gap: 1rem;
+}
