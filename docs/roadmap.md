@@ -234,6 +234,9 @@ Concluído:
 * Integração inicial do Template Service com Signature Engine.
 * Inclusão do template ativo no modelo de assinatura.
 * Validação do carregamento dinâmico pelo Template Registry.
+* PreviewRenderer inicial
+* Integração PreviewRenderer + SignatureEngine
+* Atualização automática após alteração de assinatura
 
 Próxima implementação:
 
