@@ -186,9 +186,88 @@ export class HtmlRenderer {
   
   
     renderCompany(signature = {}) {
-  
-      return '';
-  
+
+      const company =
+        signature.company ?? {};
+    
+    
+    
+      if (
+    
+        !company.name &&
+        !company.address &&
+        !company.city &&
+        !company.country
+    
+      ) {
+    
+        return '';
+    
+      }
+    
+    
+    
+      const location = [
+    
+        company.address,
+    
+        company.city,
+    
+        company.country
+    
+      ]
+    
+        .filter(Boolean)
+    
+        .map(value => this.escape(value))
+    
+        .join(', ');
+    
+    
+    
+      return `
+    
+    <div
+      class="signature-company"
+      style="
+        margin-top:10px;
+      "
+    >
+    
+      ${
+        company.name
+          ? `
+    <div
+      style="
+        font-weight:600;
+      "
+    >
+      ${this.escape(company.name)}
+    </div>
+    `
+          : ''
+      }
+    
+      ${
+        location
+          ? `
+    <div
+      style="
+        font-size:13px;
+        opacity:.75;
+        margin-top:2px;
+      "
+    >
+      ${location}
+    </div>
+    `
+          : ''
+      }
+    
+    </div>
+    
+    `;
+    
     }
   
   
