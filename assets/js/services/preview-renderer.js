@@ -15,6 +15,7 @@
 
 import { EVENTS } from '../constants.js';
 import { eventBus } from '../events.js';
+import htmlRenderer from './html-renderer.js';
 
 import {
   SignatureEngine
@@ -24,28 +25,27 @@ export class PreviewRenderer {
 
   constructor({
 
-    engine =
-      new SignatureEngine(),
-
-    container =
-      null
-
+    engine = signatureEngine,
+  
+    renderer = htmlRenderer
+  
   } = {}) {
-
+  
     this.engine =
       engine;
-
+  
+    this.htmlRenderer =
+      renderer;
+  
     this.container =
-      container;
-
+      document.getElementById(
+        'signature-render-target'
+      );
+  
     this.lastHtml =
       '';
-
-    this.registerEvents();
-
+  
   }
-
-
 
   registerEvents() {
 
@@ -91,8 +91,8 @@ export class PreviewRenderer {
     const model =
       this.engine.build();
 
-    const html =
-      this.buildPreviewHtml(model);
+      const html =
+      this.htmlRenderer.render(model);
 
     if (
       html === this.lastHtml
