@@ -1,42 +1,112 @@
-// Objetivo: template Microsoft.
+// Objetivo: Template Microsoft.
 // Responsabilidade:
-// - Definir identificação do template.
-// - Preparar estrutura para renderização futura.
+// - Definir identidade visual do template.
+// - Fornecer configuração para o Template Registry.
+// - Preparar dados para o Signature Engine.
+//
 // Dependências:
 // - ./base-template.js
 
 
-import BaseTemplate from './base-template.js';
+import { BaseTemplate } from './base-template.js';
 
+const microsoftTemplate = new BaseTemplate({
 
+  id: 'microsoft',
 
-export default class MicrosoftTemplate
-  extends BaseTemplate {
+  name: 'Microsoft',
 
+  description:
+    'Modelo inspirado no padrão corporativo Microsoft.',
 
-  constructor() {
+  author:
+    'ObjetivoNET',
 
-    super({
+  version:
+    '1.0.0',
 
-      id:
-        'microsoft',
+  layout:
+    'horizontal',
 
+  styles: {
 
-      name:
-        'Microsoft',
+    colors: {
 
+      primary: '#0078D4',
 
-      description:
-        'Modelo inspirado no padrão corporativo Microsoft.',
+      secondary: '#5E5E5E',
 
+      background: '#FFFFFF',
 
-      category:
-        'corporate'
+      text: '#323130',
 
+      muted: '#605E5C',
 
-    });
+      border: '#D2D0CE'
+
+    },
+
+    typography: {
+
+      fontFamily:
+        'Arial, Helvetica, sans-serif',
+
+      nameWeight:
+        700,
+
+      textWeight:
+        400
+
+    },
+
+    spacing: {
+
+      padding:
+        16,
+
+      gap:
+        12,
+
+      borderRadius:
+        6
+
+    }
+
+  },
+
+  assets: {
+
+    profilePlaceholder:
+      'assets/placeholders/profile-placeholder.svg',
+
+    logoPlaceholder:
+      'assets/placeholders/logo-placeholder.svg'
+
+  },
+
+  options: {
+
+    showPhoto:
+      true,
+
+    showLogo:
+      true,
+
+    roundedPhoto:
+      true,
+
+    roundedLogo:
+      false,
+
+    showSocialIcons:
+      true,
+
+    divider:
+      true
 
   }
 
+});
 
-}
+
+export default microsoftTemplate;

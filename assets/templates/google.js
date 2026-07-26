@@ -2,7 +2,7 @@
 // Objetivo: Template Google.
 // Responsabilidade:
 // - Definir a identidade visual inspirada no Google.
-// - Registrar automaticamente o template.
+// - Disponibilizar configuração do template para o Registry.
 //
 // Dependências:
 // - base-template.js
@@ -10,7 +10,6 @@
 // ==========================================================
 
 import { BaseTemplate } from './base-template.js';
-import { templateRegistry } from './template-registry.js';
 
 const googleTemplate = new BaseTemplate({
 
@@ -95,9 +94,5 @@ const googleTemplate = new BaseTemplate({
   }
 
 });
-
-templateRegistry.register(
-  googleTemplate
-);
 
 export default googleTemplate;

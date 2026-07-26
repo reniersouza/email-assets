@@ -1,42 +1,69 @@
 // Objetivo: template Apple.
 // Responsabilidade:
-// - Definir identificação do template.
+//description:
+//Template inspirado no design minimalista da Apple.
 // - Preparar estrutura para renderização futura.
 // Dependências:
 // - ./base-template.js
 
 
-import BaseTemplate from './base-template.js';
+import { BaseTemplate } from './base-template.js';
 
+const appleTemplate = new BaseTemplate({
 
+  id: 'apple',
 
-export default class AppleTemplate
-  extends BaseTemplate {
+  name: 'Apple',
 
+  description:
+    'Descrição do template.',
 
-  constructor() {
+  author:
+    'ObjetivoNET',
 
-    super({
+  version:
+    '1.0.0',
 
-      id:
-        'apple',
+  layout:
+    'horizontal',
 
+  styles: {
 
-      name:
-        'Apple',
+    colors: {},
 
+    typography: {},
 
-      description:
-        'Modelo inspirado no padrão visual Apple.',
+    spacing: {}
 
+  },
 
-      category:
-        'minimal'
+  assets: {
 
+    profilePlaceholder:
+      'assets/placeholders/profile-placeholder.svg',
 
-    });
+    logoPlaceholder:
+      'assets/placeholders/logo-placeholder.svg'
+
+  },
+
+  options: {
+
+    showPhoto: true,
+
+    showLogo: true,
+
+    roundedPhoto: true,
+
+    roundedLogo: false,
+
+    showSocialIcons: true,
+
+    divider: true
 
   }
 
+});
 
-}
+
+export default appleTemplate;
