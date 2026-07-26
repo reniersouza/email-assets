@@ -2,7 +2,7 @@
 // Responsabilidade:
 //description:
 //Template inspirado no design minimalista da Apple.
-// - Preparar estrutura para renderização futura.
+//Preparar estrutura para renderização futura.
 // Dependências:
 // - ./base-template.js
 

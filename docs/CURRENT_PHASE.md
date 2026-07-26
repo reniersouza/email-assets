@@ -6,11 +6,13 @@ Current Version: 0.6.0
 
 Current Phase: Phase 6 — Templates
 
-Next Milestone: 0.7.0
+Next Milestone: Templates Rendering
 
 ---
 
 ## Current Objective
+
+Implementar os modelos visuais utilizando a infraestrutura de templates existente.
 
 Implementar o sistema oficial de Templates reutilizando integralmente o Signature Engine, HTML Renderer, Preview Renderer e Assets já existentes.
 

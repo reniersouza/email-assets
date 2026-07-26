@@ -6,6 +6,35 @@ O projeto segue Semantic Versioning (SemVer).
 
 ---
 
+## [0.7.0] - 2026-07-25
+
+### 🎉 Em desenvolvimento
+
+* ⏳ Fase 6 — Templates
+
+### ✨ Implementado
+
+* Infraestrutura inicial de Templates.
+* Criação do BaseTemplate.
+* Criação do Template Registry.
+* Registro centralizado dos templates disponíveis.
+* Templates configuracionais:
+  * Gravatar
+  * ObjetivoNET
+  * Google
+  * Microsoft
+  * Apple
+  * Executivo
+  * Dark
+
+### 🧪 Testes
+
+* Validação do carregamento dos módulos ES.
+* Validação do Template Registry.
+* Validação da recuperação dos IDs dos templates.
+
+---
+
 ## [0.6.0] - 2026-07-24
 
 ### 🎉 Concluído

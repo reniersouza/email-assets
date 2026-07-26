@@ -174,7 +174,14 @@ Arquitetura consolidada e preparada para evolução das próximas fases sem nece
 
 # Fase 6 — Templates
 
-**Status:** ⏳ Próxima fase
+**Status:** 🔄 Em andamento
+
+Implementado:
+
+* Infraestrutura base de templates.
+* Classe BaseTemplate.
+* Template Registry.
+* Registro dos templates oficiais.
 
 Escopo:
 
