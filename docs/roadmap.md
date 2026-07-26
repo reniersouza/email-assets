@@ -185,11 +185,14 @@ Implementado:
 * Template Service.
 * Integração Template Service + Signature Engine.
 * Integração TemplateModel + Store.
-* Validação do fluxo dinâmico de template.
+* Modelo de assinatura passou a carregar o template ativo.
+* Cache do Signature Engine adaptado para mudança de template.
+* Validação da troca dinâmica de templates concluída.
 
 Decisões arquiteturais:
 
 * Template Service aprovado como serviço responsável pelo gerenciamento dos templates.
+* Templates permanecem responsáveis apenas por configuração, sem lógica própria de renderização.
 
 Escopo:
 
@@ -234,9 +237,9 @@ Concluído:
 
 Próxima implementação:
 
-* Criação do Template Renderer.
-* Integração entre Template Renderer e HTML Renderer.
-* Aplicação das estruturas visuais individuais dos templates.
+* Integração do evento TEMPLATE_SELECTED com Preview Renderer.
+* Atualização automática do Preview ao trocar template.
+* Aplicação dos estilos e opções específicas dos templates.
 
 ---
 
