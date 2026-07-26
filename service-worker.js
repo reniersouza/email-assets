@@ -233,13 +233,24 @@ self.addEventListener(
 
 
 
-
 async function cacheFirst(request) {
+
+    const url =
+        new URL(request.url);
+
+
+    if (
+        url.protocol !== 'http:' &&
+        url.protocol !== 'https:'
+    ) {
+
+        return fetch(request);
+
+    }
 
 
     const cachedResponse =
         await caches.match(request);
-
 
 
     if (cachedResponse) {
@@ -249,31 +260,33 @@ async function cacheFirst(request) {
     }
 
 
-
     try {
 
 
         const networkResponse =
-            await fetch(request);
+    await fetch(request);
 
+if (!networkResponse.ok) {
 
+    return networkResponse;
 
-        const cache =
-            await caches.open(
-                CACHE_NAME
-            );
+}
 
+const cache =
+    await caches.open(
+        CACHE_NAME
+    );
 
+if (networkResponse.type === 'basic') {
 
-        cache.put(
-            request,
-            networkResponse.clone()
-        );
+    await cache.put(
+        request,
+        networkResponse.clone()
+    );
 
+}
 
-
-        return networkResponse;
-
+return networkResponse;
 
 
     } catch {
