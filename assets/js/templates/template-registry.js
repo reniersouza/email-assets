@@ -13,7 +13,7 @@
 // - ./executive.js
 // - ./dark.js
 
-import { BaseTemplate } from './base-template.js';
+import BaseTemplate from './base-template.js';
 import GravatarTemplate from './gravatar.js';
 import ObjetivoNETTemplate from './objetivonet.js';
 import GoogleTemplate from './google.js';
