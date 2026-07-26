@@ -67,24 +67,32 @@ export class SignatureEngine {
       templateRenderer
   
   } = {}) {
-    
+  
+  
     this.store =
-    store;
+      store;
   
-  this.validationService =
-    validationService;
   
-  this.templates =
-    templates;
+    this.validationService =
+      validationService;
   
-  this.templateRenderer =
-    renderer;
   
-  this.cacheKey =
-    null;
+    this.templates =
+      templates;
   
-  this.cacheValue =
-    null;
+  
+    this.renderer =
+      renderer;
+  
+  
+    this.cacheKey =
+      null;
+  
+  
+    this.cacheValue =
+      null;
+  
+  }
 
   build() {
 
@@ -113,11 +121,11 @@ export class SignatureEngine {
     const signature =
       state.signature ?? {};
 
-    const template =
-  this.templateRenderer.resolve(
-    this.templates.getActiveTemplate()
-  );
-
+      const template =
+      this.renderer.resolve(
+        this.templates.getActiveTemplate()
+      );
+  
       const model = {
 
         meta: {      
@@ -499,12 +507,15 @@ export class SignatureEngine {
   removeEmpty(value, isRoot = true) {
 
     const protectedKeys = [
+
       'person',
       'company',
       'socials',
       'layout',
       'style',
-      'meta'
+      'meta',
+      'template'
+    
     ];
 
 
