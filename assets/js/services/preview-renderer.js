@@ -15,7 +15,9 @@
 
 import { EVENTS } from '../constants.js';
 import { eventBus } from '../events.js';
-import signatureEngine from './signature-engine.js';
+import {
+  SignatureEngine
+} from './signature-engine.js';
 import htmlRenderer from './html-renderer.js';
 
 
@@ -23,11 +25,13 @@ export class PreviewRenderer {
 
   constructor({
 
-    engine = signatureEngine,
+    engine =
+      new SignatureEngine(),
   
-    renderer = htmlRenderer
+    renderer =
+      htmlRenderer
   
-  } = {}) {
+  } = {})
   
     this.engine =
       engine;
