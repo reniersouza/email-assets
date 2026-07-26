@@ -329,6 +329,19 @@ export class LayoutModel extends BaseModel {
 
 }
 
+export class TemplateModel extends BaseModel {
+
+
+  static defaults = {
+
+    active:
+      'gravatar',
+
+  };
+
+
+}
+
 export class SettingsModel extends BaseModel {
 
 
@@ -410,6 +423,8 @@ export const MODEL_REGISTRY = Object.freeze({
   StyleModel,
 
   LayoutModel,
+
+  TemplateModel,
 
   SettingsModel,
 

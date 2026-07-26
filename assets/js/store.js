@@ -4,7 +4,7 @@
 
 import { EVENTS } from './constants.js';
 import { eventBus } from './events.js';
-import { ApplicationModel, CompanyModel, LayoutModel, PersonModel, PhotoModel, SettingsModel, SocialModel, StyleModel, ThemeModel, ValidationModel } from './models/signature-models.js';
+import { ApplicationModel, CompanyModel, LayoutModel, PersonModel, PhotoModel, SettingsModel, SocialModel, StyleModel, ThemeModel, TemplateModel, ValidationModel } from './models/signature-models.js';
 import { HistoryService, ImageService, StorageService, ThemeService, ValidationService, createAutoSave } from './services/core-services.js';
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -13,7 +13,7 @@ const getByPath = (source, path) => pathParts(path).reduce((value, key) => value
 const setByPath = (target, path, value) => { const parts = pathParts(path); const last = parts.pop(); const parent = parts.reduce((node, key) => { node[key] ??= {}; return node[key]; }, target); parent[last] = value; };
 
 export const createDefaultState = () => ({
-  signature: { person: PersonModel.from(), company: CompanyModel.from(), photo: PhotoModel.from(), socials: SocialModel.from(), style: StyleModel.from(), layout: LayoutModel.from(), preferences: SettingsModel.from() },
+  signature: { person: PersonModel.from(), company: CompanyModel.from(), photo: PhotoModel.from(), socials: SocialModel.from(), style: StyleModel.from(), layout: LayoutModel.from(), template: TemplateModel.from(), preferences: SettingsModel.from() },
   application: ApplicationModel.from(),
   history: { canUndo: false, canRedo: false, limit: SettingsModel.defaults.historyLimit },
   storage: { status: 'idle', version: 1, updatedAt: null },
