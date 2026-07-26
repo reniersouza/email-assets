@@ -31,18 +31,22 @@ export class PreviewRenderer {
     renderer =
       htmlRenderer
   
-  } = {})
+  } = {}) {
+  
   
     this.engine =
       engine;
   
+  
     this.htmlRenderer =
       renderer;
+  
   
     this.container =
       document.getElementById(
         'signature-render-target'
       );
+  
   
     this.lastHtml =
       '';
