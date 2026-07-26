@@ -2,9 +2,9 @@
 
 # ARCHITECTURE
 
-**Versão:** 1.1.0
+**Versão:** 1.2.0
 
-**Última atualização:** 2026-07-24
+**Última atualização:** 2026-07-25
 
 ---
 
@@ -213,27 +213,39 @@ Ambos utilizam exclusivamente a saída do Signature Engine.
 
 ## Assets Layer
 
-Será implementada na Fase 5.
+Implementada na Fase 5.
 
-Será responsável por:
+Responsável por:
 
 * favicon
 * ícones PWA
 * ícones sociais
-* logos
-* imagens
 * placeholders
+* imagens
 * fontes
+* integração com Manifest
+* integração com Service Worker
+* Responsável pela infraestrutura de recursos estáticos reutilizados por toda a aplicação.
 
-Nenhuma regra de negócio deverá existir nesta camada.
+Todos os Assets são consumidos exclusivamente pelos Renderers e Templates.
+
+Nenhum Asset deve conter lógica de negócio.
 
 ---
 
 ## Templates Layer
 
-Será implementada na Fase 6.
+Próxima camada arquitetural.
 
-Será responsável apenas por definir modelos visuais reutilizando integralmente o Signature Engine.
+Será responsável por definir exclusivamente a apresentação visual das assinaturas.
+
+Cada Template deverá:
+
+- consumir apenas a saída do Signature Engine;
+- não acessar diretamente o Store;
+- não implementar regras de negócio;
+- reutilizar Layout Engine e Style Engine;
+- gerar HTML compatível com clientes de e-mail.
 
 ---
 
@@ -381,24 +393,53 @@ O acesso ocorre exclusivamente através dos Services.
 
 ```text
 Usuário
-    ↓
+      ↓
 Interface
-    ↓
+      ↓
 Store
-    ↓
+      ↓
 Validation Engine
-    ↓
-Services
-    ↓
+      ↓
 Event Bus
-    ↓
+      ↓
 Signature Engine
-    ↓
-Preview Renderer
-HTML Renderer
+      ↓
+Layout Engine
+      ↓
+Style Engine
+      ↓
+      ├──────────────┐
+      ▼              ▼
+Preview Renderer   HTML Renderer
 ```
 
 Toda alteração deve obrigatoriamente passar pelo Store.
+
+---
+
+# Arquitetura Consolidada (v0.6.0)
+
+Ao término da Fase 5 foi realizada uma auditoria técnica completa da arquitetura.
+
+Resultado:
+
+- nenhuma alteração estrutural foi necessária;
+- a arquitetura originalmente definida permaneceu válida;
+- apenas ajustes internos de implementação foram realizados;
+- todos os módulos centrais passaram a ser considerados estáveis.
+
+Os módulos auditados incluem:
+
+* Config Loader
+* Store
+* Storage
+* Models
+* Core Services
+* Signature Engine
+* HTML Renderer
+* Preview Renderer
+* Theme Engine
+* Service Worker
 
 ---
 
@@ -519,6 +560,18 @@ Deploy
 Cada fase deve reutilizar integralmente a infraestrutura construída nas fases anteriores.
 
 ---
+
+# Estado Arquitetural
+
+Arquitetura considerada estável.
+
+Os próximos incrementos do projeto deverão reutilizar integralmente a infraestrutura existente.
+
+Não há previsão de novas camadas arquiteturais além das já definidas.
+
+As próximas fases adicionarão funcionalidades sem modificar a arquitetura principal.
+
+----
 
 # Architectural Decision Records (ADR)
 

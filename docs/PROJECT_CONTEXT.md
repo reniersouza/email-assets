@@ -2,9 +2,9 @@
 
 ## Project Context
 
-**Versão do Documento:** 1.3.0
+**Versão do Documento:** 1.4.0
 
-**Última Atualização:** 2026-07-24
+**Última Atualização:** 2026-07-25
 
 ---
 
@@ -64,6 +64,30 @@ Todos os módulos devem respeitar os princípios:
 * KISS
 * Separation of Concerns
 * Clean Code
+
+# Estado da Arquitetura
+
+Arquitetura considerada estável.
+
+Todos os módulos centrais foram auditados e aprovados para evolução do projeto.
+
+Módulos consolidados:
+
+* Store
+* Event Bus
+* Config Loader
+* Storage
+* Validation
+* Signature Engine
+* Layout Engine
+* Style Engine
+* HTML Renderer
+* Preview Renderer
+* Export Service
+* Asset Pipeline
+* Service Worker
+
+As próximas fases deverão concentrar-se apenas em adicionar funcionalidades sobre esta base, evitando alterações estruturais.
 
 ---
 
@@ -223,7 +247,31 @@ Inclui:
 * Ícones sociais (GitHub, LinkedIn)
 * Placeholders (foto de perfil, logo)
 * Estrutura preparada para imagens e fontes
-* Integração com Manifest e Service Worker
+* Integração completa com Manifest, Config Loader e Service Worker.
+* Deploy automático via GitHub.
+
+---
+
+# ✅ Auditoria Técnica (v0.6.0)
+
+Concluída.
+
+Ao término da Fase 5 foi realizada uma auditoria completa da base de código com foco em arquitetura, organização dos módulos, consistência visual e preparação para a Fase 6.
+
+Principais resultados:
+
+* Revisão da arquitetura dos serviços centrais.
+* Padronização dos Models.
+* Revisão completa do Signature Engine.
+* Revisão do sistema de Config Loader.
+* Revisão do Storage.
+* Revisão do sistema de temas (Light / Dark / Auto).
+* Revisão dos arquivos CSS principais.
+* Correção do Service Worker.
+* Correção de caminhos de assets.
+* Eliminação de inconsistências encontradas durante os testes.
+
+A auditoria não alterou a arquitetura definida na Fase 1, apenas consolidou e refinou sua implementação.
 
 ---
 
@@ -231,8 +279,15 @@ Inclui:
 
 ### Fase 6 — Templates
 
-Responsável pela definição dos modelos visuais reutilizando integralmente o Signature Engine.
-Engine, Layout Engine, Style Engine, HTML Renderer e Asset Pipeline implementados nas fases anteriores.
+Responsável pela implementação dos templates oficiais reutilizando integralmente o Signature Engine, Layout Engine, Style Engine, HTML Renderer e Asset Pipeline.
+
+Cada template deverá possuir:
+
+* Estrutura HTML própria.
+* Estilo visual independente.
+* Compatibilidade máxima com clientes de e-mail.
+* Reutilização integral do estado da aplicação.
+* Zero duplicação de lógica.
 
 ---
 
@@ -305,6 +360,10 @@ Versão atual:
 Status atual:
 
 **Fase 5 concluída.**
+
+**Arquitetura auditada e consolidada.**
+
+**Pronto para início da Fase 6 — Templates.**
 
 Próximo marco:
 

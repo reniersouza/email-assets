@@ -4,7 +4,7 @@
 
 **Versão Atual:** 0.6.0
 
-**Última atualização:** 2026-07-24
+**Última atualização:** 2026-07-25
 
 ---
 
@@ -144,19 +144,72 @@ Restrições respeitadas:
 
 ---
 
+# Auditoria Técnica (v0.6.0)
+
+**Status:** ✅ Concluída
+
+Objetivo:
+
+Realizar uma revisão completa da base de código antes do início da Fase 6.
+
+Atividades executadas:
+
+* Revisão da arquitetura dos módulos.
+* Padronização dos serviços centrais.
+* Revisão dos Models.
+* Revisão do Config Loader.
+* Revisão do Storage.
+* Revisão completa do Signature Engine.
+* Revisão do sistema de temas.
+* Correção do Service Worker.
+* Correção de carregamento dos arquivos JSON.
+* Revisão dos arquivos CSS.
+* Eliminação de inconsistências identificadas durante os testes.
+
+Resultado:
+
+Arquitetura consolidada e preparada para evolução das próximas fases sem necessidade de refatorações estruturais.
+
+---
+
 # Fase 6 — Templates
 
 **Status:** ⏳ Próxima fase
 
 Escopo:
 
-* Template Gravatar.
-* Template ObjetivoNET.
-* Template Google.
-* Template Microsoft.
-* Template Apple.
-* Template Executivo.
-* Template Dark.
+Implementação dos templates oficiais da aplicação utilizando integralmente o Signature Engine desenvolvido na Fase 4B.
+
+Cada template deverá possuir:
+
+* Estrutura HTML própria.
+* Layout independente.
+* Estilos específicos.
+* Preview em tempo real.
+* Compatibilidade com clientes de e-mail.
+* Exportação utilizando o HTML Renderer existente.
+
+Templates previstos:
+
+* Gravatar
+* ObjetivoNET
+* Google
+* Microsoft
+* Apple
+* Executivo
+* Dark
+
+Todos os templates deverão reutilizar integralmente:
+
+- Store
+- Signature Engine
+- Layout Engine
+- Style Engine
+- HTML Renderer
+- Preview Renderer
+- Asset Pipeline
+
+Nenhum template poderá implementar lógica própria de renderização.
 
 ---
 
@@ -182,10 +235,9 @@ Escopo:
 
 Escopo:
 
-* Offline completo.
-* Cache inteligente.
-* Atualizações automáticas.
-* Instalação.
+* Aprimoramento do cache offline.
+* Estratégias avançadas de atualização.
+* Instalação da PWA.
 * Splash Screen.
 * Atalhos.
 * Otimização final.
@@ -223,10 +275,31 @@ Escopo:
 
 ---
 
+# Situação Atual
+
+Arquitetura concluída.
+
+Assets concluídos.
+
+Auditoria técnica concluída.
+
+Base considerada estável para evolução funcional.
+
+Próximo foco:
+
+Implementação dos Templates oficiais.
+
+----
+
 # Próximo Marco
 
 **v0.7.0**
 
-Conclusão da:
+**Conclusão da Fase 6 — Templates**
 
-**Fase 6 — Templates**
+Entregas previstas:
+
+* Biblioteca oficial de templates.
+* Sistema de seleção de templates.
+* Preview específico por template.
+* Exportação utilizando o Signature Engine.
