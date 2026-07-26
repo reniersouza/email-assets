@@ -221,3 +221,10 @@ Observações:
 
 - Templates reutilizam integralmente o Signature Engine.
 - Assets oficiais já disponíveis para uso nos templates.
+
+### 🔧 Melhorias de Infraestrutura
+
+- Correção do caminho do favicon para compatibilidade com hospedagem em subdiretórios (GitHub Pages).
+- Aprimoramento do Service Worker para ignorar requisições com protocolos não suportados (`chrome-extension://`, entre outros).
+- Validação das respostas da rede antes do armazenamento em cache.
+- Armazenamento em cache restrito a respostas da própria origem da aplicação (`networkResponse.type === 'basic'`).
