@@ -8,7 +8,7 @@
 // Dependências: nenhuma.
 // ==========================================================
 
-export class BaseTemplate {
+class BaseTemplate {
 
     constructor(config = {}) {
   
@@ -103,3 +103,4 @@ export class BaseTemplate {
     }
   
   }
+  export default BaseTemplate;

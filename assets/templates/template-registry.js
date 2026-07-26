@@ -40,13 +40,13 @@ function register(template) {
 
 }
 
-register(new GravatarTemplate());
-register(new ObjetivoNETTemplate());
-register(new GoogleTemplate());
-register(new MicrosoftTemplate());
-register(new AppleTemplate());
-register(new ExecutiveTemplate());
-register(new DarkTemplate());
+register(GravatarTemplate);
+register(ObjetivoNETTemplate);
+register(GoogleTemplate);
+register(MicrosoftTemplate);
+register(AppleTemplate);
+register(ExecutiveTemplate);
+register(DarkTemplate);
 
 export function getTemplate(id) {
 

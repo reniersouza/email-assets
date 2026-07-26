@@ -9,8 +9,7 @@
 // - template-registry.js
 // ==========================================================
 
-import { BaseTemplate } from './base-template.js';
-import { templateRegistry } from './template-registry.js';
+import BaseTemplate from './base-template.js';
 
 const gravatarTemplate = new BaseTemplate({
 
@@ -96,8 +95,5 @@ const gravatarTemplate = new BaseTemplate({
 
 });
 
-templateRegistry.register(
-  gravatarTemplate
-);
 
 export default gravatarTemplate;
