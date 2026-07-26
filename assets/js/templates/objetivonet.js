@@ -8,7 +8,7 @@
 // - base-template.js
 // ==========================================================
 
-import { BaseTemplate } from './base-template.js';
+import BaseTemplate from './base-template.js';
 
 const objetivoNetTemplate = new BaseTemplate({
 

@@ -7,7 +7,7 @@
 // - ./base-template.js
 
 
-import { BaseTemplate } from './base-template.js';
+import BaseTemplate from './base-template.js';
 
 const appleTemplate = new BaseTemplate({
 

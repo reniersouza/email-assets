@@ -10,7 +10,7 @@
 // ==========================================================
 
 
-import { BaseTemplate } from './base-template.js';
+import BaseTemplate from './base-template.js';
 
 const executiveTemplate = new BaseTemplate({
 

@@ -9,7 +9,7 @@
 // - template-registry.js
 // ==========================================================
 
-import { BaseTemplate } from './base-template.js';
+import BaseTemplate from './base-template.js';
 
 const googleTemplate = new BaseTemplate({
 
