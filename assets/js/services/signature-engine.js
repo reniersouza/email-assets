@@ -53,17 +53,28 @@ const SUPPORTED_LAYOUTS = Object.freeze([
 export class SignatureEngine {
 
   constructor({
+
     store = defaultStore,
-    validationService = new ValidationService()
-  } = {}) {
-
-    this.store = store;
-    this.validationService = validationService;
-
-    this.cacheKey = null;
-    this.cacheValue = null;
+    validationService = new ValidationService(),
+    templates = templateService
+    } = {}) {
+    
+    this.store =
+      store;
+   
+    this.validationService =
+      validationService;
+    
+    this.templates =
+      templates;
+    
+    this.cacheKey =
+      null;
+    
+    this.cacheValue =
+      null;
+    
   }
-
 
   build() {
 
@@ -93,14 +104,18 @@ export class SignatureEngine {
       state.signature ?? {};
 
 
-    const model = {
+      const model = {
 
-      meta: {
-        valid: validation.valid,
-        generatedAt: new Date().toISOString()
-      },
-      template: templateService.getActiveTemplate(),
-
+        meta: {      
+          valid:
+            validation.valid,      
+          generatedAt:
+            new Date().toISOString()
+          },
+            
+        template:
+                this.templates.getActiveTemplate(),
+      
       person:
         this.buildPerson(
           signature.person,
