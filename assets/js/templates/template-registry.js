@@ -14,13 +14,13 @@
 // - ./dark-template.js
 
 import { BaseTemplate } from './base-template.js';
-import GravatarTemplate from './gravatar-template.js';
-import ObjetivoNETTemplate from './objetivonet-template.js';
-import GoogleTemplate from './google-template.js';
-import MicrosoftTemplate from './microsoft-template.js';
-import AppleTemplate from './apple-template.js';
-import ExecutiveTemplate from './executive-template.js';
-import DarkTemplate from './dark-template.js';
+import GravatarTemplate from './gravatar.js';
+import ObjetivoNETTemplate from './objetivonet.js';
+import GoogleTemplate from './google.js';
+import MicrosoftTemplate from './microsoft.js';
+import AppleTemplate from './apple.js';
+import ExecutiveTemplate from './executive.js';
+import DarkTemplate from './dark.js';
 
 const registry = new Map();
 
