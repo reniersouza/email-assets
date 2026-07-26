@@ -103,6 +103,8 @@ export class SignatureEngine {
     const signature =
       state.signature ?? {};
 
+      const template =
+      this.templates.getActiveTemplate();
 
       const model = {
 
@@ -113,8 +115,7 @@ export class SignatureEngine {
             new Date().toISOString()
           },
             
-        template:
-                this.templates.getActiveTemplate(),
+          template,
       
       person:
         this.buildPerson(
@@ -138,10 +139,21 @@ export class SignatureEngine {
           errors
         ),
 
-      layout:
-        LayoutEngine.resolve(
-          signature.layout
-        ),
+        layout:
+        LayoutEngine.resolve({
+      
+          variant:
+            template.layout
+            ??
+            signature.layout.variant,
+      
+          spacing:
+            signature.layout.spacing,
+      
+          photoPosition:
+            signature.layout.photoPosition
+      
+        }),
 
       style:
         StyleEngine.resolve(
@@ -182,16 +194,19 @@ export class SignatureEngine {
   createCacheKey(state) {
 
     return JSON.stringify({
-
+   
       signature:
         state.signature,
-
+   
       theme:
-        state.theme
-
+        state.theme,
+   
+        template:
+        this.templates.getActiveTemplateId()
+   
     });
-
-  }
+   
+   }
 
 
   buildPerson(person = {}, errors) {
