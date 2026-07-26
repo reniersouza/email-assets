@@ -273,9 +273,66 @@ export class HtmlRenderer {
   
   
     renderContacts(signature = {}) {
-  
-      return '';
-  
+
+      const contacts =
+        signature.contacts ?? [];
+    
+    
+    
+      if (!contacts.length) {
+    
+        return '';
+    
+      }
+    
+    
+    
+      return `
+    
+    <div
+      class="signature-contacts"
+      style="
+        margin-top:10px;
+      "
+    >
+    
+    ${contacts.map(contact => `
+    
+    <div
+      style="
+        margin-top:3px;
+        font-size:13px;
+      "
+    >
+    
+    <a
+      href="${this.escape(contact.href ?? '#')}"
+      style="
+        color:inherit;
+        text-decoration:none;
+      "
+    >
+    
+    <strong>
+    
+    ${this.escape(contact.label)}
+    
+    </strong>
+    
+    :
+    
+    ${this.escape(contact.value)}
+    
+    </a>
+    
+    </div>
+    
+    `).join('')}
+    
+    </div>
+    
+    `;
+    
     }
   
   
