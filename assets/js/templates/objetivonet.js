@@ -6,11 +6,9 @@
 //
 // Dependências:
 // - base-template.js
-// - template-registry.js
 // ==========================================================
 
 import { BaseTemplate } from './base-template.js';
-import { templateRegistry } from './template-registry.js';
 
 const objetivoNetTemplate = new BaseTemplate({
 
@@ -95,9 +93,5 @@ const objetivoNetTemplate = new BaseTemplate({
   }
 
 });
-
-templateRegistry.register(
-  objetivoNetTemplate
-);
 
 export default objetivoNetTemplate;
