@@ -182,7 +182,10 @@ Implementado:
 * Classe BaseTemplate.
 * Template Registry.
 * Definição da arquitetura da camada Templates.
-* Registro dos templates oficiais.
+* Template Service.
+* Integração Template Service + Signature Engine.
+* Integração TemplateModel + Store.
+* Validação do fluxo dinâmico de template.
 
 Decisões arquiteturais:
 
