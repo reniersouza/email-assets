@@ -97,7 +97,19 @@ models/
 
 services/
 ├── core-services.js
-└── signature-engine.js
+├── signature-engine.js
+└── template-service.js
+
+templates/
+├── base-template.js
+├── template-registry.js
+├── gravatar.js
+├── objetivonet.js
+├── google.js
+├── microsoft.js
+├── apple.js
+├── executive.js
+└── dark.js
 
 app.js
 config.js
@@ -138,6 +150,16 @@ O arquivo `signature-engine.js` concentra a infraestrutura de geração da assin
 - HTML Renderer
 - Preview Renderer
 - Pipeline de renderização
+
+O arquivo `template-service.js` concentra os serviços relacionados ao gerenciamento dos templates da aplicação, incluindo:
+
+- seleção do template ativo;
+- integração com o Template Registry;
+- validação de templates;
+- obtenção do template padrão;
+- preparação para persistência da seleção do usuário.
+
+O serviço permanece desacoplado da interface e reutiliza a infraestrutura existente do Store, Event Bus e Signature Engine.
 
 Novos módulos devem respeitar o princípio da responsabilidade única (SRP), permanecer desacoplados da interface e reutilizar a infraestrutura existente.
 
@@ -246,6 +268,21 @@ Cada Template deverá:
 - não implementar regras de negócio;
 - reutilizar Layout Engine e Style Engine;
 - gerar HTML compatível com clientes de e-mail.
+
+Implementada durante a Fase 6.
+
+Responsável por definir os modelos visuais reutilizando integralmente o Signature Engine.
+
+Inclui:
+
+- BaseTemplate
+- Template Registry
+- Template Service
+- Templates oficiais
+- Integração com o Store
+- Integração com o Signature Engine
+
+Esta camada não implementa regras de negócio próprias, apenas fornece configurações visuais reutilizadas pelo processo de renderização.
 
 ---
 

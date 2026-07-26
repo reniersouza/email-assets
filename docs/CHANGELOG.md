@@ -33,6 +33,13 @@ O projeto segue Semantic Versioning (SemVer).
 * Validação do Template Registry.
 * Validação da recuperação dos IDs dos templates.
 
+### 🏗️ Arquitetura
+
+- Documentada oficialmente a camada `Templates`.
+- Documentada a estrutura `assets/js/templates/`.
+- Adicionada a definição arquitetural do `Template Service`.
+- Atualizada a arquitetura para suportar seleção dinâmica de templates.
+
 ---
 
 ## [0.6.0] - 2026-07-24

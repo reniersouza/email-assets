@@ -181,20 +181,25 @@ Implementado:
 * Infraestrutura base de templates.
 * Classe BaseTemplate.
 * Template Registry.
+* Definição da arquitetura da camada Templates.
 * Registro dos templates oficiais.
+
+Decisões arquiteturais:
+
+* Template Service aprovado como serviço responsável pelo gerenciamento dos templates.
 
 Escopo:
 
 Implementação dos templates oficiais da aplicação utilizando integralmente o Signature Engine desenvolvido na Fase 4B.
 
-Cada template deverá possuir:
+Cada template deverá fornecer:
 
-* Estrutura HTML própria.
-* Layout independente.
+* Configuração de layout.
 * Estilos específicos.
-* Preview em tempo real.
-* Compatibilidade com clientes de e-mail.
-* Exportação utilizando o HTML Renderer existente.
+* Assets específicos.
+* Opções específicas.
+* Preview em tempo real através do Preview Renderer.
+* Compatibilidade com clientes de e-mail através do HTML Renderer.
 
 Templates previstos:
 
@@ -217,6 +222,14 @@ Todos os templates deverão reutilizar integralmente:
 - Asset Pipeline
 
 Nenhum template poderá implementar lógica própria de renderização.
+
+Próxima implementação:
+
+* Template Service.
+* Integração do Template Registry com o Signature Engine.
+* Seleção dinâmica do template ativo.
+* Integração do Preview Renderer.
+* Integração do HTML Renderer.
 
 ---
 
