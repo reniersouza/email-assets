@@ -105,9 +105,82 @@ export class HtmlRenderer {
   
   
     renderPerson(signature = {}) {
-  
-      return '';
-  
+
+      const person =
+        signature.person ?? {};
+    
+    
+    
+      if (
+        !person.name &&
+        !person.role &&
+        !person.department
+      ) {
+    
+        return '';
+    
+      }
+    
+    
+    
+      return `
+    
+    <div
+      class="signature-person"
+    >
+    
+      ${
+        person.name
+          ? `
+    <strong
+      style="
+        display:block;
+        font-size:16px;
+        font-weight:700;
+        line-height:1.3;
+      "
+    >
+      ${this.escape(person.name)}
+    </strong>
+    `
+          : ''
+      }
+    
+      ${
+        person.role
+          ? `
+    <div
+      style="
+        font-size:14px;
+        margin-top:2px;
+      "
+    >
+      ${this.escape(person.role)}
+    </div>
+    `
+          : ''
+      }
+    
+      ${
+        person.department
+          ? `
+    <div
+      style="
+        font-size:13px;
+        opacity:.75;
+        margin-top:2px;
+      "
+    >
+      ${this.escape(person.department)}
+    </div>
+    `
+          : ''
+      }
+    
+    </div>
+    
+    `;
+    
     }
   
   
