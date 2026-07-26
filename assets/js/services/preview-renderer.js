@@ -15,11 +15,9 @@
 
 import { EVENTS } from '../constants.js';
 import { eventBus } from '../events.js';
+import SignatureEngine from './signature-engine.js';
 import htmlRenderer from './html-renderer.js';
 
-import {
-  SignatureEngine
-} from './signature-engine.js';
 
 export class PreviewRenderer {
 
