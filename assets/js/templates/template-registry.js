@@ -5,13 +5,13 @@
 // - Expor template padrão.
 // Dependências:
 // - ./base-template.js
-// - ./gravatar-template.js
-// - ./objetivonet-template.js
-// - ./google-template.js
-// - ./microsoft-template.js
-// - ./apple-template.js
-// - ./executive-template.js
-// - ./dark-template.js
+// - ./gravatar.js
+// - ./objetivonet.js
+// - ./google.js
+// - ./microsoft.js
+// - ./apple.js
+// - ./executive.js
+// - ./dark.js
 
 import { BaseTemplate } from './base-template.js';
 import GravatarTemplate from './gravatar.js';
