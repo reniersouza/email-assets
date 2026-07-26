@@ -14,7 +14,6 @@
 // - ./dark-template.js
 
 import { BaseTemplate } from './base-template.js';
-
 import GravatarTemplate from './gravatar-template.js';
 import ObjetivoNETTemplate from './objetivonet-template.js';
 import GoogleTemplate from './google-template.js';
