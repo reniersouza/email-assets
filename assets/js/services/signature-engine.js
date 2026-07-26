@@ -99,6 +99,7 @@ export class SignatureEngine {
         valid: validation.valid,
         generatedAt: new Date().toISOString()
       },
+      template: templateService.getActiveTemplate(),
 
       person:
         this.buildPerson(
