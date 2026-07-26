@@ -8,7 +8,7 @@ import { eventBus } from '../events.js';
 import { store as defaultStore } from '../store.js';
 import { escapeHtml, sanitizeUrl, debounce } from '../utils.js';
 import { ClipboardService, ValidationService } from './core-services.js';
-
+import { templateService } from './template-service.js';
 
 const clone = (value) =>
   value === undefined || value === null
