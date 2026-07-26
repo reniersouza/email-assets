@@ -223,13 +223,17 @@ Todos os templates deverão reutilizar integralmente:
 
 Nenhum template poderá implementar lógica própria de renderização.
 
+Concluído:
+
+* Integração inicial do Template Service com Signature Engine.
+* Inclusão do template ativo no modelo de assinatura.
+* Validação do carregamento dinâmico pelo Template Registry.
+
 Próxima implementação:
 
-* Template Service.
-* Integração do Template Registry com o Signature Engine.
-* Seleção dinâmica do template ativo.
-* Integração do Preview Renderer.
-* Integração do HTML Renderer.
+* Criação do Template Renderer.
+* Integração entre Template Renderer e HTML Renderer.
+* Aplicação das estruturas visuais individuais dos templates.
 
 ---
 
