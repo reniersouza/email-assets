@@ -506,8 +506,19 @@ export class SignatureEngine {
   }
   removeEmpty(value, isRoot = true) {
 
-    const protectedKeys = [
 
+    if (
+      value?.id &&
+      value?.name &&
+      value?.version
+    ) {
+  
+      return value;
+  
+    }
+  
+  
+    const protectedKeys = [
       'person',
       'company',
       'socials',
@@ -515,7 +526,6 @@ export class SignatureEngine {
       'style',
       'meta',
       'template'
-    
     ];
 
 
