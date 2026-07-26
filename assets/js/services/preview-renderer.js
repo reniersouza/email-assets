@@ -15,7 +15,7 @@
 
 import { EVENTS } from '../constants.js';
 import { eventBus } from '../events.js';
-import SignatureEngine from './signature-engine.js';
+import signatureEngine from './signature-engine.js';
 import htmlRenderer from './html-renderer.js';
 
 
