@@ -203,8 +203,6 @@ export class TemplateRenderer {
   
   }
   
-  
-  
   export const templateRenderer =
     new TemplateRenderer();
   

@@ -9,6 +9,7 @@ import { store as defaultStore } from '../store.js';
 import { escapeHtml, sanitizeUrl, debounce } from '../utils.js';
 import { ClipboardService, ValidationService } from './core-services.js';
 import { templateService } from './template-service.js';
+import { templateRenderer} from './template-renderer.js';
 
 const clone = (value) =>
   value === undefined || value === null
@@ -55,26 +56,35 @@ export class SignatureEngine {
   constructor({
 
     store = defaultStore,
-    validationService = new ValidationService(),
-    templates = templateService
-    } = {}) {
+  
+    validationService =
+      new ValidationService(),
+  
+    templates =
+      templateService,
+  
+    renderer =
+      templateRenderer
+  
+  } = {}) {
     
     this.store =
-      store;
-   
-    this.validationService =
-      validationService;
-    
-    this.templates =
-      templates;
-    
-    this.cacheKey =
-      null;
-    
-    this.cacheValue =
-      null;
-    
-  }
+    store;
+  
+  this.validationService =
+    validationService;
+  
+  this.templates =
+    templates;
+  
+  this.templateRenderer =
+    renderer;
+  
+  this.cacheKey =
+    null;
+  
+  this.cacheValue =
+    null;
 
   build() {
 
@@ -103,8 +113,10 @@ export class SignatureEngine {
     const signature =
       state.signature ?? {};
 
-      const template =
-      this.templates.getActiveTemplate();
+    const template =
+  this.templateRenderer.resolve(
+    this.templates.getActiveTemplate()
+  );
 
       const model = {
 
