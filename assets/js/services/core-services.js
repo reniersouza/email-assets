@@ -212,7 +212,38 @@ export class ConfigService {
 
 
 }
+const SOCIAL_DOMAIN_RULES = {
 
+  linkedin: [
+    'linkedin.com'
+  ],
+
+  github: [
+    'github.com'
+  ],
+
+  instagram: [
+    'instagram.com'
+  ],
+
+  facebook: [
+    'facebook.com'
+  ],
+
+  youtube: [
+    'youtube.com'
+  ],
+
+  tiktok: [
+    'tiktok.com'
+  ],
+
+  x: [
+    'x.com',
+    'twitter.com'
+  ]
+
+};
 
 export class ValidationService {
 
@@ -425,54 +456,44 @@ export class ValidationService {
       }
 
       const name =
-        label
-          ?.toLowerCase();
+  label
+    ?.toLowerCase();
 
-      if (
 
-        name === 'github' &&
+const allowedDomains =
+  SOCIAL_DOMAIN_RULES[name];
 
-        !url.hostname.includes(
-          'github.com'
+
+if (
+  allowedDomains
+) {
+
+
+  const valid =
+    allowedDomains.some(
+      domain =>
+        url.hostname.includes(
+          domain
         )
-
-      ) {
-
-
-        errors.push({
-
-          field,
-
-          message:
-            'URL do GitHub deve apontar para github.com.'
-
-        });
+    );
 
 
-      }
+  if (
+    !valid
+  ) {
 
-      if (
+    errors.push({
 
-        name === 'linkedin' &&
+      field,
 
-        !url.hostname.includes(
-          'linkedin.com'
-        )
+      message:
+        `URL do ${label} deve apontar para domínio oficial.`
 
-      ) {
+    });
 
+  }
 
-        errors.push({
-
-          field,
-
-          message:
-            'URL do LinkedIn deve apontar para linkedin.com.'
-
-        });
-
-
-      }
+}
 
 
 
