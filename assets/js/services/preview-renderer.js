@@ -97,10 +97,14 @@ export class PreviewRenderer {
     const model =
       this.engine.build();
 
-  console.log(
-  'MODELO DO PREVIEW:',
-  model
-);
+      console.log(
+        'TEMPLATE RECEBIDO:',
+        JSON.stringify(
+          model.template,
+          null,
+          2
+        )
+      );
 
     const html =
       this.htmlRenderer.render(model);
