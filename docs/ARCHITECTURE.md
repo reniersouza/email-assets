@@ -435,18 +435,25 @@ Interface
       ↓
 Store
       ↓
-Validation Engine
-      ↓
 Event Bus
       ↓
+Validation Service
+      ↓
 Signature Engine
-      ↓
-Layout Engine
-      ↓
-Style Engine
-      ↓
-      ├──────────────┐
-      ▼              ▼
+      │
+      ├───────────────┐
+      ▼               ▼
+Template Service   Layout Engine
+      │               │
+      ▼               ▼
+Template Renderer  Style Engine
+      │               │
+      └───────┬───────┘
+              ▼
+       Signature Model
+              ↓
+      ┌───────────────┐
+      ▼               ▼
 Preview Renderer   HTML Renderer
 ```
 
