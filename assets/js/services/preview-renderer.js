@@ -96,6 +96,15 @@ export class PreviewRenderer {
 
     const model =
       this.engine.build();
+      
+      console.log(
+        'MODELO COMPLETO:',
+        JSON.stringify(
+          model,
+          null,
+          2
+        )
+      );
 
       console.log(
         'TEMPLATE RECEBIDO:',
