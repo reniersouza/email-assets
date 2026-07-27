@@ -175,10 +175,15 @@ export class SignatureEngine {
       
         }),
 
-      style:
-        StyleEngine.resolve(
-          signature.style
-        ),
+        style:
+        StyleEngine.resolve({
+      
+          ...signature.style,
+      
+          template:
+            template.styles
+      
+        }),
 
       contacts: []
 
@@ -732,73 +737,116 @@ export class StyleEngine {
 
   static resolve(style = {}) {
 
+    const template =
+      style.template ?? {};
+  
+    const colors =
+      template.colors ?? {};
+  
+    const typography =
+      template.typography ?? {};
+  
+    const spacing =
+      template.spacing ?? {};
+  
+  
     return {
-
-
+  
+  
       primaryColor:
-        style.primaryColor ||
+        style.primaryColor
+        ??
+        colors.primary
+        ??
         '#0f62fe',
-
-
+  
+  
       textColor:
-        style.textColor ||
+        style.textColor
+        ??
+        colors.text
+        ??
         '#1f2937',
-
-
+  
+  
       mutedColor:
-        style.mutedColor ||
+        style.mutedColor
+        ??
+        colors.muted
+        ??
         '#4b5563',
-
-
+  
+  
       backgroundColor:
-        style.backgroundColor ||
+        style.backgroundColor
+        ??
+        colors.background
+        ??
         '#ffffff',
-
-
+  
+  
       fontFamily:
-        style.fontFamily ||
+        style.fontFamily
+        ??
+        typography.fontFamily
+        ??
         'Arial, sans-serif',
-
-
+  
+  
       fontSize:
-        Number(style.fontSize) ||
+        Number(style.fontSize)
+        ||
         14,
-
-
+  
+  
       spacing:
-        Number(style.spacing) ||
+        Number(style.spacing)
+        ||
+        spacing.gap
+        ||
         8,
-
-
+  
+  
       alignment:
-        style.alignment ||
+        style.alignment
+        ??
         'left',
-
-
+  
+  
       borderColor:
-        style.borderColor ||
+        style.borderColor
+        ??
+        colors.border
+        ??
         '#e5e7eb',
-
-
+  
+  
       separator:
-        style.separator ??
+        style.separator
+        ??
         '•',
-
-
+  
+  
       iconColor:
-        style.iconColor ||
-        style.primaryColor ||
+        style.iconColor
+        ??
+        colors.primary
+        ??
         '#0f62fe',
-
-
+  
+  
       photoRadius:
-        style.photoRadius ??
-        48
-
+        style.photoRadius
+        ??
+        (
+          template.options?.roundedPhoto
+            ? 48
+            : 0
+        )
+  
     };
-
+  
   }
-
 
 
   static inline(style) {
