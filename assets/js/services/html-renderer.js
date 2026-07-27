@@ -74,23 +74,45 @@ export class HtmlRenderer {
       const assets =
         template.assets ?? {};
 
-      const colors =
+        const colors =
         styles.colors ?? {};
-
+      
+      const spacing =
+        styles.spacing ?? {};
+      
+      const typography =
+        styles.typography ?? {};
+      
       const border =
         colors.border ?? '#e5e7eb';
+      
+      const background =
+        colors.background ?? '#ffffff';
+      
+      const radius =
+        spacing.borderRadius ?? 8;
+      
+      const padding =
+        spacing.padding ?? 16;
+      
+      const fontFamily =
+        typography.fontFamily ??
+        'Arial, Helvetica, sans-serif';
     
       return `
       <table
-  role="presentation"
-  cellpadding="0"
-  cellspacing="0"
-  border="0"
-  style="
-    border:1px solid ${border};
-    border-radius:8px;
-    border-collapse:separate;
-  ">
+role="presentation"
+cellpadding="0"
+cellspacing="0"
+border="0"
+style="
+  background:${background};
+  border:1px solid ${border};
+  border-radius:${radius}px;
+  border-collapse:separate;
+  padding:${padding}px;
+  font-family:${fontFamily};
+">
     
         <tr>
     
