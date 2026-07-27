@@ -93,16 +93,13 @@ export class EditorComponent {
       const handler = () => {
 
         const path = field.dataset.field;
-
-
+      
         let value = field.value;
-
-
+      
         if (field.type === 'checkbox') {
           value = field.checked;
         }
-
-
+      
         store.dispatch(
           'updateField',
           {
@@ -110,7 +107,14 @@ export class EditorComponent {
             value
           }
         );
-
+      
+        store.dispatch(
+          'touchField',
+          {
+            path
+          }
+        );
+      
       };
 
 
