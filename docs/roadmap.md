@@ -63,7 +63,8 @@ Implementado:
 * Footer.
 * Responsividade.
 * Dark Mode.
-* Estrutura visual completa.
+* Sincronização completa do estado da aplicação.
+* Evolução posterior permitiu controle de interação dos campos através de touched state.
 
 ---
 
@@ -188,6 +189,13 @@ Implementado:
 * Modelo de assinatura passou a carregar o template ativo.
 * Cache do Signature Engine adaptado para mudança de template.
 * Validação da troca dinâmica de templates concluída.
+
+Aprimoramentos realizados durante a implementação dos templates:
+
+* Evolução do Validation Engine para controle de interação dos campos.
+* Implementação do estado touched para validação contextual.
+* Criação do componente ValidationFeedback.
+* Integração visual com eventos VALIDATION_UPDATED.
 
 Decisões arquiteturais:
 
