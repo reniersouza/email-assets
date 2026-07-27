@@ -127,7 +127,50 @@ export class HtmlRenderer {
       assets = {}
     ) {
     
-      return '';
+      const photo =
+        signature.photo ?? {};
+    
+      if (
+        options.showPhoto === false
+      ) {
+    
+        return '';
+    
+      }
+    
+      if (
+        !photo.url
+      ) {
+    
+        return '';
+    
+      }
+    
+      return `
+    
+    <td
+      valign="top"
+      style="
+        padding-right:16px;
+      "
+    >
+    
+      <img
+        src="${this.escape(photo.url)}"
+        alt="${this.escape(photo.alt ?? 'Foto do perfil')}"
+        width="${photo.size ?? 96}"
+        height="${photo.size ?? 96}"
+        style="
+          display:block;
+          width:${photo.size ?? 96}px;
+          height:${photo.size ?? 96}px;
+          border-radius:50%;
+        "
+      />
+    
+    </td>
+    
+    `;
     
     }
   
