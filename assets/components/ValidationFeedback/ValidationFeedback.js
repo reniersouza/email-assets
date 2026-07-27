@@ -120,7 +120,10 @@ import {
       field,
       message
     ) {
-  
+
+      field.classList.add(
+        'has-validation-error'
+      );
   
       const existing =
         field.parentElement
@@ -169,8 +172,7 @@ import {
   
   
     clear() {
-  
-  
+
       document
         .querySelectorAll(
           '.validation-feedback'
@@ -179,22 +181,25 @@ import {
           element =>
             element.remove()
         );
-  
-  
+    
+      document
+        .querySelectorAll(
+          '.has-validation-error'
+        )
+        .forEach(
+          field =>
+            field.classList.remove(
+              'has-validation-error'
+            )
+        );
+    
     }
-  
-  
-  }
-  
-  
-  
-  const instance =
-    new ValidationFeedback();
-  
-  
-  
-  instance.init();
-  
-  
-  
-  export default instance;
+    
+    }
+    
+    const instance =
+      new ValidationFeedback();
+    
+    instance.init();
+    
+    export default instance;
