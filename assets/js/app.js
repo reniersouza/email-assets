@@ -25,9 +25,7 @@ import { $, lazyImport, setBusy } from './helpers.js';
 import { logger } from './logger.js';
 import { router } from './router.js';
 import { store } from './store.js';
-
-
-
+import previewRenderer from './services/preview-renderer.js';
 
 
 export class ThemeManager {
@@ -405,18 +403,16 @@ export class App {
       await this.loadComponents();
 
 
+// Inicializa sistema de Preview
+  previewRenderer.registerEvents();
+
+  previewRenderer.render();
 
 
-      this.registerServiceWorker();
+  this.registerServiceWorker();
 
 
-
-
-
-
-      this.finishStartup();
-
-
+  this.finishStartup();
 
 
     }
@@ -653,12 +649,7 @@ export class App {
 
   }
 
-
-
-
-
-
-
+  
 
   finishStartup() {
 
