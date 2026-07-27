@@ -315,6 +315,15 @@ export class Store {
                   value
                 }
               ),
+              touchField:
+            ({ path }) =>
+
+              this.commit(
+      'TOUCH_FIELD',
+      {
+        path
+      }
+    ),
 
           undo:
             () =>
@@ -359,30 +368,42 @@ export class Store {
         Object.entries({
 
           SET_FIELD:
-            (
-              state,
-              {
-                path,
-                value
-              }
-            ) =>
+  (
+    state,
+    {
+      path,
+      value
+    }
+  ) =>
 
-              setByPath(
-                state,
-                path,
-                value
-              ),
+    setByPath(
+      state,
+      path,
+      value
+    ),
 
-          RESTORE:
-            (
-              state,
-              payload
-            ) =>
+TOUCH_FIELD:
+  (
+    state,
+    {
+      path
+    }
+  ) => {
 
-              Object.assign(
-                state,
-                clone(payload)
-              ),
+    state.validation.touched[path] = true;
+
+  },
+
+RESTORE:
+  (
+    state,
+    payload
+  ) =>
+
+    Object.assign(
+      state,
+      clone(payload)
+    ),
 
           SET_VALIDATION:
             (
