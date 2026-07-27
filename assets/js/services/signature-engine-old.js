@@ -371,12 +371,17 @@ export class SignatureEngine {
         })
       )
 
+
       .filter(
         (item) =>
-  
+
           isFilled(item.network) &&
-          isFilled(item.url)
-  
+          isFilled(item.url) &&
+          validField(
+            errors,
+            `signature.socials.items.${item.index}.url`
+          )
+
       )
 
 
