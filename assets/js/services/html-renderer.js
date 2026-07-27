@@ -59,47 +59,76 @@ export class HtmlRenderer {
       return html;
   
     }
-  
-  
-  
+    
     renderTable(signature = {}) {
-  
+
+      const template =
+        signature.template ?? {};
+    
+      const styles =
+        template.styles ?? {};
+    
+      const options =
+        template.options ?? {};
+    
+      const assets =
+        template.assets ?? {};
+    
       return `
-  <table
-    role="presentation"
-    cellpadding="0"
-    cellspacing="0"
-    border="0">
-  
-    <tr>
-  
-      ${this.renderPhoto(signature)}
-  
-      <td>
-  
-        ${this.renderPerson(signature)}
-  
-        ${this.renderCompany(signature)}
-  
-        ${this.renderContacts(signature)}
-  
-        ${this.renderSocials(signature)}
-  
-      </td>
-  
-    </tr>
-  
-  </table>
-  `;
-  
+      <table
+        role="presentation"
+        cellpadding="0"
+        cellspacing="0"
+        border="0">
+    
+        <tr>
+    
+          ${this.renderPhoto(
+            signature,
+            options,
+            assets
+          )}
+    
+          <td>
+    
+            ${this.renderPerson(
+              signature,
+              styles
+            )}
+    
+            ${this.renderCompany(
+              signature,
+              styles
+            )}
+    
+            ${this.renderContacts(
+              signature,
+              styles
+            )}
+    
+            ${this.renderSocials(
+              signature,
+              options
+            )}
+    
+          </td>
+    
+        </tr>
+    
+      </table>
+      `;
+    
     }
   
   
-  
-    renderPhoto(signature = {}) {
-  
+    renderPhoto(
+      signature = {},
+      options = {},
+      assets = {}
+    ) {
+    
       return '';
-  
+    
     }
   
   
