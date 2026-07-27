@@ -93,17 +93,20 @@ function getByPath(source, path) {
 |
 | Responsável por atualizar qualquer caminho do estado.
 |
-| Exemplo:
+| Suporta:
+| - Objetos
+| - Arrays
+| - Índices numéricos
+|
+| Exemplos:
 |
 | signature.person.name
 | signature.company.website
 | signature.socials.items.0.url
 |
-| Nesta primeira versão reorganizada
-| mantemos o mesmo comportamento da implementação atual.
-|
-| Na Parte 2 faremos a evolução para
-| suportar Arrays corretamente.
+| Evolução:
+| Agora reconhece quando o próximo nível
+| representa um índice de array.
 |
 */
 
@@ -116,17 +119,42 @@ function setByPath(
   const parts =
     pathParts(path);
 
+
   const last =
     parts.pop();
+
 
   const parent =
     parts.reduce(
 
-      (node, key) => {
+      (
+        node,
+        key,
+        index
+      ) => {
 
-        node[key] ??= {};
+
+        const nextKey =
+          parts[index + 1];
+
+
+        if (
+          node[key] == null
+        ) {
+
+
+          node[key] =
+            /^\d+$/.test(nextKey)
+
+              ? []
+
+              : {};
+
+        }
+
 
         return node[key];
+
 
       },
 
@@ -134,11 +162,11 @@ function setByPath(
 
     );
 
+
   parent[last] =
     value;
 
 }
-
 
 // ==========================================================
 // Estado Inicial
