@@ -410,11 +410,50 @@ export class HtmlRenderer {
   
   
     renderSocials(signature = {}) {
-  
-      return '';
-  
+
+      const socials =
+        signature.socials ?? [];
+    
+      if (!socials.length) {
+    
+        return '';
+    
+      }
+    
+      return `
+    
+    <div
+      class="signature-socials"
+      style="
+        margin-top:10px;
+        font-size:13px;
+      "
+    >
+    
+    ${socials.map((social, index) => `
+    
+    <a
+      href="${this.escape(social.url)}"
+      target="_blank"
+      style="
+        color:inherit;
+        text-decoration:none;
+      "
+    >
+    
+    ${this.escape(social.network)}
+    
+    </a>
+    
+    ${index < socials.length - 1 ? '&nbsp;&bull;&nbsp;' : ''}
+    
+    `).join('')}
+    
+    </div>
+    
+    `;
+    
     }
-  
   
   
     escape(value) {
