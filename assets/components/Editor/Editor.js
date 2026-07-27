@@ -125,8 +125,15 @@ export class EditorComponent {
         'change',
         handler
       );
+// sincroniza valores iniciais dos campos
+if (
+  field.tagName === 'SELECT' ||
+  field.type === 'hidden'
+) {
 
+  handler();
 
+}
 
       this.listeners.push(
         {
