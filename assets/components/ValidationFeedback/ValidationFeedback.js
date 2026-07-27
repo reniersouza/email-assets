@@ -64,58 +64,43 @@ import {
       );
     
     }
-  
-  
-  
-  
+    
     render(
       validation = {}
     ) {
-  
-  
+    
       this.clear();
-  
-  
-  
+    
       const errors =
         validation.errors ?? [];
-  
-  
-  
-      errors.forEach(
-  
-        error => {
-  
-  
-          const field =
-            document.querySelector(
-              `[data-field="${error.field}"]`
-            );
-  
-  
-  
-          if (!field) {
-            return;
-          }
-  
-  
-  
-          this.showError(
-            field,
-            error.message
-          );
-  
-  
+    
+      const touched =
+        validation.touched ?? {};
+    
+      errors.forEach(error => {
+    
+        if (!touched[error.field]) {
+          return;
         }
-  
-      );
-  
-  
+    
+        const field =
+          document.querySelector(
+            `[data-field="${error.field}"]`
+          );
+    
+        if (!field) {
+          return;
+        }
+    
+        this.showError(
+          field,
+          error.message
+        );
+    
+      });
+    
     }
-  
-  
-  
-  
+    
     showError(
       field,
       message
