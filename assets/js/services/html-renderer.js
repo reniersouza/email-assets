@@ -73,13 +73,24 @@ export class HtmlRenderer {
     
       const assets =
         template.assets ?? {};
+
+      const colors =
+        styles.colors ?? {};
+
+      const border =
+        colors.border ?? '#e5e7eb';
     
       return `
       <table
-        role="presentation"
-        cellpadding="0"
-        cellspacing="0"
-        border="0">
+  role="presentation"
+  cellpadding="0"
+  cellspacing="0"
+  border="0"
+  style="
+    border:1px solid ${border};
+    border-radius:8px;
+    border-collapse:separate;
+  ">
     
         <tr>
     
