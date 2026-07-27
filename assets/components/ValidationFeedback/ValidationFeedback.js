@@ -20,36 +20,49 @@ import {
   export class ValidationFeedback {
   
   
-    constructor() {
-  
+    constructor(
+      root = document.querySelector(
+        '[data-component="ValidationFeedback"]'
+      )
+    ) {
+    
       this.name =
         'ValidationFeedback';
-  
+    
+      this.root =
+        root;
+    
       this.errors =
         [];
-  
+    
     }
   
   
   
     init() {
-  
-  
+
+
+      if (this.root) {
+    
+        this.root.dataset.ready =
+          'true';
+    
+      }
+       
       eventBus.on(
-  
+    
         EVENTS.VALIDATION_UPDATED,
-  
+    
         (validation) => {
-  
+    
           this.render(
             validation
           );
-  
+    
         }
-  
+    
       );
-  
-  
+    
     }
   
   

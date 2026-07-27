@@ -211,19 +211,18 @@ export const EVENTS = Object.freeze({
 
 export const COMPONENTS = Object.freeze([
 
-
   'Header',
 
   'Sidebar',
 
   'Editor',
 
+  'ValidationFeedback',
+
   'Preview',
 
   'CodeViewer',
 
   'Footer',
-
-
 
 ]);
