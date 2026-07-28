@@ -572,39 +572,28 @@ ${this.escape(contact.value)}
     const options =
       signature.template?.options ?? {};
   
+  
     if (!options.showSocialIcons) {
   
-      return '';
+      return null;
   
     }
   
-    const icons = {
   
-      linkedin: '🔗',
-  
-      github: '💻'
-  
-    };
-  
-    return icons[
-      String(
-        social.network
-      ).toLowerCase()
-    ] ?? '•';
+    return iconService.getIcon(
+      social.network
+    );
   
   }
 
   renderSocials(signature = {}) {
 
-
     const socials =
       signature.socials ?? [];
   
   
-  
     const options =
       signature.template?.options ?? {};
-  
   
   
     if (!socials.length) {
@@ -614,82 +603,82 @@ ${this.escape(contact.value)}
     }
   
   
+    if (!options.showSocialIcons) {
+  
+      return '';
+  
+    }
+  
   
     return `
   
-  <div
-    class="signature-socials"
-    style="
-      margin-top:10px;
-      font-size:13px;
-    "
+  <table
+  role="presentation"
+  cellpadding="0"
+  cellspacing="0"
+  border="0"
+  style="
+  margin-top:12px;
+  "
   >
   
-  ${socials.map((social, index) => {
+  <tr>
+  
+  ${socials.map((social) => {
   
   
     const icon =
-      options.showSocialIcons
-        ? iconService.getIcon(
-            social.network
-          )
-        : null;
+      iconService.getIcon(
+        social.network
+      );
   
+  
+    if (!icon) {
+  
+      return '';
+  
+    }
   
   
     return `
   
-  <a
-    href="${this.escape(social.url)}"
-    target="_blank"
-    style="
-      color:inherit;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:4px;
-    "
+  <td
+  style="
+  padding-right:8px;
+  "
   >
   
+  <a
+  href="${this.escape(social.url ?? '#')}"
+  target="_blank"
+  style="
+  text-decoration:none;
+  "
+  >
   
-  ${
-    icon
-      ?
-  `
   <img
-    src="${this.escape(icon.path)}"
-    alt="${this.escape(icon.name)}"
-    width="16"
-    height="16"
-    style="
-      display:inline-block;
-      vertical-align:middle;
-    "
+  src="${this.escape(icon.path)}"
+  alt="${this.escape(icon.name)}"
+  width="18"
+  height="18"
+  style="
+  display:block;
+  border:0;
+  "
   />
-  `
-      :
-  ''
-  }
-  
-  
-  ${this.escape(social.network)}
-  
   
   </a>
   
-  
-  ${
-    index < socials.length - 1
-      ? '&nbsp;&bull;&nbsp;'
-      : ''
-  }
-  
+  </td>
   
   `;
   
   }).join('')}
   
-  </div>
+  
+  </tr>
+  
+  </table>
   
   `;
   
