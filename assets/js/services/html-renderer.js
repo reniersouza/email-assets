@@ -544,78 +544,77 @@ ${location}
     signature = {},
     styles = {}
   ) {
-
-    const spacing =
-    signature.template?.styles?.spacing ?? {};
   
-  const gap =
-    spacing.gap ?? 12;
-
+    const spacing =
+      signature.template?.styles?.spacing ?? {};
+  
+    const gap =
+      spacing.gap ?? 12;
+  
     const contacts =
       signature.contacts ?? [];
-
-
-
-    if (
-      !contacts.length
-    ) {
-
+  
+    if (!contacts.length) {
+  
       return '';
-
+  
     }
-
-
-
+  
     const colors =
       styles.colors ?? {};
-
-
-
+  
+    const options =
+      signature.template?.options ?? {};
+  
+    const minimal =
+      options.contactStyle === 'minimal';
+  
     return `
-
-<div
-class="signature-contacts"
-style="
-margin-top:${gap}px;
-">
-
-${contacts.map(contact => `
-
-
-<div
-style="
-margin-top:${Math.round(gap / 4)}px;
-font-size:13px;
-color:${colors.text ?? '#1f2937'};
-">
-
-<a
-href="${this.escape(contact.href ?? '#')}"
-style="
-color:${colors.primary ?? '#2563eb'};
-text-decoration:none;
-">
-
-<strong>
-${this.escape(contact.label)}
-</strong>
-
-:
-${this.escape(contact.value)}
-
-</a>
-
-
-</div>
-
-
-`).join('')}
-
-
-</div>
-
-`;
-
+  
+  <div
+  class="signature-contacts"
+  style="
+  margin-top:${gap}px;
+  ">
+  
+  ${contacts.map(contact => `
+  
+  <div
+  style="
+  margin-top:${Math.round(gap / 4)}px;
+  font-size:13px;
+  color:${colors.text ?? '#1f2937'};
+  ">
+  
+  <a
+  href="${this.escape(contact.href ?? '#')}"
+  style="
+  color:${colors.primary ?? '#2563eb'};
+  text-decoration:none;
+  ">
+  
+  ${
+  minimal
+  ?
+  
+  `${this.escape(contact.value)}`
+  
+  :
+  
+  `<strong>${this.escape(contact.label)}</strong>: ${this.escape(contact.value)}`
+  
+  }
+  
+  </a>
+  
+  </div>
+  
+  `).join('')}
+  
+  </div>
+  
+  `;
+  
   }
 
   renderSocialIcon(social = {}, signature = {}) {
