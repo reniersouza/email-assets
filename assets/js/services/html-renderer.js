@@ -135,26 +135,28 @@ style="
           )}
     
           <td>
-    
-            renderPerson(signature = {}, styles = {}) {
-            )}
-    
-            ${this.renderCompany(
-              signature,
-              styles
-            )}
-    
-            ${this.renderContacts(
-              signature,
-              styles
-            )}
-    
-            ${this.renderSocials(
-              signature,
-              options
-            )}
-    
-          </td>
+
+  ${this.renderPerson(
+    signature,
+    styles
+  )}
+
+  ${this.renderCompany(
+    signature,
+    styles
+  )}
+
+  ${this.renderContacts(
+    signature,
+    styles
+  )}
+
+  ${this.renderSocials(
+    signature,
+    options
+  )}
+
+</td>
     
         </tr>
     
