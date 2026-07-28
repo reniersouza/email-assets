@@ -67,8 +67,11 @@ export class HtmlRenderer {
       const template =
         signature.template ?? {};
     
-      const styles =
+        const styles =
         template.styles ?? {};
+            
+      const legacyStyle =
+        signature.style ?? {};
     
       const options =
         template.options ?? {};
@@ -85,19 +88,26 @@ export class HtmlRenderer {
       const typography =
         styles.typography ?? {};
       
-      const border =
-        colors.border ?? '#e5e7eb';
-      
+        const border =
+        legacyStyle.borderColor ??
+        colors.border ??
+        '#e5e7eb';
+            
       const background =
-        colors.background ?? '#ffffff';
-      
+        legacyStyle.backgroundColor ??
+        colors.background ??
+        '#ffffff';
+            
       const radius =
-        spacing.borderRadius ?? 8;
-      
+        spacing.borderRadius ??
+        8;
+            
       const padding =
-        spacing.padding ?? 16;
-      
+        spacing.padding ??
+        16;
+            
       const fontFamily =
+        legacyStyle.fontFamily ??
         typography.fontFamily ??
         'Arial, Helvetica, sans-serif';
     
@@ -126,9 +136,7 @@ style="
     
           <td>
     
-            ${this.renderPerson(
-              signature,
-              styles
+            renderPerson(signature = {}, styles = {}) {
             )}
     
             ${this.renderCompany(
@@ -237,13 +245,14 @@ style="
     >
     
     <strong
-      style="
-        display:block;
-        font-size:16px;
-        font-weight:700;
-        line-height:1.3;
-      "
-    >
+style="
+display:block;
+font-size:${signature.style?.fontSize + 2 || 16}px;
+font-weight:700;
+line-height:1.3;
+color:${signature.style?.primaryColor || styles.colors?.primary || '#0f62fe'};
+"
+>
       ${this.escape(name)}
     </strong>
     
@@ -329,7 +338,8 @@ style="
           ? `
     <div
       style="
-        font-weight:600;
+       font-weight:600;
+color:${signature.style?.textColor || '#1f2937'};
       "
     >
       ${this.escape(company.name)}
