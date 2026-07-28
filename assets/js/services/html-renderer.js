@@ -399,6 +399,12 @@ const gap =
     const colors =
       styles.colors ?? {};
 
+      const options =
+  signature.template?.options ?? {};
+
+const highlight =
+  options.companyHighlight === true;
+
     if (
       !company.name &&
       !company.address &&
@@ -448,7 +454,9 @@ company.name
 <div
 style="
 font-weight:${textWeight};
-color:${colors.text ?? '#1f2937'};
+color:${highlight
+  ? (colors.primary ?? '#2563eb')
+  : (colors.text ?? '#1f2937')};
 ">
 
 ${this.escape(company.name)}
