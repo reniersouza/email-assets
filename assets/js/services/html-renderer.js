@@ -438,122 +438,147 @@ border-radius:50%;
     signature = {},
     styles = {}
   ) {
-
-
+  
+  
     const company =
       signature.company ?? {};
-      const typography =
+  
+  
+    const typography =
       signature.template?.styles?.typography ?? {};
-
-      const spacing =
-  signature.template?.styles?.spacing ?? {};
-
-const gap =
-  spacing.gap ?? 12;
-    
+  
+  
+    const spacing =
+      signature.template?.styles?.spacing ?? {};
+  
+  
+    const gap =
+      spacing.gap ?? 12;
+  
+  
     const textWeight =
       typography.textWeight ?? 400;
-
-
+  
+  
+    const companyWeight =
+      typography.companyWeight ?? textWeight;
+  
+  
+    const companySize =
+      typography.companySize ?? 14;
+  
+  
+    const locationSize =
+      typography.locationSize ?? 13;
+  
+  
     const colors =
       styles.colors ?? {};
-
-      const options =
-  signature.template?.options ?? {};
-
-const highlight =
-  options.companyHighlight === true;
-
+  
+  
+    const options =
+      signature.template?.options ?? {};
+  
+  
+    const highlight =
+      options.companyHighlight === true;
+  
+  
     if (
       !company.name &&
       !company.address &&
       !company.city &&
       !company.country
     ) {
-
+  
       return '';
-
+  
     }
-
+  
+  
     const location = [
-
+  
       company.address,
-
+  
       company.city,
-
+  
       company.country
-
+  
     ]
-
+  
     .filter(Boolean)
-
+  
     .map(
       value =>
         this.escape(value)
     )
-
+  
     .join(', ');
-
-
-
+  
+  
+  
     return `
-
-<div
-class="signature-company"
-style="
-margin-top:${gap}px;
-">
-
-
-${
-company.name
-?
-`
-
-<div
-style="
-font-weight:${textWeight};
-color:${highlight
-  ? (colors.primary ?? '#2563eb')
-  : (colors.text ?? '#1f2937')};
-">
-
-${this.escape(company.name)}
-
-</div>
-
-`
-:
-''
-}
-
-
-${
-location
-?
-`
-
-<div
-style="
-font-size:13px;
-margin-top:${Math.round(gap / 6)}px;
-color:${colors.muted ?? '#64748b'};
-">
-
-${location}
-
-</div>
-
-`
-:
-''
-}
-
-
-</div>
-
-`;
-
+  
+  <div
+  class="signature-company"
+  style="
+  margin-top:${gap}px;
+  ">
+  
+  
+  ${
+  company.name
+  ?
+  `
+  
+  <div
+  style="
+  font-size:${companySize}px;
+  font-weight:${companyWeight};
+  color:${
+  highlight
+    ? (colors.primary ?? '#2563eb')
+    : (colors.text ?? '#1f2937')
+  };
+  ">
+  
+  ${this.escape(company.name)}
+  
+  </div>
+  
+  `
+  :
+  ''
+  }
+  
+  
+  ${
+  location
+  ?
+  `
+  
+  <div
+  style="
+  font-size:${locationSize}px;
+  font-weight:${textWeight};
+  margin-top:${Math.round(gap / 6)}px;
+  color:${colors.muted ?? '#64748b'};
+  ">
+  
+  ${location}
+  
+  </div>
+  
+  `
+  :
+  ''
+  }
+  
+  
+  </div>
+  
+  `;
+  
   }
 
   renderContacts(
