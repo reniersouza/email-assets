@@ -327,91 +327,83 @@ border-radius:50%;
     signature = {},
     styles = {}
   ) {
-
+  
     const person =
       signature.person ?? {};
-
+  
     const colors =
       styles.colors ?? {};
-
-    const name =
-      person.name ?? '';
-
-    const role =
-      person.role ?? '';
-
-    const department =
-      person.department ?? '';
-
-      const typography =
-  signature.template?.styles?.typography ?? {};
-
-  const spacing =
-  signature.template?.styles?.spacing ?? {};
-
-const gap =
-  spacing.gap ?? 12;
-
-const nameWeight =
-  typography.nameWeight ?? 700;
-
-const textWeight =
-  typography.textWeight ?? 400;
-
-    const legacy =
-      signature.style ?? {};
-
+  
+    const typography =
+      signature.template?.styles?.typography ?? {};
+  
+    const spacing =
+      signature.template?.styles?.spacing ?? {};
+  
+    const gap =
+      spacing.gap ?? 12;
+  
+  
+    const nameWeight =
+      typography.nameWeight ?? 700;
+  
+  
+    const textWeight =
+      typography.textWeight ?? 400;
+  
+  
     return `
-
-<div
-class="signature-person"
-style="
-color:${colors.text ?? legacy.textColor ?? '#1f2937'};
-">
-
-
-<strong
-style="
-display:block;
-font-size:${signature.style?.fontSize + 2 || 16}px;
-font-weight:${nameWeight};
-line-height:1.3;
-color:${signature.style?.primaryColor || '#0f62fe'};
-">
-
-${this.escape(name)}
-
-</strong>
-
-
-<div
-style="
-font-size:14px;
-font-weight:${textWeight};
-margin-top:${Math.round(gap / 6)}px;
-">
-
-${this.escape(role)}
-
-</div>
-
-<div
-style="
-font-size:13px;
-font-weight:${textWeight};
-opacity:.75;
-margin-top:${Math.round(gap / 6)}px;
-">
-
-${this.escape(department)}
-
-</div>
-
-
-</div>
-
-`;
-
+  
+  <div
+  class="signature-person"
+  style="
+  color:${colors.text ?? '#1f2937'};
+  ">
+  
+  
+  <strong
+  style="
+  display:block;
+  font-size:16px;
+  font-weight:${nameWeight};
+  line-height:1.3;
+  color:${colors.primary ?? '#0f62fe'};
+  ">
+  
+  ${this.escape(person.name ?? '')}
+  
+  </strong>
+  
+  
+  <div
+  style="
+  font-size:14px;
+  font-weight:${textWeight};
+  margin-top:${Math.round(gap / 6)}px;
+  ">
+  
+  ${this.escape(person.role ?? '')}
+  
+  </div>
+  
+  
+  <div
+  style="
+  font-size:13px;
+  font-weight:${textWeight};
+  opacity:.75;
+  margin-top:${Math.round(gap / 6)}px;
+  ">
+  
+  ${this.escape(person.department ?? '')}
+  
+  </div>
+  
+  
+  </div>
+  
+  `;
+  
   }
 
   renderCompany(
