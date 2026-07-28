@@ -225,19 +225,16 @@ style="
         signature.person ?? {};
     
     
-      const name =
-        person.name ||
-        'Ana Silva';
-    
-    
+        const name =
+        person.name ?? '';
+      
+      
       const role =
-        person.role ||
-        'Head de Operações';
-    
-    
+        person.role ?? '';
+      
+      
       const department =
-        person.department ||
-        'Atendimento';
+        person.department ?? '';
     
     
       return `
