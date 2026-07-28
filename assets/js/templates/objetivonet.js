@@ -56,7 +56,13 @@ const objetivoNetTemplate = new BaseTemplate({
     
       roleSize: 14,
     
-      departmentSize: 13
+      departmentSize: 13,
+    
+      companySize: 15,
+    
+      companyWeight: 700,
+    
+      locationSize: 13
     
     },
 
