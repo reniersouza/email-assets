@@ -210,7 +210,14 @@ export class SignatureEngine {
     model.contacts =
       this.buildContacts(model);
 
-
+      console.log(
+        'MODEL ANTES DO CLEAN:',
+        JSON.stringify(
+          model,
+          null,
+          2
+        )
+      );
     const cleaned =
       this.removeEmpty(model);
 
