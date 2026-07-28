@@ -208,26 +208,26 @@ style="
     `;
     
     }
-  
-  
-  
+    
     renderPerson(signature = {}) {
 
       const person =
         signature.person ?? {};
     
     
+      const name =
+        person.name ||
+        'Ana Silva';
     
-      if (
-        !person.name &&
-        !person.role &&
-        !person.department
-      ) {
     
-        return '';
+      const role =
+        person.role ||
+        'Head de Operações';
     
-      }
     
+      const department =
+        person.department ||
+        'Atendimento';
     
     
       return `
@@ -236,9 +236,6 @@ style="
       class="signature-person"
     >
     
-      ${
-        person.name
-          ? `
     <strong
       style="
         display:block;
@@ -247,30 +244,20 @@ style="
         line-height:1.3;
       "
     >
-      ${this.escape(person.name)}
+      ${this.escape(name)}
     </strong>
-    `
-          : ''
-      }
     
-      ${
-        person.role
-          ? `
+    
     <div
       style="
         font-size:14px;
         margin-top:2px;
       "
     >
-      ${this.escape(person.role)}
+      ${this.escape(role)}
     </div>
-    `
-          : ''
-      }
     
-      ${
-        person.department
-          ? `
+    
     <div
       style="
         font-size:13px;
@@ -278,19 +265,15 @@ style="
         margin-top:2px;
       "
     >
-      ${this.escape(person.department)}
+      ${this.escape(department)}
     </div>
-    `
-          : ''
-      }
+    
     
     </div>
     
     `;
     
     }
-  
-  
   
     renderCompany(signature = {}) {
 
