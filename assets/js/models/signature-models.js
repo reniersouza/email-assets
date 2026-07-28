@@ -142,7 +142,7 @@ export class CompanyModel extends BaseModel {
   static defaults = {
 
     name:
-      'ObjetivoNET',
+      '',
 
     website:
       '',
@@ -154,7 +154,7 @@ export class CompanyModel extends BaseModel {
       '',
 
     country:
-      'Brasil',
+      '',
 
   };
 
