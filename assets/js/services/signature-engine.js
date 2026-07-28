@@ -128,6 +128,15 @@ export class SignatureEngine {
           2
         )
       );
+      
+      console.log(
+        'SOCIALS ORIGINAIS:',
+        JSON.stringify(
+          signature.socials,
+          null,
+          2
+        )
+      );
 
       const template =
       this.renderer.resolve(
