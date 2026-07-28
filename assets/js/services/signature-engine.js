@@ -120,6 +120,14 @@ export class SignatureEngine {
 
     const signature =
       state.signature ?? {};
+      console.log(
+        'SIGNATURE ORIGINAL:',
+        JSON.stringify(
+          signature,
+          null,
+          2
+        )
+      );
 
       const template =
       this.renderer.resolve(
