@@ -19,6 +19,7 @@
 import { EVENTS } from './constants.js';
 import { eventBus } from './events.js';
 
+
 import {
 
   ApplicationModel,
@@ -46,6 +47,7 @@ import {
 
 } from './services/core-services.js';
 
+import { demoSignature } from './data/demo-signature.js';
 
 // ==========================================================
 // Helpers
@@ -179,13 +181,19 @@ export function createDefaultState() {
     signature: {
 
       person:
-        PersonModel.from(),
-
+        PersonModel.from(
+          demoSignature.person
+        ),
+    
       company:
-        CompanyModel.from(),
-
+        CompanyModel.from(
+          demoSignature.company
+        ),
+    
       photo:
-        PhotoModel.from(),
+        PhotoModel.from(
+          demoSignature.photo
+        ),
 
       socials:
         SocialModel.from(),
