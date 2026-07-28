@@ -331,14 +331,22 @@ border-radius:50%;
     const person =
       signature.person ?? {};
   
+  
     const colors =
       styles.colors ?? {};
+  
   
     const typography =
       signature.template?.styles?.typography ?? {};
   
+  
     const spacing =
       signature.template?.styles?.spacing ?? {};
+  
+  
+    const options =
+      signature.template?.options ?? {};
+  
   
     const gap =
       spacing.gap ?? 12;
@@ -352,22 +360,42 @@ border-radius:50%;
       typography.textWeight ?? 400;
   
   
+    const nameSize =
+      typography.nameSize ?? 16;
+  
+  
+    const roleSize =
+      typography.roleSize ?? 14;
+  
+  
+    const departmentSize =
+      typography.departmentSize ?? 13;
+  
+  
+    const nameColor =
+      colors.primary ?? '#0f62fe';
+  
+  
+    const textColor =
+      colors.text ?? '#1f2937';
+  
+  
     return `
   
   <div
   class="signature-person"
   style="
-  color:${colors.text ?? '#1f2937'};
+  color:${textColor};
   ">
   
   
   <strong
   style="
   display:block;
-  font-size:16px;
+  font-size:${nameSize}px;
   font-weight:${nameWeight};
   line-height:1.3;
-  color:${colors.primary ?? '#0f62fe'};
+  color:${nameColor};
   ">
   
   ${this.escape(person.name ?? '')}
@@ -377,7 +405,7 @@ border-radius:50%;
   
   <div
   style="
-  font-size:14px;
+  font-size:${roleSize}px;
   font-weight:${textWeight};
   margin-top:${Math.round(gap / 6)}px;
   ">
@@ -389,7 +417,7 @@ border-radius:50%;
   
   <div
   style="
-  font-size:13px;
+  font-size:${departmentSize}px;
   font-weight:${textWeight};
   opacity:.75;
   margin-top:${Math.round(gap / 6)}px;
@@ -405,7 +433,7 @@ border-radius:50%;
   `;
   
   }
-
+  
   renderCompany(
     signature = {},
     styles = {}
