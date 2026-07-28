@@ -1,3 +1,5 @@
+import iconService from './icon-service.js';
+
 // ==========================================================
 // Objetivo: Gerador de HTML da assinatura.
 // Responsabilidade:
@@ -8,7 +10,7 @@
 // - Não emitir eventos.
 //
 // Dependências:
-// nenhuma.
+// - icon-service.js
 // ==========================================================
 
 export class HtmlRenderer {
