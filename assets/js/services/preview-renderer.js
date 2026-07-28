@@ -50,31 +50,46 @@ export class PreviewRenderer {
   
     this.lastHtml =
       '';
+      this.unsubscribers =
+  [];
+  
+  }
+  start() {
+
+    this.registerEvents();
+  
+    this.render();
+  
+    return () => this.destroy();
   
   }
 
   registerEvents() {
 
-    eventBus.on(
-      EVENTS.STATE_UPDATED,
-      () => this.render()
-    );
-
-    eventBus.on(
-      EVENTS.TEMPLATE_SELECTED,
-      () => this.render()
-    );
-
-    eventBus.on(
-      EVENTS.STYLE_CHANGED,
-      () => this.render()
-    );
-
-    eventBus.on(
-      EVENTS.LAYOUT_CHANGED,
-      () => this.render()
-    );
-
+    this.unsubscribers = [
+  
+      eventBus.on(
+        EVENTS.STATE_UPDATED,
+        () => this.render()
+      ),
+  
+      eventBus.on(
+        EVENTS.TEMPLATE_SELECTED,
+        () => this.render()
+      ),
+  
+      eventBus.on(
+        EVENTS.STYLE_CHANGED,
+        () => this.render()
+      ),
+  
+      eventBus.on(
+        EVENTS.LAYOUT_CHANGED,
+        () => this.render()
+      )
+  
+    ];
+  
   }
 
 
@@ -194,8 +209,24 @@ export class PreviewRenderer {
 
   }
 
+
+destroy() {
+
+  this.unsubscribers.forEach(unsubscribe => {
+
+    if (typeof unsubscribe === 'function') {
+
+      unsubscribe();
+
+    }
+
+  });
+
+  this.unsubscribers = [];
+
 }
 
+}
 export const previewRenderer =
   new PreviewRenderer();
 
