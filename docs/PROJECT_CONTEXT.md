@@ -2,9 +2,9 @@
 
 ## Project Context
 
-**Versão do Documento:** 1.4.0
+**Versão do Documento:** 1.5.0
 
-**Última Atualização:** 2026-07-25
+**Última Atualização:** 2026-07-28
 
 ---
 
@@ -360,16 +360,21 @@ Versão atual:
 Status atual:
 
 **Fase 5 concluída.**
+**Fase 6 em andamento**
 
-**Arquitetura auditada e consolidada.**
+Estado atual da Fase 6
 
-**Pronto para início da Fase 6 — Templates.**
+O Preview inicial utiliza um modelo de demonstração.
+
+Esse modelo existe apenas para facilitar a experiência inicial do usuário.
+
+Os dados do demo não pertencem ao Store permanente e serão substituídos automaticamente assim que o usuário editar qualquer campo.
 
 Próximo marco:
 
-**v0.7.0**
+**v0.8.0**
 
-**Fase 6 — Templates**
+**Fase 7 — Recursos avançados**
 
 ---
 

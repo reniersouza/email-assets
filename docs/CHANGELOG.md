@@ -40,6 +40,28 @@ O projeto segue Semantic Versioning (SemVer).
 - Adicionada a definição arquitetural do `Template Service`.
 - Atualizada a arquitetura para suportar seleção dinâmica de templates.
 
+### 🔧 Melhorias de Infraestrutura
+
+- Correção do caminho do favicon para compatibilidade com hospedagem em subdiretórios (GitHub Pages).
+- Aprimoramento do Service Worker para ignorar requisições com protocolos não suportados (`chrome-extension://`, entre outros).
+- Validação das respostas da rede antes do armazenamento em cache.
+- Armazenamento em cache restrito a respostas da própria origem da aplicação (`networkResponse.type === 'basic'`).
+
+## [0.7.1] - 2026-07-28
+
+Correções realizadas durante a estabilização da Fase 6.
+
+Concluído
+
+- Correção da integração entre Store e Signature Engine.
+- Criação do modelo demo inicial para Preview.
+- HtmlRenderer ajustado para utilizar exclusivamente o modelo normalizado.
+- Correção da aplicação de estilos provenientes do Template.
+- Correção da renderização dos contatos.
+- Correção da renderização das redes sociais.
+- Correção do Preview inicial.
+- Remoção de valores padrão hardcoded do HtmlRenderer.
+
 ---
 
 ## [0.6.0] - 2026-07-24
@@ -210,28 +232,16 @@ Atualizados:
 
 # Próxima Versão
 
-## [0.7.0]
+## [0.8.0]
 
-### Fase 6 — Templates
+### Fase 7 — Recursos avançados
 
 Objetivos:
 
-- Template Gravatar.
-- Template ObjetivoNET.
-- Template Google.
-- Template Microsoft.
-- Template Apple.
-- Template Executivo.
-- Template Dark.
-
-Observações:
-
-- Templates reutilizam integralmente o Signature Engine.
-- Assets oficiais já disponíveis para uso nos templates.
-
-### 🔧 Melhorias de Infraestrutura
-
-- Correção do caminho do favicon para compatibilidade com hospedagem em subdiretórios (GitHub Pages).
-- Aprimoramento do Service Worker para ignorar requisições com protocolos não suportados (`chrome-extension://`, entre outros).
-- Validação das respostas da rede antes do armazenamento em cache.
-- Armazenamento em cache restrito a respostas da própria origem da aplicação (`networkResponse.type === 'basic'`).
+* QR Code.
+* vCard.
+* Favoritos.
+* Histórico avançado.
+* Importação.
+* Exportação estendida.
+* Recursos adicionais.

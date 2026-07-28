@@ -5,6 +5,8 @@
 - Nunca alterar a arquitetura aprovada.
 - Nunca reorganizar diretórios existentes.
 - Nunca duplicar funcionalidades.
+- Durante a implementação de uma fase do roadmap, não antecipar decisões arquiteturais pertencentes às fases seguintes.
+- Correções estruturais só devem ocorrer quando forem necessárias para estabilizar a fase atual.
 
 ## Código
 
