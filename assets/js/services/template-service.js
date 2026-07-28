@@ -33,7 +33,14 @@ class TemplateService {
 
     this.activeTemplate =
       getDefaultTemplate();
-
+      console.log(
+        'TEMPLATE INICIAL:',
+        JSON.stringify(
+          this.activeTemplate,
+          null,
+          2
+        )
+      );
 
   }
 
