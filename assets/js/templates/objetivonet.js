@@ -79,17 +79,25 @@ const objetivoNetTemplate = new BaseTemplate({
   options: {
 
     showPhoto: true,
-
+  
     showLogo: true,
-
+  
     roundedPhoto: true,
-
+  
     roundedLogo: false,
-
+  
     showSocialIcons: true,
-
-    divider: true
-
+  
+    divider: true,
+  
+    photoPosition: 'left',
+  
+    socialStyle: 'icons-only',
+  
+    contactStyle: 'minimal',
+  
+    companyHighlight: true
+  
   }
 
 });
