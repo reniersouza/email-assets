@@ -52,31 +52,31 @@ export default class BaseTemplate {
 
 
       this.options =
-      Object.freeze({
-    
-        showPhoto: true,
-    
-        showLogo: true,
-    
-        roundedPhoto: true,
-    
-        roundedLogo: false,
-    
-        showSocialIcons: true,
-    
-        divider: true,
-    
-        photoPosition: 'left',
-    
-        socialStyle: 'icons-only',
-    
-        contactStyle: 'minimal',
-    
-        companyHighlight: false,
-    
-        ...(config.options ?? {})
-    
-      });
+  Object.freeze({
+
+    showPhoto: true,
+
+    showLogo: true,
+
+    roundedPhoto: true,
+
+    roundedLogo: false,
+
+    showSocialIcons: true,
+
+    divider: true,
+
+    photoPosition: 'left',
+
+    socialStyle: 'default',
+
+    contactStyle: 'default',
+
+    companyHighlight: false,
+
+    ...(config.options ?? {})
+
+  });
 
 
     Object.freeze(this);
