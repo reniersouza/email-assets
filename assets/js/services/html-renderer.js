@@ -631,6 +631,13 @@ const gap =
     "
   >
   
+  ${this.renderSocialIcon(
+    social,
+    signature
+  )}
+  
+  &nbsp;
+  
   ${this.escape(social.network)}
   
   </a>
