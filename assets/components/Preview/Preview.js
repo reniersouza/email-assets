@@ -5,7 +5,7 @@
 
 import { EVENTS } from '../../js/constants.js';
 import { eventBus } from '../../js/events.js';
-import { PreviewRenderer } from '../../js/services/signature-engine.js';
+import { PreviewRenderer } from '../../js/services/preview-renderer.js';
 
 
 export class PreviewComponent {
