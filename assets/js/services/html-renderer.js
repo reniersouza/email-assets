@@ -558,9 +558,9 @@ ${location}
       signature.template?.options ?? {};
   
   
-    const minimal =
+      const minimal =
+      signature.template?.id === 'objetivonet' &&
       options.contactStyle === 'minimal';
-  
   
     return `
   
