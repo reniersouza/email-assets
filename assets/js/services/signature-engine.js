@@ -196,6 +196,15 @@ export class SignatureEngine {
     const cleaned =
       this.removeEmpty(model);
 
+      console.log(
+        'MODELO FINAL ANTES DO HTML:',
+        JSON.stringify(
+          cleaned,
+          null,
+          2
+        )
+      );
+
 
     this.cacheKey = cacheKey;
     this.cacheValue = cleaned;
