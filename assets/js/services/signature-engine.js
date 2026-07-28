@@ -120,24 +120,7 @@ export class SignatureEngine {
 
     const signature =
       state.signature ?? {};
-      console.log(
-        'SIGNATURE ORIGINAL:',
-        JSON.stringify(
-          signature,
-          null,
-          2
-        )
-      );
       
-      console.log(
-        'SOCIALS ORIGINAIS:',
-        JSON.stringify(
-          signature.socials,
-          null,
-          2
-        )
-      );
-
       const template =
       this.renderer.resolve(
         this.templates.getActiveTemplate()
@@ -210,14 +193,6 @@ export class SignatureEngine {
     model.contacts =
       this.buildContacts(model);
 
-      console.log(
-        'MODEL ANTES DO CLEAN:',
-        JSON.stringify(
-          model,
-          null,
-          2
-        )
-      );
     const cleaned =
       this.removeEmpty(model);
 
