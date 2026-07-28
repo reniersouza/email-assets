@@ -871,7 +871,7 @@ export class StyleEngine {
 
 
 
-export class HtmlRenderer {
+export class HtmlRendererLegacy {
 
 
   render(signature) {
