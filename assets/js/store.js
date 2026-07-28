@@ -195,8 +195,10 @@ export function createDefaultState() {
           demoSignature.photo
         ),
 
-      socials:
-        SocialModel.from(),
+        socials:
+        SocialModel.from(
+          demoSignature.socials
+        ),
 
       style:
         StyleModel.from(),
