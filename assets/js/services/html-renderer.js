@@ -26,10 +26,6 @@ export class HtmlRenderer {
   render(signature = {}) {
 
 
-    console.log(
-      'HTML RENDERER EXTERNO'
-    );
-
     const cacheKey =
       JSON.stringify(signature);
 
@@ -554,20 +550,25 @@ ${location}
     const contacts =
       signature.contacts ?? [];
   
+  
     if (!contacts.length) {
   
       return '';
   
     }
   
+  
     const colors =
       styles.colors ?? {};
+  
   
     const options =
       signature.template?.options ?? {};
   
+  
     const minimal =
       options.contactStyle === 'minimal';
+  
   
     return `
   
@@ -595,13 +596,20 @@ ${location}
   
   ${
   minimal
+  
   ?
   
-  `${this.escape(contact.value)}`
+  this.escape(contact.value)
   
   :
   
-  `<strong>${this.escape(contact.label)}</strong>: ${this.escape(contact.value)}`
+  `
+  <strong>
+  ${this.escape(contact.label)}
+  </strong>
+  :
+  ${this.escape(contact.value)}
+  `
   
   }
   
