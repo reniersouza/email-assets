@@ -565,6 +565,32 @@ ${this.escape(contact.value)}
 
   }
 
+  renderSocialIcon(social = {}, signature = {}) {
+
+    const options =
+      signature.template?.options ?? {};
+  
+    if (!options.showSocialIcons) {
+  
+      return '';
+  
+    }
+  
+    const icons = {
+  
+      linkedin: '🔗',
+  
+      github: '💻'
+  
+    };
+  
+    return icons[
+      String(
+        social.network
+      ).toLowerCase()
+    ] ?? '•';
+  
+  }
 
   renderSocials(signature = {}) {
 
