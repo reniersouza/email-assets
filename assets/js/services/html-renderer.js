@@ -84,6 +84,9 @@ export class HtmlRenderer {
     const spacing =
       styles.spacing ?? {};
 
+    const gap =
+      spacing.gap ?? 12;
+
 
     const typography =
       styles.typography ?? {};
@@ -210,7 +213,7 @@ ${this.renderSocials(
 <td
 valign="top"
 style="
-padding-right:16px;
+padding-right:${signature.template?.styles?.spacing?.gap ?? 12}px;
 ">
 
 <img
@@ -255,6 +258,12 @@ border-radius:50%;
       const typography =
   signature.template?.styles?.typography ?? {};
 
+  const spacing =
+  signature.template?.styles?.spacing ?? {};
+
+const gap =
+  spacing.gap ?? 12;
+
 const nameWeight =
   typography.nameWeight ?? 700;
 
@@ -291,7 +300,7 @@ ${this.escape(name)}
 style="
 font-size:14px;
 font-weight:${textWeight};
-margin-top:2px;
+margin-top:${Math.round(gap / 6)}px;
 ">
 
 ${this.escape(role)}
@@ -303,7 +312,7 @@ style="
 font-size:13px;
 font-weight:${textWeight};
 opacity:.75;
-margin-top:2px;
+margin-top:${Math.round(gap / 6)}px;
 ">
 
 ${this.escape(department)}
@@ -327,6 +336,12 @@ ${this.escape(department)}
       signature.company ?? {};
       const typography =
       signature.template?.styles?.typography ?? {};
+
+      const spacing =
+  signature.template?.styles?.spacing ?? {};
+
+const gap =
+  spacing.gap ?? 12;
     
     const textWeight =
       typography.textWeight ?? 400;
@@ -372,7 +387,7 @@ ${this.escape(department)}
 <div
 class="signature-company"
 style="
-margin-top:10px;
+margin-top:${gap}px;
 ">
 
 
@@ -405,7 +420,7 @@ location
 <div
 style="
 font-size:13px;
-margin-top:2px;
+margin-top:${Math.round(gap / 6)}px;
 color:${colors.muted ?? '#64748b'};
 ">
 
@@ -430,6 +445,11 @@ ${location}
     styles = {}
   ) {
 
+    const spacing =
+    signature.template?.styles?.spacing ?? {};
+  
+  const gap =
+    spacing.gap ?? 12;
 
     const contacts =
       signature.contacts ?? [];
@@ -456,7 +476,7 @@ ${location}
 <div
 class="signature-contacts"
 style="
-margin-top:10px;
+margin-top:${gap}px;
 ">
 
 ${contacts.map(contact => `
@@ -464,7 +484,7 @@ ${contacts.map(contact => `
 
 <div
 style="
-margin-top:3px;
+margin-top:${Math.round(gap / 4)}px;
 font-size:13px;
 color:${colors.text ?? '#1f2937'};
 ">
@@ -503,6 +523,12 @@ ${this.escape(contact.value)}
 
     const socials =
       signature.socials ?? [];
+
+      const spacing =
+  signature.template?.styles?.spacing ?? {};
+
+const gap =
+  spacing.gap ?? 12;
   
     if (!socials.length) {
   
@@ -515,7 +541,7 @@ ${this.escape(contact.value)}
   <div
     class="signature-socials"
     style="
-      margin-top:10px;
+      margin-top:${gap}px;
       font-size:13px;
       color:${signature.style?.primaryColor || '#2563eb'};
     "
