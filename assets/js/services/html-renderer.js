@@ -596,14 +596,16 @@ ${this.escape(contact.value)}
 
   renderSocials(signature = {}) {
 
+
     const socials =
       signature.socials ?? [];
-
-      const spacing =
-  signature.template?.styles?.spacing ?? {};
-
-const gap =
-  spacing.gap ?? 12;
+  
+  
+  
+    const options =
+      signature.template?.options ?? {};
+  
+  
   
     if (!socials.length) {
   
@@ -611,42 +613,81 @@ const gap =
   
     }
   
+  
+  
     return `
   
   <div
     class="signature-socials"
     style="
-      margin-top:${gap}px;
+      margin-top:10px;
       font-size:13px;
-      color:${signature.style?.primaryColor || '#2563eb'};
     "
   >
   
-  ${socials.map((social, index) => `
+  ${socials.map((social, index) => {
+  
+  
+    const icon =
+      options.showSocialIcons
+        ? iconService.getIcon(
+            social.network
+          )
+        : null;
+  
+  
+  
+    return `
   
   <a
     href="${this.escape(social.url)}"
     target="_blank"
     style="
-      color:${signature.style?.primaryColor || '#2563eb'};
+      color:inherit;
       text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
     "
   >
   
-  ${this.renderSocialIcon(
-    social,
-    signature
-  )}
   
-  &nbsp;
+  ${
+    icon
+      ?
+  `
+  <img
+    src="${this.escape(icon.path)}"
+    alt="${this.escape(icon.name)}"
+    width="16"
+    height="16"
+    style="
+      display:inline-block;
+      vertical-align:middle;
+    "
+  />
+  `
+      :
+  ''
+  }
+  
   
   ${this.escape(social.network)}
   
+  
   </a>
   
-  ${index < socials.length - 1 ? '&nbsp;&bull;&nbsp;' : ''}
   
-  `).join('')}
+  ${
+    index < socials.length - 1
+      ? '&nbsp;&bull;&nbsp;'
+      : ''
+  }
+  
+  
+  `;
+  
+  }).join('')}
   
   </div>
   
