@@ -167,29 +167,38 @@ export class TemplateRenderer {
         showPhoto:
           options.showPhoto !== false,
     
+    
         showLogo:
           options.showLogo !== false,
+    
     
         roundedPhoto:
           options.roundedPhoto !== false,
     
+    
         roundedLogo:
           options.roundedLogo === true,
+    
     
         showSocialIcons:
           options.showSocialIcons !== false,
     
+    
         divider:
           options.divider !== false,
+    
     
         photoPosition:
           options.photoPosition ?? 'left',
     
+    
         socialStyle:
-          options.socialStyle ?? 'icons-text',
+          options.socialStyle ?? 'default',
+    
     
         contactStyle:
           options.contactStyle ?? 'default',
+    
     
         companyHighlight:
           options.companyHighlight === true
