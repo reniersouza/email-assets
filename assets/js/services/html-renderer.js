@@ -154,9 +154,17 @@ ${this.renderPerson(
   styles
 )}
 
+${this.renderDivider(
+  signature
+)}
+
 ${this.renderCompany(
   signature,
   styles
+)}
+
+${this.renderDivider(
+  signature
 )}
 
 ${this.renderContacts(
@@ -164,6 +172,9 @@ ${this.renderContacts(
   styles
 )}
 
+${this.renderDivider(
+  signature
+)}
 
 ${this.renderSocials(
   signature,
@@ -233,6 +244,42 @@ border-radius:50%;
 
 `;
 
+  }
+
+  renderDivider(signature = {}) {
+
+    const options =
+      signature.template?.options ?? {};
+  
+    if (!options.divider) {
+  
+      return '';
+  
+    }
+  
+    const colors =
+      signature.template?.styles?.colors ?? {};
+  
+    const spacing =
+      signature.template?.styles?.spacing ?? {};
+  
+    const gap =
+      spacing.gap ?? 12;
+  
+    return `
+  
+    <div
+      style="
+        margin:${gap}px 0;
+        border-top:1px solid ${colors.border ?? '#e5e7eb'};
+        height:0;
+        line-height:0;
+        font-size:0;
+      "
+    ></div>
+  
+    `;
+  
   }
 
   renderPerson(
