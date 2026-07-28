@@ -114,6 +114,7 @@ export class PreviewRenderer {
           2
         )
       );
+      console.log('USANDO html-renderer.js');
 
     const html =
       this.htmlRenderer.render(model);
