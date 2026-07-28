@@ -252,6 +252,15 @@ border-radius:50%;
     const department =
       person.department ?? '';
 
+      const typography =
+  signature.template?.styles?.typography ?? {};
+
+const nameWeight =
+  typography.nameWeight ?? 700;
+
+const textWeight =
+  typography.textWeight ?? 400;
+
     const legacy =
       signature.style ?? {};
 
@@ -267,10 +276,10 @@ color:${colors.text ?? legacy.textColor ?? '#1f2937'};
 <strong
 style="
 display:block;
-font-size:${(legacy.fontSize ?? 14) + 2}px;
-font-weight:700;
+font-size:${signature.style?.fontSize + 2 || 16}px;
+font-weight:${nameWeight};
 line-height:1.3;
-color:${legacy.primaryColor ?? colors.primary ?? '#2563eb'};
+color:${signature.style?.primaryColor || '#0f62fe'};
 ">
 
 ${this.escape(name)}
@@ -281,8 +290,8 @@ ${this.escape(name)}
 <div
 style="
 font-size:14px;
+font-weight:${textWeight};
 margin-top:2px;
-color:${colors.text ?? '#1f2937'};
 ">
 
 ${this.escape(role)}
@@ -292,8 +301,9 @@ ${this.escape(role)}
 <div
 style="
 font-size:13px;
+font-weight:${textWeight};
+opacity:.75;
 margin-top:2px;
-color:${colors.muted ?? '#64748b'};
 ">
 
 ${this.escape(department)}
@@ -315,7 +325,11 @@ ${this.escape(department)}
 
     const company =
       signature.company ?? {};
-
+      const typography =
+      signature.template?.styles?.typography ?? {};
+    
+    const textWeight =
+      typography.textWeight ?? 400;
 
 
     const colors =
@@ -369,7 +383,7 @@ company.name
 
 <div
 style="
-font-weight:600;
+font-weight:${textWeight};
 color:${colors.text ?? '#1f2937'};
 ">
 
