@@ -875,6 +875,7 @@ export class HtmlRenderer {
 
 
   render(signature) {
+    console.log('HTML RENDERER INTERNO');
 
     const style =
       signature.style;

@@ -24,6 +24,8 @@ export class HtmlRenderer {
   
   
     render(signature = {}) {
+
+      console.log('HTML RENDERER EXTERNO');
   
       const cacheKey =
         JSON.stringify(signature);
