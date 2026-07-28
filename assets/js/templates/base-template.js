@@ -51,9 +51,31 @@ export default class BaseTemplate {
       });
 
 
-    this.options =
+      this.options =
       Object.freeze({
+    
+        showPhoto: true,
+    
+        showLogo: true,
+    
+        roundedPhoto: true,
+    
+        roundedLogo: false,
+    
+        showSocialIcons: true,
+    
+        divider: true,
+    
+        photoPosition: 'left',
+    
+        socialStyle: 'icons-only',
+    
+        contactStyle: 'minimal',
+    
+        companyHighlight: false,
+    
         ...(config.options ?? {})
+    
       });
 
 
