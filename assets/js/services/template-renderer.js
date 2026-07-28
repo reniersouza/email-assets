@@ -161,43 +161,41 @@ export class TemplateRenderer {
   
   
     resolveOptions(options = {}) {
-  
-  
+
       return {
-  
-  
+    
         showPhoto:
           options.showPhoto !== false,
-  
-  
-  
+    
         showLogo:
           options.showLogo !== false,
-  
-  
-  
+    
         roundedPhoto:
           options.roundedPhoto !== false,
-  
-  
-  
+    
         roundedLogo:
           options.roundedLogo === true,
-  
-  
-  
+    
         showSocialIcons:
           options.showSocialIcons !== false,
-  
-  
-  
+    
         divider:
-          options.divider !== false
-  
-  
+          options.divider !== false,
+    
+        photoPosition:
+          options.photoPosition ?? 'left',
+    
+        socialStyle:
+          options.socialStyle ?? 'icons-text',
+    
+        contactStyle:
+          options.contactStyle ?? 'default',
+    
+        companyHighlight:
+          options.companyHighlight === true
+    
       };
-  
-  
+    
     }
   
   
