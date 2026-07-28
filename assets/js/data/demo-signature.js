@@ -9,7 +9,6 @@
 // nenhuma.
 // ==========================================================
 
-
 export const demoSignature = {
 
   person: {
@@ -68,6 +67,35 @@ export const demoSignature = {
 
     size:
       96
+
+  },
+
+
+  socials: {
+
+    items: [
+
+      {
+
+        network:
+          'LinkedIn',
+
+        url:
+          'https://linkedin.com'
+
+      },
+
+      {
+
+        network:
+          'GitHub',
+
+        url:
+          'https://github.com'
+
+      }
+
+    ]
 
   }
 
