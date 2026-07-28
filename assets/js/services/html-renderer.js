@@ -485,72 +485,53 @@ ${this.escape(contact.value)}
   }
 
 
-  renderSocials(
-    signature = {},
-    options = {}
-  ) {
-
-
-    if (
-      options.showSocialIcons === false
-    ) {
-
-      return '';
-
-    }
+  renderSocials(signature = {}) {
 
     const socials =
-      signature.socials?.items ??
-      [];
-
-
-
-    if (
-      !socials.length
-    ) {
-
+      signature.socials ?? [];
+  
+    if (!socials.length) {
+  
       return '';
-
+  
     }
-
-
-
+  
     return `
-
-<div
-class="signature-socials"
-style="
-margin-top:10px;
-font-size:13px;
-color:#64748b;
-">
-
-${socials.map((social,index)=>`
-
-
-<span>
-
-${this.escape(
-  social.network
-)}
-
-
-${index < socials.length - 1
-? '&nbsp;&bull;&nbsp;'
-: ''}
-
-</span>
-
-
-`).join('')}
-
-
-</div>
-
-`;
-
+  
+  <div
+    class="signature-socials"
+    style="
+      margin-top:10px;
+      font-size:13px;
+      color:${signature.style?.primaryColor || '#2563eb'};
+    "
+  >
+  
+  ${socials.map((social, index) => `
+  
+  <a
+    href="${this.escape(social.url)}"
+    target="_blank"
+    style="
+      color:${signature.style?.primaryColor || '#2563eb'};
+      text-decoration:none;
+    "
+  >
+  
+  ${this.escape(social.network)}
+  
+  </a>
+  
+  ${index < socials.length - 1 ? '&nbsp;&bull;&nbsp;' : ''}
+  
+  `).join('')}
+  
+  </div>
+  
+  `;
+  
   }
-
+  
   escape(value) {
 
     return String(value ?? '')
