@@ -6,6 +6,7 @@
 import { EVENTS } from '../../js/constants.js';
 import { eventBus } from '../../js/events.js';
 import { store } from '../../js/store.js';
+import templateService from '../../js/services/template-service.js';
 
 
 const SOCIAL_NETWORKS = [
@@ -29,13 +30,34 @@ const SOCIAL_NETWORKS = [
 
 
 const TEMPLATES = [
-  'Gravatar',
-  'ObjetivoNET',
-  'Google',
-  'Microsoft',
-  'Apple',
-  'Executivo',
-  'Dark'
+  {
+    id: 'gravatar',
+    name: 'Gravatar'
+  },
+  {
+    id: 'objetivonet',
+    name: 'ObjetivoNET'
+  },
+  {
+    id: 'google',
+    name: 'Google'
+  },
+  {
+    id: 'microsoft',
+    name: 'Microsoft'
+  },
+  {
+    id: 'apple',
+    name: 'Apple'
+  },
+  {
+    id: 'executive',
+    name: 'Executivo'
+  },
+  {
+    id: 'dark',
+    name: 'Dark'
+  }
 ];
 
 
@@ -371,13 +393,13 @@ ${index + 1}
     container.innerHTML =
       TEMPLATES
       .map(
-        (template) => `
+  (template) => `
 
 
 <button
   type="button"
   class="template-card"
-  data-template="${template}"
+  data-template="${template.id}"
 >
 
 <span
@@ -394,7 +416,7 @@ ${index + 1}
 
 
 <strong>
-Template ${template}
+Template ${template.name}
 </strong>
 
 
@@ -434,12 +456,8 @@ Miniatura demonstrativa
       const handler = () => {
 
 
-        eventBus.emit(
-          EVENTS.TEMPLATE_SELECTED,
-          {
-            template:
-              button.dataset.template
-          }
+        templateService.selectTemplate(
+          button.dataset.template
         );
 
 
