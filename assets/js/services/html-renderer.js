@@ -63,137 +63,180 @@ export class HtmlRenderer {
 
     const template =
       signature.template ?? {};
-
+  
     const styles =
       template.styles ?? {};
-
+  
     const legacyStyle =
       signature.style ?? {};
-
-
+  
     const options =
       template.options ?? {};
-
-
+  
     const assets =
       template.assets ?? {};
-
-
+  
     const colors =
       styles.colors ?? {};
-
-
+  
     const spacing =
       styles.spacing ?? {};
-
-    const gap =
-      spacing.gap ?? 12;
-
-
+  
     const typography =
       styles.typography ?? {};
-
-
+  
     const border =
       legacyStyle.borderColor ??
       colors.border ??
       '#e5e7eb';
-
+  
     const background =
       legacyStyle.backgroundColor ??
       colors.background ??
       '#ffffff';
-
-
+  
     const radius =
-      spacing.borderRadius ??
-      8;
-
-
+      spacing.borderRadius ?? 8;
+  
     const padding =
-      spacing.padding ??
-      16;
-
-
+      spacing.padding ?? 16;
+  
     const fontFamily =
       legacyStyle.fontFamily ??
       typography.fontFamily ??
       'Arial, Helvetica, sans-serif';
-
-
-
+  
+    const photoPosition =
+      options.photoPosition ?? 'left';
+  
+    const content = `
+  
+  ${this.renderPerson(signature, styles)}
+  
+  ${this.renderDivider(signature)}
+  
+  ${this.renderCompany(signature, styles)}
+  
+  ${this.renderDivider(signature)}
+  
+  ${this.renderContacts(signature, styles)}
+  
+  ${this.renderDivider(signature)}
+  
+  ${this.renderSocials(signature)}
+  
+  `;
+  
+    let body = '';
+  
+    switch (photoPosition) {
+  
+      case 'right':
+  
+        body = `
+  
+  <tr>
+  
+  <td valign="top">
+  
+  ${content}
+  
+  </td>
+  
+  ${this.renderPhoto(
+    signature,
+    options,
+    assets
+  )}
+  
+  </tr>
+  
+  `;
+  
+        break;
+  
+      case 'top':
+  
+        body = `
+  
+  <tr>
+  
+  <td
+  align="center"
+  colspan="2"
+  >
+  
+  ${this.renderPhoto(
+    signature,
+    options,
+    assets
+  )}
+  
+  </td>
+  
+  </tr>
+  
+  <tr>
+  
+  <td colspan="2">
+  
+  ${content}
+  
+  </td>
+  
+  </tr>
+  
+  `;
+  
+        break;
+  
+      default:
+  
+        body = `
+  
+  <tr>
+  
+  ${this.renderPhoto(
+    signature,
+    options,
+    assets
+  )}
+  
+  <td valign="top">
+  
+  ${content}
+  
+  </td>
+  
+  </tr>
+  
+  `;
+  
+    }
+  
     return `
-
-<table
-role="presentation"
-cellpadding="0"
-cellspacing="0"
-border="0"
-style="
-background:${background};
-border:1px solid ${border};
-border-radius:${radius}px;
-border-collapse:separate;
-padding:${padding}px;
-font-family:${fontFamily};
-color:${colors.text ?? '#1f2937'};
-">
-
-<tr>
-
-
-${this.renderPhoto(
-  signature,
-  options,
-  assets
-)}
-
-
-<td>
-
-${this.renderPerson(
-  signature,
-  styles
-)}
-
-${this.renderDivider(
-  signature
-)}
-
-${this.renderCompany(
-  signature,
-  styles
-)}
-
-${this.renderDivider(
-  signature
-)}
-
-${this.renderContacts(
-  signature,
-  styles
-)}
-
-${this.renderDivider(
-  signature
-)}
-
-${this.renderSocials(
-  signature,
-  options
-)}
-
-
-</td>
-
-
-</tr>
-
-
-</table>
-
-`;
-
+  
+  <table
+  role="presentation"
+  cellpadding="0"
+  cellspacing="0"
+  border="0"
+  style="
+  background:${background};
+  border:1px solid ${border};
+  border-radius:${radius}px;
+  border-collapse:separate;
+  padding:${padding}px;
+  font-family:${fontFamily};
+  color:${colors.text ?? '#1f2937'};
+  ">
+  
+  ${body}
+  
+  </table>
+  
+  `;
+  
   }
 
   renderPhoto(
