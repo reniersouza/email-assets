@@ -47,11 +47,17 @@ const objetivoNetTemplate = new BaseTemplate({
 
       fontFamily:
         'Arial, Helvetica, sans-serif',
-
+    
       nameWeight: 700,
-
-      textWeight: 400
-
+    
+      textWeight: 400,
+    
+      nameSize: 18,
+    
+      roleSize: 14,
+    
+      departmentSize: 13
+    
     },
 
     spacing: {
