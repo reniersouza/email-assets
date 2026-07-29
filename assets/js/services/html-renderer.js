@@ -115,7 +115,12 @@ export class HtmlRenderer {
   
   ${this.renderDivider(signature)}
   
-  ${this.renderCompany(signature, styles)}
+  ${this.renderCompany(
+    signature,
+    styles,
+    typography,
+    spacing
+  )}
   
   ${this.renderDivider(signature)}
   
@@ -432,20 +437,14 @@ width:${photoSize}px;
   
   renderCompany(
     signature = {},
-    styles = {}
+    styles = {},
+    typography = {},
+    spacing = {}
   ) {
   
   
     const company =
       signature.company ?? {};
-  
-  
-    const typography =
-      signature.template?.styles?.typography ?? {};
-  
-  
-    const spacing =
-      signature.template?.styles?.spacing ?? {};
   
   
     const gap =
