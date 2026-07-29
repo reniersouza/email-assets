@@ -634,26 +634,28 @@ width:${photoSize}px;
   ${contacts.map(contact => `
   
   <div
-  style="
-  margin-top:${Math.round(gap / 4)}px;
-  font-size:13px;
-  color:${colors.text ?? '#1f2937'};
-  ">
-  
-  <a
-  href="${this.escape(contact.href ?? '#')}"
-  style="
-  color:${colors.primary ?? '#2563eb'};
-  text-decoration:none;
-  ">
-  
-  ${
-  showIcons
-  ?
-  
-  `${icons[contact.type] ?? '•'} ${this.escape(contact.value)}`
-  
-  :
+style="
+margin-top:${Math.round(gap / 4)}px;
+font-size:13px;
+color:${colors.text ?? '#1f2937'};
+white-space:nowrap;
+">
+
+<a
+href="${this.escape(contact.href ?? '#')}"
+style="
+color:${colors.primary ?? '#2563eb'};
+text-decoration:none;
+white-space:nowrap;
+">
+
+${
+showIcons
+?
+
+`${icons[contact.type] ?? '•'}&nbsp;${this.escape(contact.value)}`
+
+:
   
   minimal
   ?
