@@ -113,7 +113,11 @@ export class HtmlRenderer {
       typography
     )}
   
-  ${this.renderDivider(signature)}
+    ${this.renderDivider(
+      options,
+      colors,
+      spacing
+    )}
   
   ${this.renderCompany(
     signature,
@@ -323,22 +327,17 @@ width:${photoSize}px;
   
   }
 
-  renderDivider(signature = {}) {
+  renderDivider(
+    options = {},
+    colors = {},
+    spacing = {}
+  ) {
 
-    const options =
-      signature.template?.options ?? {};
-  
     if (!options.divider) {
   
       return '';
   
     }
-  
-    const colors =
-      signature.template?.styles?.colors ?? {};
-  
-    const spacing =
-      signature.template?.styles?.spacing ?? {};
   
     const gap =
       spacing.gap ?? 12;
