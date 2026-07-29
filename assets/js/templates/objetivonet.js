@@ -92,6 +92,14 @@ const objetivoNetTemplate = new BaseTemplate({
 
   },
 
+  photo: {
+
+    size: 96,
+  
+    radius: '50%'
+  
+  },
+
   options: {
 
     showPhoto: true,
