@@ -240,60 +240,69 @@ export class HtmlRenderer {
     options = {},
     assets = {}
   ) {
-
+  
     const photo =
       signature.photo ?? {};
-
-      const templatePhoto =
-  signature.template?.photo ?? {};
-
-const photoSize =
-  templatePhoto.size ?? photo.size ?? 96;
-
-const photoRadius =
-  templatePhoto.radius ?? '50%';
-
+  
+  
+    const templatePhoto =
+      signature.template?.photo ?? {};
+  
+  
+    const photoSize =
+      templatePhoto.size ?? photo.size ?? 96;
+  
+  
+    const photoRadius =
+      templatePhoto.radius ?? '50%';
+  
+  
     if (
       options.showPhoto === false
     ) {
-
+  
       return '';
-
+  
     }
-
+  
+  
     if (
       !photo.url
     ) {
-
+  
       return '';
-
+  
     }
-
+  
+  
     return `
-
-<td
-valign="top"
-style="
-padding-right:${signature.template?.styles?.spacing?.gap ?? 12}px;
-">
-
-<img
-src="${this.escape(photo.url)}"
-alt="${this.escape(photo.alt ?? 'Foto do perfil')}"
-width="${photoSize}"
-height="${photoSize}"
-style="
-display:block;
-width:${photoSize}px;
-height:${photoSize}px;
-border-radius:${photoRadius};
-"
-/>
-
-</td>
-
-`;
-
+  
+  <td
+  valign="top"
+  style="
+  padding-right:${signature.template?.styles?.spacing?.gap ?? 12}px;
+  ">
+  
+  <img
+  src="${this.escape(photo.url)}"
+  alt="${this.escape(photo.alt ?? 'Foto do perfil')}"
+  width="${photoSize}"
+  height="${photoSize}"
+  style="
+  display:block;
+  width:${photoSize}px;
+  height:${photoSize}px;
+  max-width:${photoSize}px;
+  max-height:${photoSize}px;
+  border-radius:${photoRadius};
+  object-fit:cover;
+  "
+  />
+  
+  </td>
+  
+  `;
+  
   }
 
   renderDivider(signature = {}) {
