@@ -106,7 +106,7 @@ const objetivoNetTemplate = new BaseTemplate({
   
     socialStyle: 'icons-only',
   
-    contactStyle: 'minimal',
+    contactStyle: 'icons',
   
     companyHighlight: true
   
