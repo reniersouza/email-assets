@@ -569,33 +569,39 @@ border-radius:50%;
     const contacts =
       signature.contacts ?? [];
   
-  
     if (!contacts.length) {
   
       return '';
   
     }
   
-  
     const colors =
       styles.colors ?? {};
-  
   
     const options =
       signature.template?.options ?? {};
   
+    const contactStyle =
+      options.contactStyle ?? 'default';
   
-      const contactStyle =
-  options.contactStyle ?? 'default';
-
-const minimal =
-  contactStyle === 'minimal';
-
-const showIcons =
-  contactStyle === 'icons';
-
-const labeled =
-  contactStyle === 'default';
+    const minimal =
+      contactStyle === 'minimal';
+  
+    const showIcons =
+      contactStyle === 'icons';
+  
+    const labeled =
+      contactStyle === 'default';
+  
+    const icons = {
+  
+      email: '✉',
+  
+      phone: '☎',
+  
+      website: '🌐'
+  
+    };
   
     return `
   
@@ -622,18 +628,34 @@ const labeled =
   ">
   
   ${
-    minimal
-      ? this.escape(contact.value)
-    
-      : labeled
-        ? `
-    <strong>
-    ${this.escape(contact.label)}
-    </strong>:
-    ${this.escape(contact.value)}
-    `
-        : this.escape(contact.value)
-    }
+  showIcons
+  ?
+  
+  `${icons[contact.type] ?? '•'} ${this.escape(contact.value)}`
+  
+  :
+  
+  minimal
+  ?
+  
+  this.escape(contact.value)
+  
+  :
+  
+  labeled
+  ?
+  
+  `
+  <strong>
+  ${this.escape(contact.label)}
+  </strong>:
+  ${this.escape(contact.value)}
+  `
+  
+  :
+  
+  this.escape(contact.value)
+  }
   
   </a>
   
