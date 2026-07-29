@@ -331,63 +331,40 @@ border-radius:50%;
     const person =
       signature.person ?? {};
   
-  
     const colors =
       styles.colors ?? {};
-  
   
     const typography =
       signature.template?.styles?.typography ?? {};
   
-  
     const spacing =
       signature.template?.styles?.spacing ?? {};
-  
-  
-    const options =
-      signature.template?.options ?? {};
-  
   
     const gap =
       spacing.gap ?? 12;
   
-  
     const nameWeight =
       typography.nameWeight ?? 700;
-  
   
     const textWeight =
       typography.textWeight ?? 400;
   
-  
     const nameSize =
       typography.nameSize ?? 16;
-  
   
     const roleSize =
       typography.roleSize ?? 14;
   
-  
     const departmentSize =
       typography.departmentSize ?? 13;
-  
-  
-    const nameColor =
-      colors.primary ?? '#0f62fe';
-  
-  
-    const textColor =
-      colors.text ?? '#1f2937';
-  
   
     return `
   
   <div
   class="signature-person"
   style="
-  color:${textColor};
+  color:${colors.text ?? '#1f2937'};
   ">
-  
   
   <strong
   style="
@@ -395,13 +372,12 @@ border-radius:50%;
   font-size:${nameSize}px;
   font-weight:${nameWeight};
   line-height:1.3;
-  color:${nameColor};
+  color:${colors.primary ?? '#0f62fe'};
   ">
   
   ${this.escape(person.name ?? '')}
   
   </strong>
-  
   
   <div
   style="
@@ -414,7 +390,6 @@ border-radius:50%;
   
   </div>
   
-  
   <div
   style="
   font-size:${departmentSize}px;
@@ -426,7 +401,6 @@ border-radius:50%;
   ${this.escape(person.department ?? '')}
   
   </div>
-  
   
   </div>
   
