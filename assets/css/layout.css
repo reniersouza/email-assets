@@ -15,7 +15,7 @@
         "header header"
         "sidebar main"
         "footer footer";
-    grid-template-columns: 17rem minmax(0, 1fr);
+    grid-template-columns: 15rem minmax(0, 1fr);
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
