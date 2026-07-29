@@ -72,7 +72,7 @@ const objetivoNetTemplate = new BaseTemplate({
 
     spacing: {
 
-      padding: 16,
+      padding: 10,
 
       gap: 12,
 
