@@ -263,3 +263,31 @@
 
     gap: 1rem;
 }
+
+/* ==========================================================
+   SIGNATURE PREVIEW
+========================================================== */
+
+.signature-viewport {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    overflow-x: auto;
+
+    padding: 1rem;
+
+}
+
+#signature-render-target {
+
+    display: flex;
+
+    justify-content: center;
+
+    width: 100%;
+
+}
