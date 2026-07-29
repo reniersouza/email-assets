@@ -212,9 +212,9 @@
     gap: var(--space-4);
 
     grid-template-columns:
-        minmax(0, 1.6fr)
-        minmax(20rem, .9fr)
-        minmax(18rem, .85fr);
+    minmax(0, 1.35fr)
+    minmax(26rem, 1.15fr)
+    minmax(15rem, .65fr);
 
     align-items: start;
 
@@ -264,30 +264,3 @@
     gap: 1rem;
 }
 
-/* ==========================================================
-   SIGNATURE PREVIEW
-========================================================== */
-
-.signature-viewport {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: flex-start;
-
-    overflow-x: auto;
-
-    padding: 1rem;
-
-}
-
-#signature-render-target {
-
-    display: flex;
-
-    justify-content: center;
-
-    width: 100%;
-
-}
