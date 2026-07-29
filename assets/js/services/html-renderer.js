@@ -585,9 +585,17 @@ border-radius:50%;
       signature.template?.options ?? {};
   
   
-      const minimal =
-      signature.template?.id === 'objetivonet' &&
-      options.contactStyle === 'minimal';
+      const contactStyle =
+  options.contactStyle ?? 'default';
+
+const minimal =
+  contactStyle === 'minimal';
+
+const showIcons =
+  contactStyle === 'icons';
+
+const labeled =
+  contactStyle === 'default';
   
     return `
   
@@ -614,23 +622,18 @@ border-radius:50%;
   ">
   
   ${
-  minimal
-  
-  ?
-  
-  this.escape(contact.value)
-  
-  :
-  
-  `
-  <strong>
-  ${this.escape(contact.label)}
-  </strong>
-  :
-  ${this.escape(contact.value)}
-  `
-  
-  }
+    minimal
+      ? this.escape(contact.value)
+    
+      : labeled
+        ? `
+    <strong>
+    ${this.escape(contact.label)}
+    </strong>:
+    ${this.escape(contact.value)}
+    `
+        : this.escape(contact.value)
+    }
   
   </a>
   
