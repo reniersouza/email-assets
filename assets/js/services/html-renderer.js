@@ -244,6 +244,15 @@ export class HtmlRenderer {
     const photo =
       signature.photo ?? {};
 
+      const templatePhoto =
+  signature.template?.photo ?? {};
+
+const photoSize =
+  templatePhoto.size ?? photo.size ?? 96;
+
+const photoRadius =
+  templatePhoto.radius ?? '50%';
+
     if (
       options.showPhoto === false
     ) {
