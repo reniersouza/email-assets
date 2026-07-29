@@ -107,7 +107,11 @@ export class HtmlRenderer {
   
     const content = `
   
-  ${this.renderPerson(signature, styles)}
+    ${this.renderPerson(
+      signature,
+      styles,
+      typography
+    )}
   
   ${this.renderDivider(signature)}
   
@@ -345,7 +349,8 @@ width:${photoSize}px;
 
   renderPerson(
     signature = {},
-    styles = {}
+    styles = {},
+    typography = {}
   ) {
   
     const person =
@@ -353,9 +358,6 @@ width:${photoSize}px;
   
     const colors =
       styles.colors ?? {};
-  
-    const typography =
-      signature.template?.styles?.typography ?? {};
   
     const spacing =
       signature.template?.styles?.spacing ?? {};
