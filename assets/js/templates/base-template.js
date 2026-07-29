@@ -50,6 +50,17 @@ export default class BaseTemplate {
         ...(config.assets ?? {})
       });
 
+      this.photo =
+  Object.freeze({
+
+    size: 96,
+
+    radius: '50%',
+
+    ...(config.photo ?? {})
+
+  });
+
 
       this.options =
   Object.freeze({
