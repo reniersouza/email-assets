@@ -278,10 +278,12 @@ export class HtmlRenderer {
     return `
   
   <td
-  valign="top"
-  style="
-  padding-right:${signature.template?.styles?.spacing?.gap ?? 12}px;
-  ">
+valign="top"
+align="left"
+style="
+padding-right:${signature.template?.styles?.spacing?.gap ?? 12}px;
+width:${photoSize}px;
+">
   
   <img
   src="${this.escape(photo.url)}"
