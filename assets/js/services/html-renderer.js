@@ -126,7 +126,11 @@ export class HtmlRenderer {
     spacing
   )}
   
-  ${this.renderDivider(signature)}
+  ${this.renderDivider(
+    options,
+    colors,
+    spacing
+  )}
   
   ${this.renderContacts(
     signature,
@@ -135,7 +139,11 @@ export class HtmlRenderer {
     options
   )}
   
-  ${this.renderDivider(signature)}
+  ${this.renderDivider(
+    options,
+    colors,
+    spacing
+  )}
   
   ${this.renderSocials(signature)}
   
@@ -706,11 +714,12 @@ showIcons
       return null;
   
     }
-  
-  
-    return iconService.getIcon(
-      social.network
-    );
+    
+    const icon =
+  this.renderSocialIcon(
+    social,
+    signature
+  );
   
   }
 
