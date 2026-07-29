@@ -124,7 +124,12 @@ export class HtmlRenderer {
   
   ${this.renderDivider(signature)}
   
-  ${this.renderContacts(signature, styles)}
+  ${this.renderContacts(
+    signature,
+    styles,
+    spacing,
+    options
+  )}
   
   ${this.renderDivider(signature)}
   
@@ -578,12 +583,12 @@ width:${photoSize}px;
 
   renderContacts(
     signature = {},
-    styles = {}
+    styles = {},
+    spacing = {},
+    options = {}
   ) {
   
-    const spacing =
-      signature.template?.styles?.spacing ?? {};
-  
+      
     const gap =
       spacing.gap ?? 12;
   
@@ -598,9 +603,6 @@ width:${photoSize}px;
   
     const colors =
       styles.colors ?? {};
-  
-    const options =
-      signature.template?.options ?? {};
   
     const contactStyle =
       options.contactStyle ?? 'default';
