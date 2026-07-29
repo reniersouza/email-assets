@@ -133,7 +133,10 @@ export default class BaseTemplate {
   getAssets() {
     return this.assets;
   }
-
+  
+  getPhoto() {
+    return this.photo;
+  }
 
   getOptions() {
     return this.options;
