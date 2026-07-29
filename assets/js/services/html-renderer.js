@@ -280,13 +280,13 @@ padding-right:${signature.template?.styles?.spacing?.gap ?? 12}px;
 <img
 src="${this.escape(photo.url)}"
 alt="${this.escape(photo.alt ?? 'Foto do perfil')}"
-width="${photo.size ?? 96}"
-height="${photo.size ?? 96}"
+width="${photoSize}"
+height="${photoSize}"
 style="
 display:block;
-width:${photo.size ?? 96}px;
-height:${photo.size ?? 96}px;
-border-radius:50%;
+width:${photoSize}px;
+height:${photoSize}px;
+border-radius:${photoRadius};
 "
 />
 
