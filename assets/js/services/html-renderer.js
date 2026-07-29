@@ -156,7 +156,8 @@ export class HtmlRenderer {
   ${this.renderPhoto(
     signature,
     options,
-    assets
+    assets,
+    spacing
   )}
   
   </tr>
@@ -252,7 +253,8 @@ export class HtmlRenderer {
   renderPhoto(
     signature = {},
     options = {},
-    assets = {}
+    assets = {},
+    spacing = {}
   ) {
   
     const photo =
@@ -295,7 +297,7 @@ export class HtmlRenderer {
 valign="top"
 align="left"
 style="
-padding-right:${signature.template?.styles?.spacing?.gap ?? 12}px;
+padding-right:${spacing.gap ?? 12}px;
 width:${photoSize}px;
 ">
   
