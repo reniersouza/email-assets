@@ -62,7 +62,11 @@ const objetivoNetTemplate = new BaseTemplate({
     
       companyWeight: 700,
     
-      locationSize: 13
+      locationSize: 13,
+    
+      socialIconSize: 20,
+    
+      socialGap: 10
     
     },
 

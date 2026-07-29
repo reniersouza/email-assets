@@ -712,6 +712,26 @@ border-radius:50%;
     }
   
   
+    const typography =
+      signature.template?.styles?.typography ?? {};
+  
+  
+    const spacing =
+      signature.template?.styles?.spacing ?? {};
+  
+  
+    const iconSize =
+      typography.socialIconSize ?? 18;
+  
+  
+    const iconGap =
+      typography.socialGap ?? 8;
+  
+  
+    const gap =
+      spacing.gap ?? 12;
+  
+  
     return `
   
   <table
@@ -720,7 +740,7 @@ border-radius:50%;
   cellspacing="0"
   border="0"
   style="
-  margin-top:12px;
+  margin-top:${gap}px;
   "
   >
   
@@ -746,7 +766,7 @@ border-radius:50%;
   
   <td
   style="
-  padding-right:8px;
+  padding-right:${iconGap}px;
   "
   >
   
@@ -761,10 +781,12 @@ border-radius:50%;
   <img
   src="${this.escape(icon.path)}"
   alt="${this.escape(icon.name)}"
-  width="18"
-  height="18"
+  width="${iconSize}"
+  height="${iconSize}"
   style="
   display:block;
+  width:${iconSize}px;
+  height:${iconSize}px;
   border:0;
   "
   />
