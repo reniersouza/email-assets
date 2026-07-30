@@ -225,20 +225,19 @@ export class SignatureEngine {
   createCacheKey(state) {
 
     return JSON.stringify({
-   
+  
       signature:
         state.signature,
-   
+  
       theme:
         state.theme,
-   
-        template:
-        this.templates.getActiveTemplateVersion()
-   
+  
+      template:
+        this.templates.getActiveTemplateId()
+  
     });
-   
-   }
-
+  
+  }
 
   buildPerson(person = {}, errors) {
 
