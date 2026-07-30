@@ -163,15 +163,15 @@ export class SignatureEngine {
         LayoutEngine.resolve({
       
           variant:
-            template.layout
-            ??
-            signature.layout.variant,
+          template.layout
+          ??
+          signature.layout?.variant,
       
           spacing:
-            signature.layout.spacing,
+          signature.layout?.spacing,
       
           photoPosition:
-            signature.layout.photoPosition
+          signature.layout?.photoPosition
       
         }),
 
@@ -338,10 +338,9 @@ export class SignatureEngine {
 
     return {
 
-      url: photo.url,
+      url: sanitizeUrl(photo.url),
   
-      alt:
-          photo.alt || 'Foto do perfil',
+      alt: photo.alt || 'Foto do perfil',
   
       size:
           Number(photo.size) || 96,
