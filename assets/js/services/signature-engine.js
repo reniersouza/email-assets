@@ -6,7 +6,7 @@
 import { EVENTS } from '../constants.js';
 import { eventBus } from '../events.js';
 import { store as defaultStore } from '../store.js';
-import { escapeHtml, sanitizeUrl, debounce } from '../utils.js';
+import { sanitizeUrl } from '../utils.js';
 import { ClipboardService, ValidationService } from './core-services.js';
 import { templateService } from './template-service.js';
 import { templateRenderer} from './template-renderer.js';
@@ -177,14 +177,12 @@ export class SignatureEngine {
 
         style:
         StyleEngine.resolve({
-      
-          ...signature.style,
-      
-          template:
-            template.styles
-      
-        }),
 
+    ...signature.style,
+
+    template
+
+}),
       contacts: []
 
     };
@@ -235,7 +233,7 @@ export class SignatureEngine {
         state.theme,
    
         template:
-        this.templates.getActiveTemplateId()
+        this.templates.getActiveTemplateVersion()
    
     });
    
@@ -302,8 +300,13 @@ export class SignatureEngine {
         company.name?.trim() ?? '',
 
 
-      website:
-        company.website?.trim() ?? '',
+        website:
+
+        sanitizeUrl(
+        
+        company.website?.trim()
+        
+        ) ?? '',
 
 
       address:
@@ -336,19 +339,18 @@ export class SignatureEngine {
 
     return {
 
-      url:
-        photo.url,
-
-
+      url: photo.url,
+  
       alt:
-        photo.alt ||
-        'Foto do perfil',
-
-
+          photo.alt || 'Foto do perfil',
+  
       size:
-        Number(photo.size) || 96
-
-    };
+          Number(photo.size) || 96,
+  
+      radius:
+          Number(photo.radius) || 48
+  
+  };
 
   }
 
@@ -364,25 +366,28 @@ export class SignatureEngine {
 
     )
 
-      .map(
-        (item, index) => ({
-
-          network:
-            item.network?.trim(),
-
-
-          url:
-            item.url?.trim(),
-
-
-          order:
-            item.order ?? index,
-
-
-          index
-
-        })
-      )
+    .map(
+      (item, index) => ({
+    
+        network:
+          item.network?.trim(),
+    
+        url:
+          item.url?.trim(),
+    
+        order:
+          item.order ?? index,
+    
+        icon:
+          item.icon ?? true,
+    
+        label:
+          item.label ?? '',
+    
+        index
+    
+      })
+    )
 
       .filter(
         (item) =>
@@ -403,13 +408,17 @@ export class SignatureEngine {
         ({
           network,
           url,
-          order
-        })=>({
-
+          order,
+          icon,
+          label
+        }) => ({
+      
           network,
           url,
-          order
-
+          order,
+          icon,
+          label
+      
         })
       );
 
@@ -674,9 +683,7 @@ export class LayoutEngine {
 
 
       spacing:
-        layout.spacing ||
-        'normal',
-
+      Number(layout.spacing) || 8,
 
       photoPosition:
         layout.photoPosition ||
@@ -746,16 +753,16 @@ export class StyleEngine {
   static resolve(style = {}) {
 
     const template =
-      style.template ?? {};
-  
-    const colors =
-      template.colors ?? {};
-  
-    const typography =
-      template.typography ?? {};
-  
-    const spacing =
-      template.spacing ?? {};
+    style.template ?? {};
+
+const colors =
+    template.styles?.colors ?? {};
+
+const typography =
+    template.styles?.typography ?? {};
+
+const spacing =
+    template.styles?.spacing ?? {};
   
   
     return {
@@ -801,9 +808,16 @@ export class StyleEngine {
         'Arial, sans-serif',
   
   
-      fontSize:
+        fontSize:
+
         Number(style.fontSize)
+        
         ||
+        
+        typography.fontSize
+        
+        ||
+        
         14,
   
   
